@@ -4,6 +4,7 @@ import { Github } from 'lucide-react';
 import ScrambleText from './ScrambleText';
 import PlayerOneLogo from './PlayerOneLogo';
 import SquashHamburger from './SquashHamburger';
+import { scrollToTarget } from '../lib/smoothScroll';
 
 export const REPO_URL = 'https://github.com/nijathatamli/AI-hakaton';
 
@@ -76,11 +77,11 @@ export default function Navbar({ entranceComplete }: NavbarProps) {
   }, [open]);
 
   const goTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToTarget(`#${id}`);
     setOpen(false);
   };
 
-  const goTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const goTop = () => scrollToTarget(0);
 
   return (
     <motion.nav

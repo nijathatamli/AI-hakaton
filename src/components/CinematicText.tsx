@@ -23,11 +23,7 @@ export default function CinematicText() {
       aria-label="About PlayerOne"
       className="relative h-screen h-[100dvh] w-full scroll-mt-20 overflow-hidden bg-black"
     >
-      <VideoBackground src={VIDEO} />
-      <div
-        className="pointer-events-none absolute left-0 right-0 top-0 z-10 h-[180px]"
-        style={{ background: 'linear-gradient(to bottom, #010103, transparent)' }}
-      />
+      <VideoBackground src={VIDEO} parallax fadeEdges />
       {/* the sky gets bright pink in the middle of this clip, text was hard to read there */}
       <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(60%_50%_at_50%_50%,rgba(0,0,0,0.55),transparent)]" />
       <div className="relative z-20 flex h-full items-center justify-center">

@@ -51,6 +51,21 @@ body {
   background: transparent;
 }
 
+/* lenis takes over the wheel, so native smooth scroll has to get out of its way */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
 /* text sitting on top of the videos needs a bit of help */
 .on-video {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6), 0 8px 32px rgba(0, 0, 0, 0.5);
