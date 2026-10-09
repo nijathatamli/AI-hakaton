@@ -1,0 +1,423 @@
+{
+  "started": true,
+  "running": false,
+  "window": "Cavern (PlayerOne test) (DEBUG)",
+  "goal": "walk right through the level, collect coins, get past every obstacle and watch the coin counter",
+  "player": "ollama:qwen2.5vl:3b",
+  "director": "none",
+  "events": [
+    {
+      "t_ms": 352,
+      "kind": "launch",
+      "text": "godot --path testgame -- --bugs=freeze"
+    },
+    {
+      "t_ms": 3202,
+      "kind": "player",
+      "text": "warming up ollama:qwen2.5vl:3b"
+    },
+    {
+      "t_ms": 4343,
+      "kind": "action",
+      "text": "hold right 200ms"
+    },
+    {
+      "t_ms": 5808,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 6009,
+      "kind": "action",
+      "text": "hold right 200ms"
+    },
+    {
+      "t_ms": 7573,
+      "kind": "action",
+      "text": "hold right 200ms"
+    },
+    {
+      "t_ms": 9042,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 9643,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 11148,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 11749,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 13221,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 13822,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 15305,
+      "kind": "player",
+      "text": "what you see in a few words"
+    },
+    {
+      "t_ms": 15906,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 17376,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 17978,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 19436,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 20037,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 20765,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 21366,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 22016,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 22617,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 23272,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 23873,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 23905,
+      "kind": "probe",
+      "text": "screen still for 4s, trying every control once"
+    },
+    {
+      "t_ms": 24983,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 26840,
+      "kind": "probe",
+      "text": "the game reacted, it was a dead end, not a bug"
+    },
+    {
+      "t_ms": 27991,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 28592,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 29261,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 29862,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 30507,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 30906,
+      "kind": "probe",
+      "text": "screen still for 4s, trying every control once"
+    },
+    {
+      "t_ms": 31109,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 33005,
+      "kind": "probe",
+      "text": "the game reacted, it was a dead end, not a bug"
+    },
+    {
+      "t_ms": 34121,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 34722,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 35887,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 36490,
+      "kind": "player",
+      "text": "left"
+    },
+    {
+      "t_ms": 37091,
+      "kind": "action",
+      "text": "hold left 600ms"
+    },
+    {
+      "t_ms": 37815,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 38416,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 39092,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 39693,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 40391,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 40992,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 41622,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 42223,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 42671,
+      "kind": "probe",
+      "text": "screen still for 4s, trying every control once"
+    },
+    {
+      "t_ms": 42841,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 43442,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 45371,
+      "kind": "probe",
+      "text": "the game reacted, it was a dead end, not a bug"
+    },
+    {
+      "t_ms": 46426,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 47027,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 47726,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 48327,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 48989,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 49434,
+      "kind": "probe",
+      "text": "screen still for 4s, trying every control once"
+    },
+    {
+      "t_ms": 49590,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 51539,
+      "kind": "probe",
+      "text": "the game reacted, it was a dead end, not a bug"
+    },
+    {
+      "t_ms": 51843,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 52444,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 53670,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 54316,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 54919,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 55531,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 55767,
+      "kind": "probe",
+      "text": "screen still for 4s, trying every control once"
+    },
+    {
+      "t_ms": 56132,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 58104,
+      "kind": "probe",
+      "text": "the game reacted, it was a dead end, not a bug"
+    },
+    {
+      "t_ms": 58342,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 58943,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 59629,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 60230,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 60849,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 61449,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 62121,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 62166,
+      "kind": "probe",
+      "text": "screen still for 4s, trying every control once"
+    },
+    {
+      "t_ms": 62722,
+      "kind": "action",
+      "text": "hold right 600ms"
+    }
+  ],
+  "incidents": [],
+  "reports": [],
+  "meter": {
+    "frames_captured": 296,
+    "player_steps": 35,
+    "player_tokens": {
+      "input": 45879,
+      "output": 1038
+    },
+    "director_calls": 0,
+    "director_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "director_bytes_sent": 0,
+    "naive_director_tokens": 37135,
+    "window_size": [
+      960,
+      540
+    ]
+  },
+  "out_dir": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\freeze-ollama",
+  "error": null
+}

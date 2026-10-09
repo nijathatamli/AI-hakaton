@@ -155,7 +155,8 @@ impl Session {
             incident: v.incident,
             title: if v.title.is_empty() { inc.as_ref().map(|i| i.detail.clone()).unwrap_or_default() } else { v.title },
             severity: if v.severity.is_empty() { "major".into() } else { v.severity },
-            steps: v.steps,
+            // a weak director writes "press a key". the recorded inputs are better than that
+            steps: if v.steps.len() >= 2 { v.steps } else { repro_steps_locked(&st, inc.as_ref().map(|i| i.t_ms).unwrap_or(u64::MAX)) },
             expected: v.expected,
             actual: v.actual,
             console: inc.as_ref().map(|i| i.console.clone()).unwrap_or_default(),
@@ -784,6 +785,10 @@ fn noise(line: &str) -> bool {
 /// turn the recorded inputs before an incident into readable steps: runs of the same input get merged
 fn repro_steps(sess: &Arc<Session>, until_ms: u64) -> Vec<String> {
     let st = sess.state.lock().unwrap();
+    repro_steps_locked(&st, until_ms)
+}
+
+fn repro_steps_locked(st: &State, until_ms: u64) -> Vec<String> {
     let acts: Vec<&Event> = st.events.iter().filter(|e| e.kind == "action" && e.t_ms <= until_ms).collect();
     let mut steps: Vec<(String, u32)> = vec![];
     for a in acts {

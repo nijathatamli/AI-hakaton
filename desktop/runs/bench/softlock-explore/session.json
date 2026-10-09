@@ -1,0 +1,722 @@
+{
+  "started": true,
+  "running": false,
+  "window": "Cavern (PlayerOne test) (DEBUG)",
+  "goal": "walk right through the level, collect coins, get past every obstacle and watch the coin counter",
+  "player": "explore",
+  "director": "none",
+  "events": [
+    {
+      "t_ms": 289,
+      "kind": "launch",
+      "text": "godot --path testgame -- --bugs=softlock"
+    },
+    {
+      "t_ms": 3278,
+      "kind": "action",
+      "text": "hold right 402ms"
+    },
+    {
+      "t_ms": 3279,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 3728,
+      "kind": "action",
+      "text": "hold right 449ms"
+    },
+    {
+      "t_ms": 4167,
+      "kind": "action",
+      "text": "hold right 438ms"
+    },
+    {
+      "t_ms": 5021,
+      "kind": "action",
+      "text": "hold right 853ms"
+    },
+    {
+      "t_ms": 5021,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 5347,
+      "kind": "action",
+      "text": "hold right 324ms"
+    },
+    {
+      "t_ms": 5347,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 5600,
+      "kind": "action",
+      "text": "hold right 252ms"
+    },
+    {
+      "t_ms": 6247,
+      "kind": "action",
+      "text": "hold right 646ms"
+    },
+    {
+      "t_ms": 6247,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 6803,
+      "kind": "action",
+      "text": "hold right 555ms"
+    },
+    {
+      "t_ms": 7104,
+      "kind": "action",
+      "text": "hold right 300ms"
+    },
+    {
+      "t_ms": 8424,
+      "kind": "action",
+      "text": "hold right 1319ms"
+    },
+    {
+      "t_ms": 9087,
+      "kind": "action",
+      "text": "hold right 662ms"
+    },
+    {
+      "t_ms": 10258,
+      "kind": "action",
+      "text": "hold right 1170ms"
+    },
+    {
+      "t_ms": 11424,
+      "kind": "probe",
+      "text": "screen still for 4s, trying every control once"
+    },
+    {
+      "t_ms": 11437,
+      "kind": "action",
+      "text": "hold right 1178ms"
+    },
+    {
+      "t_ms": 13242,
+      "kind": "action",
+      "text": "hold space 300ms"
+    },
+    {
+      "t_ms": 13710,
+      "kind": "action",
+      "text": "hold left 467ms"
+    },
+    {
+      "t_ms": 13711,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 13980,
+      "kind": "action",
+      "text": "hold right 268ms"
+    },
+    {
+      "t_ms": 14511,
+      "kind": "action",
+      "text": "hold left 530ms"
+    },
+    {
+      "t_ms": 14511,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 14722,
+      "kind": "action",
+      "text": "hold right 210ms"
+    },
+    {
+      "t_ms": 15042,
+      "kind": "incident",
+      "text": "#1 softlock: the player is stuck: the screen stayed still for 4s of input and no control had any effect when probed"
+    },
+    {
+      "t_ms": 15645,
+      "kind": "action",
+      "text": "hold right 922ms"
+    },
+    {
+      "t_ms": 15646,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 15892,
+      "kind": "action",
+      "text": "hold right 246ms"
+    },
+    {
+      "t_ms": 16866,
+      "kind": "action",
+      "text": "hold right 973ms"
+    },
+    {
+      "t_ms": 17511,
+      "kind": "action",
+      "text": "hold right 644ms"
+    },
+    {
+      "t_ms": 17511,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 18065,
+      "kind": "action",
+      "text": "hold right 553ms"
+    },
+    {
+      "t_ms": 19108,
+      "kind": "action",
+      "text": "hold right 1041ms"
+    },
+    {
+      "t_ms": 19109,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 19629,
+      "kind": "action",
+      "text": "hold right 520ms"
+    },
+    {
+      "t_ms": 20709,
+      "kind": "action",
+      "text": "hold right 1078ms"
+    },
+    {
+      "t_ms": 20944,
+      "kind": "action",
+      "text": "hold left 235ms"
+    },
+    {
+      "t_ms": 20945,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 21497,
+      "kind": "action",
+      "text": "hold right 552ms"
+    },
+    {
+      "t_ms": 21498,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 22076,
+      "kind": "action",
+      "text": "hold right 577ms"
+    },
+    {
+      "t_ms": 23280,
+      "kind": "action",
+      "text": "hold right 1203ms"
+    },
+    {
+      "t_ms": 24349,
+      "kind": "action",
+      "text": "hold right 1068ms"
+    },
+    {
+      "t_ms": 24349,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 24846,
+      "kind": "action",
+      "text": "hold right 496ms"
+    },
+    {
+      "t_ms": 25305,
+      "kind": "action",
+      "text": "hold left 458ms"
+    },
+    {
+      "t_ms": 25835,
+      "kind": "action",
+      "text": "hold right 529ms"
+    },
+    {
+      "t_ms": 25835,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 26183,
+      "kind": "action",
+      "text": "hold right 347ms"
+    },
+    {
+      "t_ms": 27359,
+      "kind": "action",
+      "text": "hold right 1174ms"
+    },
+    {
+      "t_ms": 28208,
+      "kind": "action",
+      "text": "hold right 849ms"
+    },
+    {
+      "t_ms": 29020,
+      "kind": "action",
+      "text": "hold right 811ms"
+    },
+    {
+      "t_ms": 30058,
+      "kind": "action",
+      "text": "hold right 1037ms"
+    },
+    {
+      "t_ms": 30633,
+      "kind": "action",
+      "text": "hold right 575ms"
+    },
+    {
+      "t_ms": 30634,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 31148,
+      "kind": "action",
+      "text": "hold right 513ms"
+    },
+    {
+      "t_ms": 31449,
+      "kind": "action",
+      "text": "hold right 300ms"
+    },
+    {
+      "t_ms": 31739,
+      "kind": "action",
+      "text": "hold left 286ms"
+    },
+    {
+      "t_ms": 32103,
+      "kind": "action",
+      "text": "hold left 363ms"
+    },
+    {
+      "t_ms": 32931,
+      "kind": "action",
+      "text": "hold right 826ms"
+    },
+    {
+      "t_ms": 34103,
+      "kind": "action",
+      "text": "hold right 1171ms"
+    },
+    {
+      "t_ms": 34104,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 34676,
+      "kind": "action",
+      "text": "hold right 571ms"
+    },
+    {
+      "t_ms": 35316,
+      "kind": "action",
+      "text": "hold right 639ms"
+    },
+    {
+      "t_ms": 35316,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 35554,
+      "kind": "action",
+      "text": "hold right 237ms"
+    },
+    {
+      "t_ms": 36894,
+      "kind": "action",
+      "text": "hold right 1339ms"
+    },
+    {
+      "t_ms": 37616,
+      "kind": "action",
+      "text": "hold right 721ms"
+    },
+    {
+      "t_ms": 38038,
+      "kind": "action",
+      "text": "hold right 420ms"
+    },
+    {
+      "t_ms": 38039,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 38457,
+      "kind": "action",
+      "text": "hold right 417ms"
+    },
+    {
+      "t_ms": 39076,
+      "kind": "action",
+      "text": "hold left 618ms"
+    },
+    {
+      "t_ms": 39421,
+      "kind": "action",
+      "text": "hold left 343ms"
+    },
+    {
+      "t_ms": 39722,
+      "kind": "action",
+      "text": "hold left 300ms"
+    },
+    {
+      "t_ms": 40785,
+      "kind": "action",
+      "text": "hold right 1062ms"
+    },
+    {
+      "t_ms": 40786,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 41339,
+      "kind": "action",
+      "text": "hold right 552ms"
+    },
+    {
+      "t_ms": 42525,
+      "kind": "action",
+      "text": "hold right 1185ms"
+    },
+    {
+      "t_ms": 42525,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 43104,
+      "kind": "action",
+      "text": "hold right 577ms"
+    },
+    {
+      "t_ms": 43627,
+      "kind": "action",
+      "text": "hold left 523ms"
+    },
+    {
+      "t_ms": 43628,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 44062,
+      "kind": "action",
+      "text": "hold right 434ms"
+    },
+    {
+      "t_ms": 44663,
+      "kind": "action",
+      "text": "hold right 599ms"
+    },
+    {
+      "t_ms": 45194,
+      "kind": "action",
+      "text": "hold left 530ms"
+    },
+    {
+      "t_ms": 45194,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 45697,
+      "kind": "action",
+      "text": "hold right 502ms"
+    },
+    {
+      "t_ms": 46088,
+      "kind": "action",
+      "text": "hold left 390ms"
+    },
+    {
+      "t_ms": 46088,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 46297,
+      "kind": "action",
+      "text": "hold right 208ms"
+    },
+    {
+      "t_ms": 46965,
+      "kind": "action",
+      "text": "hold right 667ms"
+    },
+    {
+      "t_ms": 48362,
+      "kind": "action",
+      "text": "hold right 1396ms"
+    },
+    {
+      "t_ms": 48362,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 48853,
+      "kind": "action",
+      "text": "hold right 490ms"
+    },
+    {
+      "t_ms": 49527,
+      "kind": "action",
+      "text": "hold right 673ms"
+    },
+    {
+      "t_ms": 49527,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 49945,
+      "kind": "action",
+      "text": "hold right 417ms"
+    },
+    {
+      "t_ms": 50888,
+      "kind": "action",
+      "text": "hold right 942ms"
+    },
+    {
+      "t_ms": 50889,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 51169,
+      "kind": "action",
+      "text": "hold right 280ms"
+    },
+    {
+      "t_ms": 51666,
+      "kind": "action",
+      "text": "hold left 495ms"
+    },
+    {
+      "t_ms": 51928,
+      "kind": "action",
+      "text": "hold left 261ms"
+    },
+    {
+      "t_ms": 51928,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 52468,
+      "kind": "action",
+      "text": "hold right 539ms"
+    },
+    {
+      "t_ms": 53639,
+      "kind": "action",
+      "text": "hold right 1169ms"
+    },
+    {
+      "t_ms": 53639,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 53868,
+      "kind": "action",
+      "text": "hold right 228ms"
+    },
+    {
+      "t_ms": 54540,
+      "kind": "action",
+      "text": "hold right 670ms"
+    },
+    {
+      "t_ms": 54541,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 54751,
+      "kind": "action",
+      "text": "hold right 209ms"
+    },
+    {
+      "t_ms": 55966,
+      "kind": "action",
+      "text": "hold right 1214ms"
+    },
+    {
+      "t_ms": 55966,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 56262,
+      "kind": "action",
+      "text": "hold right 295ms"
+    },
+    {
+      "t_ms": 56263,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 56581,
+      "kind": "action",
+      "text": "hold right 318ms"
+    },
+    {
+      "t_ms": 57460,
+      "kind": "action",
+      "text": "hold right 878ms"
+    },
+    {
+      "t_ms": 57460,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 58035,
+      "kind": "action",
+      "text": "hold right 574ms"
+    },
+    {
+      "t_ms": 59246,
+      "kind": "action",
+      "text": "hold right 1210ms"
+    },
+    {
+      "t_ms": 60520,
+      "kind": "action",
+      "text": "hold right 1273ms"
+    },
+    {
+      "t_ms": 60821,
+      "kind": "action",
+      "text": "hold space 300ms"
+    },
+    {
+      "t_ms": 61092,
+      "kind": "action",
+      "text": "hold left 270ms"
+    },
+    {
+      "t_ms": 61092,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 61587,
+      "kind": "action",
+      "text": "hold right 494ms"
+    },
+    {
+      "t_ms": 62919,
+      "kind": "action",
+      "text": "hold right 1331ms"
+    },
+    {
+      "t_ms": 63406,
+      "kind": "action",
+      "text": "hold left 486ms"
+    }
+  ],
+  "incidents": [
+    {
+      "id": 1,
+      "t_ms": 15042,
+      "kind": "softlock",
+      "detail": "the player is stuck: the screen stayed still for 4s of input and no control had any effect when probed",
+      "console": [
+        "stdout: Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+        "stdout: OpenGL API 3.3.0 NVIDIA 610.78 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Laptop GPU",
+        "stdout: cavern: bugs enabled = [\"softlock\"]",
+        "stdout: cavern: coin picked, coins=1",
+        "stdout: cavern: coin picked, coins=2"
+      ],
+      "sheet": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\softlock-explore\\incident-001.jpg",
+      "clip": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\softlock-explore\\incident-001.mp4",
+      "reviewed": true
+    }
+  ],
+  "reports": [
+    {
+      "id": 1,
+      "incident": 1,
+      "title": "Player gets soft-locked: no control has any effect",
+      "severity": "blocker",
+      "steps": [
+        "Start the game",
+        "Play forward for about 15s (8 input groups, full list in session.json)",
+        "hold right (x6)",
+        "hold space",
+        "hold left",
+        "tap space",
+        "hold right",
+        "hold left",
+        "tap space",
+        "hold right",
+        "The problem shows at about 15.0s"
+      ],
+      "expected": "",
+      "actual": "the player is stuck: the screen stayed still for 4s of input and no control had any effect when probed",
+      "console": [
+        "stdout: Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+        "stdout: OpenGL API 3.3.0 NVIDIA 610.78 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Laptop GPU",
+        "stdout: cavern: bugs enabled = [\"softlock\"]",
+        "stdout: cavern: coin picked, coins=1",
+        "stdout: cavern: coin picked, coins=2"
+      ],
+      "sheet": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\softlock-explore\\incident-001.jpg",
+      "clip": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\softlock-explore\\incident-001.mp4",
+      "filed_by": "playerone (no director)"
+    }
+  ],
+  "meter": {
+    "frames_captured": 291,
+    "player_steps": 71,
+    "player_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "director_calls": 0,
+    "director_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "director_bytes_sent": 0,
+    "naive_director_tokens": 75331,
+    "window_size": [
+      960,
+      540
+    ]
+  },
+  "out_dir": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\softlock-explore",
+  "error": null
+}

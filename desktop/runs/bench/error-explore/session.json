@@ -1,0 +1,785 @@
+{
+  "started": true,
+  "running": false,
+  "window": "Cavern (PlayerOne test) (DEBUG)",
+  "goal": "walk right through the level, collect coins, get past every obstacle and watch the coin counter",
+  "player": "explore",
+  "director": "none",
+  "events": [
+    {
+      "t_ms": 297,
+      "kind": "launch",
+      "text": "godot --path testgame -- --bugs=error"
+    },
+    {
+      "t_ms": 3840,
+      "kind": "action",
+      "text": "hold right 685ms"
+    },
+    {
+      "t_ms": 3840,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 4358,
+      "kind": "action",
+      "text": "hold right 517ms"
+    },
+    {
+      "t_ms": 5756,
+      "kind": "action",
+      "text": "hold right 1396ms"
+    },
+    {
+      "t_ms": 6485,
+      "kind": "action",
+      "text": "hold right 728ms"
+    },
+    {
+      "t_ms": 7666,
+      "kind": "action",
+      "text": "hold right 1180ms"
+    },
+    {
+      "t_ms": 8208,
+      "kind": "action",
+      "text": "hold left 541ms"
+    },
+    {
+      "t_ms": 8208,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 8503,
+      "kind": "action",
+      "text": "hold right 292ms"
+    },
+    {
+      "t_ms": 9413,
+      "kind": "action",
+      "text": "hold right 909ms"
+    },
+    {
+      "t_ms": 10557,
+      "kind": "console",
+      "text": "SCRIPT ERROR: Invalid call. Nonexistent function 'open' in base 'Nil'."
+    },
+    {
+      "t_ms": 10562,
+      "kind": "action",
+      "text": "hold right 1148ms"
+    },
+    {
+      "t_ms": 10562,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 11067,
+      "kind": "action",
+      "text": "hold right 505ms"
+    },
+    {
+      "t_ms": 11369,
+      "kind": "action",
+      "text": "hold space 300ms"
+    },
+    {
+      "t_ms": 11670,
+      "kind": "action",
+      "text": "hold space 300ms"
+    },
+    {
+      "t_ms": 12469,
+      "kind": "incident",
+      "text": "#1 console_error: SCRIPT ERROR: Invalid call. Nonexistent function 'open' in base 'Nil'."
+    },
+    {
+      "t_ms": 12594,
+      "kind": "action",
+      "text": "hold right 923ms"
+    },
+    {
+      "t_ms": 12895,
+      "kind": "action",
+      "text": "hold space 300ms"
+    },
+    {
+      "t_ms": 13552,
+      "kind": "action",
+      "text": "hold right 655ms"
+    },
+    {
+      "t_ms": 13853,
+      "kind": "action",
+      "text": "hold right 300ms"
+    },
+    {
+      "t_ms": 14271,
+      "kind": "action",
+      "text": "hold right 417ms"
+    },
+    {
+      "t_ms": 14272,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 14591,
+      "kind": "action",
+      "text": "hold right 318ms"
+    },
+    {
+      "t_ms": 15223,
+      "kind": "action",
+      "text": "hold right 631ms"
+    },
+    {
+      "t_ms": 15224,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 15488,
+      "kind": "action",
+      "text": "hold right 264ms"
+    },
+    {
+      "t_ms": 16681,
+      "kind": "action",
+      "text": "hold right 1192ms"
+    },
+    {
+      "t_ms": 16681,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 16992,
+      "kind": "action",
+      "text": "hold right 310ms"
+    },
+    {
+      "t_ms": 17524,
+      "kind": "action",
+      "text": "hold right 531ms"
+    },
+    {
+      "t_ms": 17525,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 17873,
+      "kind": "action",
+      "text": "hold right 347ms"
+    },
+    {
+      "t_ms": 18906,
+      "kind": "action",
+      "text": "hold right 1033ms"
+    },
+    {
+      "t_ms": 18907,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 19175,
+      "kind": "action",
+      "text": "hold right 267ms"
+    },
+    {
+      "t_ms": 20317,
+      "kind": "action",
+      "text": "hold right 1141ms"
+    },
+    {
+      "t_ms": 21670,
+      "kind": "action",
+      "text": "hold right 1352ms"
+    },
+    {
+      "t_ms": 22567,
+      "kind": "action",
+      "text": "hold right 896ms"
+    },
+    {
+      "t_ms": 22568,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 23028,
+      "kind": "action",
+      "text": "hold right 459ms"
+    },
+    {
+      "t_ms": 24032,
+      "kind": "action",
+      "text": "hold right 1004ms"
+    },
+    {
+      "t_ms": 24333,
+      "kind": "action",
+      "text": "hold right 300ms"
+    },
+    {
+      "t_ms": 24634,
+      "kind": "action",
+      "text": "hold right 300ms"
+    },
+    {
+      "t_ms": 25851,
+      "kind": "action",
+      "text": "hold right 1216ms"
+    },
+    {
+      "t_ms": 25852,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 26185,
+      "kind": "action",
+      "text": "hold right 333ms"
+    },
+    {
+      "t_ms": 26599,
+      "kind": "action",
+      "text": "hold left 413ms"
+    },
+    {
+      "t_ms": 26600,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 26962,
+      "kind": "action",
+      "text": "hold right 361ms"
+    },
+    {
+      "t_ms": 28202,
+      "kind": "action",
+      "text": "hold right 1239ms"
+    },
+    {
+      "t_ms": 28502,
+      "kind": "action",
+      "text": "hold right 300ms"
+    },
+    {
+      "t_ms": 28918,
+      "kind": "action",
+      "text": "hold right 415ms"
+    },
+    {
+      "t_ms": 28918,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 29174,
+      "kind": "action",
+      "text": "hold right 255ms"
+    },
+    {
+      "t_ms": 30140,
+      "kind": "action",
+      "text": "hold right 965ms"
+    },
+    {
+      "t_ms": 30140,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 30372,
+      "kind": "action",
+      "text": "hold right 231ms"
+    },
+    {
+      "t_ms": 30673,
+      "kind": "action",
+      "text": "hold right 300ms"
+    },
+    {
+      "t_ms": 30674,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 30993,
+      "kind": "action",
+      "text": "hold right 319ms"
+    },
+    {
+      "t_ms": 30994,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 31370,
+      "kind": "action",
+      "text": "hold right 375ms"
+    },
+    {
+      "t_ms": 32007,
+      "kind": "action",
+      "text": "hold right 636ms"
+    },
+    {
+      "t_ms": 32008,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 32477,
+      "kind": "action",
+      "text": "hold right 468ms"
+    },
+    {
+      "t_ms": 32477,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 32979,
+      "kind": "action",
+      "text": "hold right 501ms"
+    },
+    {
+      "t_ms": 33419,
+      "kind": "action",
+      "text": "hold right 440ms"
+    },
+    {
+      "t_ms": 34315,
+      "kind": "action",
+      "text": "hold right 895ms"
+    },
+    {
+      "t_ms": 34316,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 34692,
+      "kind": "action",
+      "text": "hold right 375ms"
+    },
+    {
+      "t_ms": 35325,
+      "kind": "action",
+      "text": "hold right 632ms"
+    },
+    {
+      "t_ms": 35325,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 35537,
+      "kind": "action",
+      "text": "hold right 211ms"
+    },
+    {
+      "t_ms": 36027,
+      "kind": "action",
+      "text": "hold left 489ms"
+    },
+    {
+      "t_ms": 36027,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 36394,
+      "kind": "action",
+      "text": "hold right 367ms"
+    },
+    {
+      "t_ms": 36697,
+      "kind": "action",
+      "text": "hold left 300ms"
+    },
+    {
+      "t_ms": 37613,
+      "kind": "action",
+      "text": "hold right 916ms"
+    },
+    {
+      "t_ms": 37916,
+      "kind": "action",
+      "text": "hold left 300ms"
+    },
+    {
+      "t_ms": 38217,
+      "kind": "action",
+      "text": "hold right 300ms"
+    },
+    {
+      "t_ms": 38218,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 38612,
+      "kind": "action",
+      "text": "hold right 393ms"
+    },
+    {
+      "t_ms": 38612,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 38953,
+      "kind": "action",
+      "text": "hold right 340ms"
+    },
+    {
+      "t_ms": 39760,
+      "kind": "action",
+      "text": "hold right 806ms"
+    },
+    {
+      "t_ms": 40884,
+      "kind": "action",
+      "text": "hold right 1123ms"
+    },
+    {
+      "t_ms": 40884,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 41337,
+      "kind": "action",
+      "text": "hold right 452ms"
+    },
+    {
+      "t_ms": 41679,
+      "kind": "action",
+      "text": "hold left 341ms"
+    },
+    {
+      "t_ms": 41680,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 42217,
+      "kind": "action",
+      "text": "hold right 536ms"
+    },
+    {
+      "t_ms": 42676,
+      "kind": "action",
+      "text": "hold left 458ms"
+    },
+    {
+      "t_ms": 42677,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 42900,
+      "kind": "action",
+      "text": "hold right 223ms"
+    },
+    {
+      "t_ms": 42901,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 43278,
+      "kind": "action",
+      "text": "hold right 376ms"
+    },
+    {
+      "t_ms": 44258,
+      "kind": "action",
+      "text": "hold right 979ms"
+    },
+    {
+      "t_ms": 44947,
+      "kind": "action",
+      "text": "hold left 689ms"
+    },
+    {
+      "t_ms": 44948,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 45318,
+      "kind": "action",
+      "text": "hold right 370ms"
+    },
+    {
+      "t_ms": 45780,
+      "kind": "action",
+      "text": "hold right 461ms"
+    },
+    {
+      "t_ms": 47121,
+      "kind": "action",
+      "text": "hold right 1340ms"
+    },
+    {
+      "t_ms": 47121,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 47638,
+      "kind": "action",
+      "text": "hold right 516ms"
+    },
+    {
+      "t_ms": 47939,
+      "kind": "action",
+      "text": "hold left 300ms"
+    },
+    {
+      "t_ms": 47940,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 48239,
+      "kind": "action",
+      "text": "hold right 298ms"
+    },
+    {
+      "t_ms": 49162,
+      "kind": "action",
+      "text": "hold right 922ms"
+    },
+    {
+      "t_ms": 49603,
+      "kind": "action",
+      "text": "hold left 440ms"
+    },
+    {
+      "t_ms": 50006,
+      "kind": "action",
+      "text": "hold right 402ms"
+    },
+    {
+      "t_ms": 50613,
+      "kind": "action",
+      "text": "hold right 607ms"
+    },
+    {
+      "t_ms": 50614,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 50951,
+      "kind": "action",
+      "text": "hold right 334ms"
+    },
+    {
+      "t_ms": 51525,
+      "kind": "action",
+      "text": "hold right 573ms"
+    },
+    {
+      "t_ms": 52191,
+      "kind": "action",
+      "text": "hold right 665ms"
+    },
+    {
+      "t_ms": 52946,
+      "kind": "action",
+      "text": "hold right 754ms"
+    },
+    {
+      "t_ms": 52946,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 53507,
+      "kind": "action",
+      "text": "hold right 560ms"
+    },
+    {
+      "t_ms": 54550,
+      "kind": "action",
+      "text": "hold right 1041ms"
+    },
+    {
+      "t_ms": 55039,
+      "kind": "action",
+      "text": "hold left 488ms"
+    },
+    {
+      "t_ms": 55594,
+      "kind": "action",
+      "text": "hold right 554ms"
+    },
+    {
+      "t_ms": 56934,
+      "kind": "action",
+      "text": "hold right 1339ms"
+    },
+    {
+      "t_ms": 56934,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 57161,
+      "kind": "action",
+      "text": "hold right 226ms"
+    },
+    {
+      "t_ms": 57811,
+      "kind": "action",
+      "text": "hold right 649ms"
+    },
+    {
+      "t_ms": 59029,
+      "kind": "action",
+      "text": "hold right 1217ms"
+    },
+    {
+      "t_ms": 59030,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 59523,
+      "kind": "action",
+      "text": "hold right 492ms"
+    },
+    {
+      "t_ms": 59815,
+      "kind": "action",
+      "text": "hold left 291ms"
+    },
+    {
+      "t_ms": 60319,
+      "kind": "action",
+      "text": "hold right 503ms"
+    },
+    {
+      "t_ms": 61168,
+      "kind": "action",
+      "text": "hold right 848ms"
+    },
+    {
+      "t_ms": 61168,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 61707,
+      "kind": "action",
+      "text": "hold right 538ms"
+    },
+    {
+      "t_ms": 62008,
+      "kind": "action",
+      "text": "hold space 300ms"
+    },
+    {
+      "t_ms": 62456,
+      "kind": "action",
+      "text": "hold right 447ms"
+    },
+    {
+      "t_ms": 63785,
+      "kind": "action",
+      "text": "hold right 1328ms"
+    }
+  ],
+  "incidents": [
+    {
+      "id": 1,
+      "t_ms": 12469,
+      "kind": "console_error",
+      "detail": "SCRIPT ERROR: Invalid call. Nonexistent function 'open' in base 'Nil'.",
+      "console": [
+        "stdout: Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+        "stdout: OpenGL API 3.3.0 NVIDIA 610.78 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Laptop GPU",
+        "stdout: cavern: bugs enabled = [\"error\"]",
+        "stdout: cavern: coin picked, coins=1",
+        "stderr: SCRIPT ERROR: Invalid call. Nonexistent function 'open' in base 'Nil'.",
+        "stderr:    at: _check_triggers (res://main.gd:148)",
+        "stderr:    GDScript backtrace (most recent call first):",
+        "stderr:        [0] _check_triggers (res://main.gd:148)",
+        "stderr:        [1] _physics_process (res://main.gd:131)"
+      ],
+      "sheet": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\error-explore\\incident-001.jpg",
+      "clip": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\error-explore\\incident-001.mp4",
+      "reviewed": true
+    }
+  ],
+  "reports": [
+    {
+      "id": 1,
+      "incident": 1,
+      "title": "Engine error: SCRIPT ERROR: Invalid call. Nonexistent function 'open' in base 'Nil'.",
+      "severity": "major",
+      "steps": [
+        "Start the game",
+        "hold right",
+        "tap space",
+        "hold right (x4)",
+        "hold left",
+        "tap space",
+        "hold right (x3)",
+        "tap space",
+        "hold right",
+        "hold space (x2)",
+        "The problem shows at about 12.5s"
+      ],
+      "expected": "",
+      "actual": "SCRIPT ERROR: Invalid call. Nonexistent function 'open' in base 'Nil'.",
+      "console": [
+        "stdout: Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org",
+        "stdout: OpenGL API 3.3.0 NVIDIA 610.78 - Compatibility - Using Device: NVIDIA - NVIDIA GeForce RTX 4060 Laptop GPU",
+        "stdout: cavern: bugs enabled = [\"error\"]",
+        "stdout: cavern: coin picked, coins=1",
+        "stderr: SCRIPT ERROR: Invalid call. Nonexistent function 'open' in base 'Nil'.",
+        "stderr:    at: _check_triggers (res://main.gd:148)",
+        "stderr:    GDScript backtrace (most recent call first):",
+        "stderr:        [0] _check_triggers (res://main.gd:148)",
+        "stderr:        [1] _physics_process (res://main.gd:131)"
+      ],
+      "sheet": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\error-explore\\incident-001.jpg",
+      "clip": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\error-explore\\incident-001.mp4",
+      "filed_by": "playerone (no director)"
+    }
+  ],
+  "meter": {
+    "frames_captured": 291,
+    "player_steps": 78,
+    "player_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "director_calls": 0,
+    "director_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "director_bytes_sent": 0,
+    "naive_director_tokens": 82758,
+    "window_size": [
+      960,
+      540
+    ]
+  },
+  "out_dir": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\error-explore",
+  "error": null
+}

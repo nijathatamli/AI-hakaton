@@ -1,0 +1,1403 @@
+{
+  "started": true,
+  "running": false,
+  "window": "Cavern (PlayerOne test) (DEBUG)",
+  "goal": "walk right through the level, collect coins, get past every obstacle and watch the coin counter",
+  "player": "random",
+  "director": "none",
+  "events": [
+    {
+      "t_ms": 348,
+      "kind": "launch",
+      "text": "godot --path testgame -- --bugs="
+    },
+    {
+      "t_ms": 4985,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 5555,
+      "kind": "action",
+      "text": "hold right 568ms"
+    },
+    {
+      "t_ms": 6376,
+      "kind": "action",
+      "text": "hold left 820ms"
+    },
+    {
+      "t_ms": 6377,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 6489,
+      "kind": "action",
+      "text": "hold space 112ms"
+    },
+    {
+      "t_ms": 7282,
+      "kind": "action",
+      "text": "hold right 791ms"
+    },
+    {
+      "t_ms": 7398,
+      "kind": "action",
+      "text": "hold left 115ms"
+    },
+    {
+      "t_ms": 7399,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 7399,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 8235,
+      "kind": "action",
+      "text": "hold left 835ms"
+    },
+    {
+      "t_ms": 8235,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 8700,
+      "kind": "action",
+      "text": "hold space 464ms"
+    },
+    {
+      "t_ms": 8701,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 9577,
+      "kind": "action",
+      "text": "hold left 875ms"
+    },
+    {
+      "t_ms": 9577,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 9577,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 9578,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 9578,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 10239,
+      "kind": "action",
+      "text": "hold right 660ms"
+    },
+    {
+      "t_ms": 10601,
+      "kind": "action",
+      "text": "hold left 361ms"
+    },
+    {
+      "t_ms": 11498,
+      "kind": "action",
+      "text": "hold left 896ms"
+    },
+    {
+      "t_ms": 12040,
+      "kind": "action",
+      "text": "hold left 541ms"
+    },
+    {
+      "t_ms": 12592,
+      "kind": "action",
+      "text": "hold space 551ms"
+    },
+    {
+      "t_ms": 13336,
+      "kind": "action",
+      "text": "hold left 743ms"
+    },
+    {
+      "t_ms": 13868,
+      "kind": "action",
+      "text": "hold left 531ms"
+    },
+    {
+      "t_ms": 14080,
+      "kind": "action",
+      "text": "hold left 211ms"
+    },
+    {
+      "t_ms": 14080,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 14704,
+      "kind": "action",
+      "text": "hold space 623ms"
+    },
+    {
+      "t_ms": 15333,
+      "kind": "action",
+      "text": "hold right 627ms"
+    },
+    {
+      "t_ms": 15333,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 15334,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 15335,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 16085,
+      "kind": "action",
+      "text": "hold left 749ms"
+    },
+    {
+      "t_ms": 16086,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 16086,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 16089,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 16810,
+      "kind": "action",
+      "text": "hold right 720ms"
+    },
+    {
+      "t_ms": 16810,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 17403,
+      "kind": "action",
+      "text": "hold left 591ms"
+    },
+    {
+      "t_ms": 17924,
+      "kind": "action",
+      "text": "hold space 520ms"
+    },
+    {
+      "t_ms": 17924,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 17924,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 17925,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 18624,
+      "kind": "action",
+      "text": "hold left 696ms"
+    },
+    {
+      "t_ms": 19064,
+      "kind": "action",
+      "text": "hold right 439ms"
+    },
+    {
+      "t_ms": 19064,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 19193,
+      "kind": "action",
+      "text": "hold space 128ms"
+    },
+    {
+      "t_ms": 19193,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 19517,
+      "kind": "action",
+      "text": "hold right 323ms"
+    },
+    {
+      "t_ms": 20262,
+      "kind": "action",
+      "text": "hold right 743ms"
+    },
+    {
+      "t_ms": 20910,
+      "kind": "action",
+      "text": "hold right 645ms"
+    },
+    {
+      "t_ms": 21357,
+      "kind": "action",
+      "text": "hold right 445ms"
+    },
+    {
+      "t_ms": 21357,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 22171,
+      "kind": "action",
+      "text": "hold right 813ms"
+    },
+    {
+      "t_ms": 22536,
+      "kind": "action",
+      "text": "hold left 364ms"
+    },
+    {
+      "t_ms": 22537,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 23110,
+      "kind": "action",
+      "text": "hold right 572ms"
+    },
+    {
+      "t_ms": 23110,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 23111,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 23111,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 23418,
+      "kind": "action",
+      "text": "hold space 306ms"
+    },
+    {
+      "t_ms": 23674,
+      "kind": "action",
+      "text": "hold right 255ms"
+    },
+    {
+      "t_ms": 23674,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 23674,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 23674,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 23675,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 23675,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 24341,
+      "kind": "action",
+      "text": "hold right 665ms"
+    },
+    {
+      "t_ms": 24912,
+      "kind": "action",
+      "text": "hold space 570ms"
+    },
+    {
+      "t_ms": 25172,
+      "kind": "action",
+      "text": "hold right 259ms"
+    },
+    {
+      "t_ms": 25274,
+      "kind": "action",
+      "text": "hold right 101ms"
+    },
+    {
+      "t_ms": 25274,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 25275,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 25275,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 25276,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 25276,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 25276,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 25277,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 25452,
+      "kind": "action",
+      "text": "hold right 174ms"
+    },
+    {
+      "t_ms": 25968,
+      "kind": "action",
+      "text": "hold right 516ms"
+    },
+    {
+      "t_ms": 26090,
+      "kind": "action",
+      "text": "hold space 119ms"
+    },
+    {
+      "t_ms": 26090,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 26903,
+      "kind": "action",
+      "text": "hold space 810ms"
+    },
+    {
+      "t_ms": 27485,
+      "kind": "action",
+      "text": "hold space 581ms"
+    },
+    {
+      "t_ms": 27956,
+      "kind": "action",
+      "text": "hold right 470ms"
+    },
+    {
+      "t_ms": 27956,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 28644,
+      "kind": "action",
+      "text": "hold space 687ms"
+    },
+    {
+      "t_ms": 28644,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 28645,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 29435,
+      "kind": "action",
+      "text": "hold left 790ms"
+    },
+    {
+      "t_ms": 29436,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 29983,
+      "kind": "action",
+      "text": "hold space 546ms"
+    },
+    {
+      "t_ms": 29984,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 29984,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 29984,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 29985,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 29985,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 29985,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 29985,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 30536,
+      "kind": "action",
+      "text": "hold left 550ms"
+    },
+    {
+      "t_ms": 30537,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 30538,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 30538,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 30539,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 30746,
+      "kind": "action",
+      "text": "hold space 206ms"
+    },
+    {
+      "t_ms": 30980,
+      "kind": "action",
+      "text": "hold right 233ms"
+    },
+    {
+      "t_ms": 31335,
+      "kind": "action",
+      "text": "hold right 355ms"
+    },
+    {
+      "t_ms": 32185,
+      "kind": "action",
+      "text": "hold left 848ms"
+    },
+    {
+      "t_ms": 32498,
+      "kind": "action",
+      "text": "hold left 313ms"
+    },
+    {
+      "t_ms": 32499,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 32637,
+      "kind": "action",
+      "text": "hold space 137ms"
+    },
+    {
+      "t_ms": 32638,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 33091,
+      "kind": "action",
+      "text": "hold left 452ms"
+    },
+    {
+      "t_ms": 33961,
+      "kind": "action",
+      "text": "hold left 869ms"
+    },
+    {
+      "t_ms": 33961,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 34516,
+      "kind": "action",
+      "text": "hold space 554ms"
+    },
+    {
+      "t_ms": 34517,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 34859,
+      "kind": "action",
+      "text": "hold space 341ms"
+    },
+    {
+      "t_ms": 35643,
+      "kind": "action",
+      "text": "hold space 783ms"
+    },
+    {
+      "t_ms": 35644,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 35773,
+      "kind": "action",
+      "text": "hold space 128ms"
+    },
+    {
+      "t_ms": 36228,
+      "kind": "action",
+      "text": "hold left 454ms"
+    },
+    {
+      "t_ms": 36228,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 36228,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 36229,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 36497,
+      "kind": "action",
+      "text": "hold left 267ms"
+    },
+    {
+      "t_ms": 36870,
+      "kind": "action",
+      "text": "hold right 373ms"
+    },
+    {
+      "t_ms": 37573,
+      "kind": "action",
+      "text": "hold left 701ms"
+    },
+    {
+      "t_ms": 37974,
+      "kind": "action",
+      "text": "hold right 401ms"
+    },
+    {
+      "t_ms": 38401,
+      "kind": "action",
+      "text": "hold right 426ms"
+    },
+    {
+      "t_ms": 38523,
+      "kind": "action",
+      "text": "hold left 121ms"
+    },
+    {
+      "t_ms": 38904,
+      "kind": "action",
+      "text": "hold space 380ms"
+    },
+    {
+      "t_ms": 38904,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 38904,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 38905,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 39682,
+      "kind": "action",
+      "text": "hold space 777ms"
+    },
+    {
+      "t_ms": 40515,
+      "kind": "action",
+      "text": "hold left 832ms"
+    },
+    {
+      "t_ms": 40515,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 40516,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 40516,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 40517,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 40517,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 40517,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 40728,
+      "kind": "action",
+      "text": "hold left 210ms"
+    },
+    {
+      "t_ms": 40729,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 40995,
+      "kind": "action",
+      "text": "hold right 265ms"
+    },
+    {
+      "t_ms": 41280,
+      "kind": "action",
+      "text": "hold left 284ms"
+    },
+    {
+      "t_ms": 41280,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 41627,
+      "kind": "action",
+      "text": "hold left 346ms"
+    },
+    {
+      "t_ms": 41628,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 42047,
+      "kind": "action",
+      "text": "hold space 419ms"
+    },
+    {
+      "t_ms": 42165,
+      "kind": "action",
+      "text": "hold space 117ms"
+    },
+    {
+      "t_ms": 42731,
+      "kind": "action",
+      "text": "hold right 565ms"
+    },
+    {
+      "t_ms": 42731,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 42731,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 42732,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 42732,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 42732,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 42732,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 43470,
+      "kind": "action",
+      "text": "hold space 737ms"
+    },
+    {
+      "t_ms": 43470,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 43471,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 43471,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 44197,
+      "kind": "action",
+      "text": "hold space 726ms"
+    },
+    {
+      "t_ms": 44198,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 44198,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 44199,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 44801,
+      "kind": "action",
+      "text": "hold right 598ms"
+    },
+    {
+      "t_ms": 44801,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 44802,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 44802,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 44913,
+      "kind": "action",
+      "text": "hold right 110ms"
+    },
+    {
+      "t_ms": 44913,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 44913,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 45065,
+      "kind": "action",
+      "text": "hold left 151ms"
+    },
+    {
+      "t_ms": 45231,
+      "kind": "action",
+      "text": "hold space 164ms"
+    },
+    {
+      "t_ms": 45231,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 45861,
+      "kind": "action",
+      "text": "hold space 629ms"
+    },
+    {
+      "t_ms": 46412,
+      "kind": "action",
+      "text": "hold left 550ms"
+    },
+    {
+      "t_ms": 46680,
+      "kind": "action",
+      "text": "hold right 265ms"
+    },
+    {
+      "t_ms": 46680,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 47461,
+      "kind": "action",
+      "text": "hold right 780ms"
+    },
+    {
+      "t_ms": 47462,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 47462,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 47933,
+      "kind": "action",
+      "text": "hold space 470ms"
+    },
+    {
+      "t_ms": 47933,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 48338,
+      "kind": "action",
+      "text": "hold right 404ms"
+    },
+    {
+      "t_ms": 48339,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 48339,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 48339,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 48442,
+      "kind": "action",
+      "text": "hold left 102ms"
+    },
+    {
+      "t_ms": 48733,
+      "kind": "action",
+      "text": "hold space 290ms"
+    },
+    {
+      "t_ms": 48733,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 48734,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 48838,
+      "kind": "action",
+      "text": "hold right 103ms"
+    },
+    {
+      "t_ms": 49551,
+      "kind": "action",
+      "text": "hold left 712ms"
+    },
+    {
+      "t_ms": 49551,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 50306,
+      "kind": "action",
+      "text": "hold right 754ms"
+    },
+    {
+      "t_ms": 50307,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 50307,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 50307,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 50308,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 50308,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 50308,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 50450,
+      "kind": "action",
+      "text": "hold right 141ms"
+    },
+    {
+      "t_ms": 50450,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 50451,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 50451,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 50639,
+      "kind": "action",
+      "text": "hold space 187ms"
+    },
+    {
+      "t_ms": 50639,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 51265,
+      "kind": "action",
+      "text": "hold left 625ms"
+    },
+    {
+      "t_ms": 51265,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 51266,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 51888,
+      "kind": "action",
+      "text": "hold space 621ms"
+    },
+    {
+      "t_ms": 52225,
+      "kind": "action",
+      "text": "hold left 336ms"
+    },
+    {
+      "t_ms": 52234,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 52234,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 52997,
+      "kind": "action",
+      "text": "hold left 762ms"
+    },
+    {
+      "t_ms": 52997,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 53285,
+      "kind": "action",
+      "text": "hold left 287ms"
+    },
+    {
+      "t_ms": 54009,
+      "kind": "action",
+      "text": "hold space 723ms"
+    },
+    {
+      "t_ms": 54514,
+      "kind": "action",
+      "text": "hold space 504ms"
+    },
+    {
+      "t_ms": 54652,
+      "kind": "action",
+      "text": "hold space 137ms"
+    },
+    {
+      "t_ms": 54652,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 54653,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 54947,
+      "kind": "action",
+      "text": "hold right 291ms"
+    },
+    {
+      "t_ms": 55601,
+      "kind": "action",
+      "text": "hold left 654ms"
+    },
+    {
+      "t_ms": 55602,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 55602,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 55997,
+      "kind": "action",
+      "text": "hold right 394ms"
+    },
+    {
+      "t_ms": 55998,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 55998,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 55998,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 56715,
+      "kind": "action",
+      "text": "hold right 716ms"
+    },
+    {
+      "t_ms": 56715,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 57368,
+      "kind": "action",
+      "text": "hold right 652ms"
+    },
+    {
+      "t_ms": 57369,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 57369,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 57855,
+      "kind": "action",
+      "text": "hold left 486ms"
+    },
+    {
+      "t_ms": 58105,
+      "kind": "action",
+      "text": "hold left 249ms"
+    },
+    {
+      "t_ms": 58713,
+      "kind": "action",
+      "text": "hold right 607ms"
+    },
+    {
+      "t_ms": 58713,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 58714,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 58816,
+      "kind": "action",
+      "text": "hold right 101ms"
+    },
+    {
+      "t_ms": 59652,
+      "kind": "action",
+      "text": "hold left 835ms"
+    },
+    {
+      "t_ms": 60196,
+      "kind": "action",
+      "text": "hold right 543ms"
+    },
+    {
+      "t_ms": 60196,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 60197,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 60197,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 60198,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 60198,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 60595,
+      "kind": "action",
+      "text": "hold space 395ms"
+    },
+    {
+      "t_ms": 61136,
+      "kind": "action",
+      "text": "hold right 541ms"
+    },
+    {
+      "t_ms": 62032,
+      "kind": "action",
+      "text": "hold space 893ms"
+    },
+    {
+      "t_ms": 62033,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 62233,
+      "kind": "action",
+      "text": "hold right 199ms"
+    },
+    {
+      "t_ms": 62233,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 62465,
+      "kind": "action",
+      "text": "hold right 231ms"
+    },
+    {
+      "t_ms": 62951,
+      "kind": "action",
+      "text": "hold right 485ms"
+    },
+    {
+      "t_ms": 62952,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 62952,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 62952,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 62953,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 63556,
+      "kind": "action",
+      "text": "hold left 602ms"
+    },
+    {
+      "t_ms": 63556,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 63556,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 63556,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 63557,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 63557,
+      "kind": "action",
+      "text": "tap right"
+    },
+    {
+      "t_ms": 63696,
+      "kind": "action",
+      "text": "hold left 138ms"
+    },
+    {
+      "t_ms": 64245,
+      "kind": "action",
+      "text": "hold space 547ms"
+    },
+    {
+      "t_ms": 64930,
+      "kind": "action",
+      "text": "hold left 684ms"
+    },
+    {
+      "t_ms": 65151,
+      "kind": "action",
+      "text": "hold right 220ms"
+    }
+  ],
+  "incidents": [],
+  "reports": [],
+  "meter": {
+    "frames_captured": 300,
+    "player_steps": 91,
+    "player_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "director_calls": 0,
+    "director_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "director_bytes_sent": 0,
+    "naive_director_tokens": 96551,
+    "window_size": [
+      960,
+      540
+    ]
+  },
+  "out_dir": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\none-random",
+  "error": null
+}

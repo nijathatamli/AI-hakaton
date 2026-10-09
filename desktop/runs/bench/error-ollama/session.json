@@ -1,0 +1,363 @@
+{
+  "started": true,
+  "running": false,
+  "window": "Cavern (PlayerOne test) (DEBUG)",
+  "goal": "walk right through the level, collect coins, get past every obstacle and watch the coin counter",
+  "player": "ollama:qwen2.5vl:3b",
+  "director": "none",
+  "events": [
+    {
+      "t_ms": 295,
+      "kind": "launch",
+      "text": "godot --path testgame -- --bugs=error"
+    },
+    {
+      "t_ms": 3046,
+      "kind": "player",
+      "text": "warming up ollama:qwen2.5vl:3b"
+    },
+    {
+      "t_ms": 3937,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 4238,
+      "kind": "action",
+      "text": "hold right 300ms"
+    },
+    {
+      "t_ms": 4873,
+      "kind": "player",
+      "text": "walk right through the level, collect coins, get past every obstacle and watch the coin counter"
+    },
+    {
+      "t_ms": 5474,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 6730,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 7331,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 9080,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 10327,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 10928,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 12038,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 13292,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 13893,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 15143,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 15744,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 17011,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 17612,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 19353,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 19700,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 21081,
+      "kind": "action",
+      "text": "hold left 1000ms"
+    },
+    {
+      "t_ms": 22382,
+      "kind": "player",
+      "text": "what you see in a few words"
+    },
+    {
+      "t_ms": 22983,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 24240,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 24841,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 25839,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 26343,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 26945,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 27460,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 28061,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 28540,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 28960,
+      "kind": "probe",
+      "text": "screen still for 4s, trying every control once"
+    },
+    {
+      "t_ms": 29142,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 31063,
+      "kind": "probe",
+      "text": "the game reacted, it was a dead end, not a bug"
+    },
+    {
+      "t_ms": 32806,
+      "kind": "action",
+      "text": "hold left 1000ms"
+    },
+    {
+      "t_ms": 34546,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 35674,
+      "kind": "action",
+      "text": "tap left"
+    },
+    {
+      "t_ms": 36686,
+      "kind": "action",
+      "text": "hold left 600ms"
+    },
+    {
+      "t_ms": 37973,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 38574,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 39991,
+      "kind": "action",
+      "text": "hold left 1000ms"
+    },
+    {
+      "t_ms": 41221,
+      "kind": "player",
+      "text": "try to collect coin"
+    },
+    {
+      "t_ms": 41822,
+      "kind": "action",
+      "text": "hold left 600ms"
+    },
+    {
+      "t_ms": 43106,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 43706,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 44996,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 45597,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 46874,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 47475,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 48786,
+      "kind": "player",
+      "text": "what you see in a few words"
+    },
+    {
+      "t_ms": 49387,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 49930,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 50531,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 51505,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 53097,
+      "kind": "action",
+      "text": "hold left 1200ms"
+    },
+    {
+      "t_ms": 54344,
+      "kind": "player",
+      "text": "left"
+    },
+    {
+      "t_ms": 54945,
+      "kind": "action",
+      "text": "hold left 600ms"
+    },
+    {
+      "t_ms": 55465,
+      "kind": "player",
+      "text": "walk right"
+    },
+    {
+      "t_ms": 56066,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 57812,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 59561,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 60848,
+      "kind": "player",
+      "text": "walk right through the level"
+    },
+    {
+      "t_ms": 61449,
+      "kind": "action",
+      "text": "hold right 600ms"
+    },
+    {
+      "t_ms": 61990,
+      "kind": "player",
+      "text": "left to move left"
+    },
+    {
+      "t_ms": 62591,
+      "kind": "action",
+      "text": "hold left 600ms"
+    },
+    {
+      "t_ms": 63844,
+      "kind": "player",
+      "text": "walk right"
+    }
+  ],
+  "incidents": [],
+  "reports": [],
+  "meter": {
+    "frames_captured": 299,
+    "player_steps": 39,
+    "player_tokens": {
+      "input": 51066,
+      "output": 1055
+    },
+    "director_calls": 0,
+    "director_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "director_bytes_sent": 0,
+    "naive_director_tokens": 41379,
+    "window_size": [
+      960,
+      540
+    ]
+  },
+  "out_dir": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\error-ollama",
+  "error": null
+}

@@ -1,0 +1,718 @@
+{
+  "started": true,
+  "running": false,
+  "window": "Cavern (PlayerOne test) (DEBUG)",
+  "goal": "walk right through the level, collect coins, get past every obstacle and watch the coin counter",
+  "player": "explore",
+  "director": "none",
+  "events": [
+    {
+      "t_ms": 385,
+      "kind": "launch",
+      "text": "godot --path testgame -- --bugs="
+    },
+    {
+      "t_ms": 4617,
+      "kind": "action",
+      "text": "hold right 1242ms"
+    },
+    {
+      "t_ms": 5405,
+      "kind": "action",
+      "text": "hold right 787ms"
+    },
+    {
+      "t_ms": 6609,
+      "kind": "action",
+      "text": "hold right 1201ms"
+    },
+    {
+      "t_ms": 6609,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 6971,
+      "kind": "action",
+      "text": "hold right 361ms"
+    },
+    {
+      "t_ms": 7949,
+      "kind": "action",
+      "text": "hold right 977ms"
+    },
+    {
+      "t_ms": 7949,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 8376,
+      "kind": "action",
+      "text": "hold right 425ms"
+    },
+    {
+      "t_ms": 9498,
+      "kind": "action",
+      "text": "hold right 1122ms"
+    },
+    {
+      "t_ms": 9499,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 9929,
+      "kind": "action",
+      "text": "hold right 430ms"
+    },
+    {
+      "t_ms": 9930,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 10316,
+      "kind": "action",
+      "text": "hold right 386ms"
+    },
+    {
+      "t_ms": 10928,
+      "kind": "action",
+      "text": "hold right 611ms"
+    },
+    {
+      "t_ms": 11229,
+      "kind": "action",
+      "text": "hold space 300ms"
+    },
+    {
+      "t_ms": 11530,
+      "kind": "action",
+      "text": "hold left 300ms"
+    },
+    {
+      "t_ms": 12190,
+      "kind": "action",
+      "text": "hold right 659ms"
+    },
+    {
+      "t_ms": 12795,
+      "kind": "action",
+      "text": "hold left 604ms"
+    },
+    {
+      "t_ms": 12795,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 13377,
+      "kind": "action",
+      "text": "hold right 581ms"
+    },
+    {
+      "t_ms": 14216,
+      "kind": "action",
+      "text": "hold right 838ms"
+    },
+    {
+      "t_ms": 15005,
+      "kind": "action",
+      "text": "hold right 788ms"
+    },
+    {
+      "t_ms": 15005,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 15225,
+      "kind": "action",
+      "text": "hold right 212ms"
+    },
+    {
+      "t_ms": 16522,
+      "kind": "action",
+      "text": "hold right 1297ms"
+    },
+    {
+      "t_ms": 16523,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 16969,
+      "kind": "action",
+      "text": "hold right 446ms"
+    },
+    {
+      "t_ms": 17682,
+      "kind": "action",
+      "text": "hold right 712ms"
+    },
+    {
+      "t_ms": 17683,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 17898,
+      "kind": "action",
+      "text": "hold right 214ms"
+    },
+    {
+      "t_ms": 18990,
+      "kind": "action",
+      "text": "hold right 1089ms"
+    },
+    {
+      "t_ms": 18991,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 19443,
+      "kind": "action",
+      "text": "hold right 452ms"
+    },
+    {
+      "t_ms": 19787,
+      "kind": "action",
+      "text": "hold left 342ms"
+    },
+    {
+      "t_ms": 19787,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 20228,
+      "kind": "action",
+      "text": "hold right 440ms"
+    },
+    {
+      "t_ms": 20754,
+      "kind": "action",
+      "text": "hold right 522ms"
+    },
+    {
+      "t_ms": 21649,
+      "kind": "action",
+      "text": "hold right 893ms"
+    },
+    {
+      "t_ms": 21649,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 22225,
+      "kind": "action",
+      "text": "hold right 575ms"
+    },
+    {
+      "t_ms": 23496,
+      "kind": "action",
+      "text": "hold right 1270ms"
+    },
+    {
+      "t_ms": 23496,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 23927,
+      "kind": "action",
+      "text": "hold right 430ms"
+    },
+    {
+      "t_ms": 24228,
+      "kind": "action",
+      "text": "hold left 300ms"
+    },
+    {
+      "t_ms": 25117,
+      "kind": "action",
+      "text": "hold right 888ms"
+    },
+    {
+      "t_ms": 25118,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 25563,
+      "kind": "action",
+      "text": "hold right 445ms"
+    },
+    {
+      "t_ms": 25864,
+      "kind": "action",
+      "text": "hold space 300ms"
+    },
+    {
+      "t_ms": 26705,
+      "kind": "action",
+      "text": "hold right 839ms"
+    },
+    {
+      "t_ms": 27343,
+      "kind": "action",
+      "text": "hold left 633ms"
+    },
+    {
+      "t_ms": 27343,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 27616,
+      "kind": "action",
+      "text": "hold right 272ms"
+    },
+    {
+      "t_ms": 28435,
+      "kind": "action",
+      "text": "hold right 818ms"
+    },
+    {
+      "t_ms": 28782,
+      "kind": "action",
+      "text": "hold left 346ms"
+    },
+    {
+      "t_ms": 28782,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 29164,
+      "kind": "action",
+      "text": "hold right 381ms"
+    },
+    {
+      "t_ms": 30025,
+      "kind": "action",
+      "text": "hold right 860ms"
+    },
+    {
+      "t_ms": 30327,
+      "kind": "action",
+      "text": "hold right 300ms"
+    },
+    {
+      "t_ms": 31381,
+      "kind": "action",
+      "text": "hold right 1053ms"
+    },
+    {
+      "t_ms": 31681,
+      "kind": "action",
+      "text": "hold left 300ms"
+    },
+    {
+      "t_ms": 31682,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 32092,
+      "kind": "action",
+      "text": "hold right 410ms"
+    },
+    {
+      "t_ms": 32769,
+      "kind": "action",
+      "text": "hold left 674ms"
+    },
+    {
+      "t_ms": 33431,
+      "kind": "action",
+      "text": "hold left 661ms"
+    },
+    {
+      "t_ms": 33900,
+      "kind": "action",
+      "text": "hold right 466ms"
+    },
+    {
+      "t_ms": 33900,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 34259,
+      "kind": "action",
+      "text": "hold right 358ms"
+    },
+    {
+      "t_ms": 34684,
+      "kind": "action",
+      "text": "hold left 424ms"
+    },
+    {
+      "t_ms": 34684,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 35229,
+      "kind": "action",
+      "text": "hold right 544ms"
+    },
+    {
+      "t_ms": 36214,
+      "kind": "action",
+      "text": "hold right 985ms"
+    },
+    {
+      "t_ms": 36214,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 36716,
+      "kind": "action",
+      "text": "hold right 500ms"
+    },
+    {
+      "t_ms": 37368,
+      "kind": "action",
+      "text": "hold left 651ms"
+    },
+    {
+      "t_ms": 37369,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 37619,
+      "kind": "action",
+      "text": "hold right 250ms"
+    },
+    {
+      "t_ms": 38781,
+      "kind": "action",
+      "text": "hold right 1151ms"
+    },
+    {
+      "t_ms": 39804,
+      "kind": "action",
+      "text": "hold right 1020ms"
+    },
+    {
+      "t_ms": 39804,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 40119,
+      "kind": "action",
+      "text": "hold right 314ms"
+    },
+    {
+      "t_ms": 40367,
+      "kind": "action",
+      "text": "hold left 246ms"
+    },
+    {
+      "t_ms": 40368,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 40910,
+      "kind": "action",
+      "text": "hold right 541ms"
+    },
+    {
+      "t_ms": 42067,
+      "kind": "action",
+      "text": "hold right 1155ms"
+    },
+    {
+      "t_ms": 43121,
+      "kind": "action",
+      "text": "hold right 1053ms"
+    },
+    {
+      "t_ms": 43121,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 43381,
+      "kind": "action",
+      "text": "hold right 256ms"
+    },
+    {
+      "t_ms": 44180,
+      "kind": "action",
+      "text": "hold right 792ms"
+    },
+    {
+      "t_ms": 44180,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 44744,
+      "kind": "action",
+      "text": "hold right 563ms"
+    },
+    {
+      "t_ms": 45558,
+      "kind": "action",
+      "text": "hold right 813ms"
+    },
+    {
+      "t_ms": 46456,
+      "kind": "action",
+      "text": "hold right 897ms"
+    },
+    {
+      "t_ms": 46457,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 46713,
+      "kind": "action",
+      "text": "hold right 256ms"
+    },
+    {
+      "t_ms": 47645,
+      "kind": "action",
+      "text": "hold right 931ms"
+    },
+    {
+      "t_ms": 48029,
+      "kind": "action",
+      "text": "hold left 383ms"
+    },
+    {
+      "t_ms": 48029,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 48393,
+      "kind": "action",
+      "text": "hold right 362ms"
+    },
+    {
+      "t_ms": 48968,
+      "kind": "action",
+      "text": "hold right 574ms"
+    },
+    {
+      "t_ms": 49787,
+      "kind": "action",
+      "text": "hold right 818ms"
+    },
+    {
+      "t_ms": 49788,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 50288,
+      "kind": "action",
+      "text": "hold right 499ms"
+    },
+    {
+      "t_ms": 50288,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 50630,
+      "kind": "action",
+      "text": "hold right 341ms"
+    },
+    {
+      "t_ms": 51220,
+      "kind": "action",
+      "text": "hold left 589ms"
+    },
+    {
+      "t_ms": 51220,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 51688,
+      "kind": "action",
+      "text": "hold right 467ms"
+    },
+    {
+      "t_ms": 52342,
+      "kind": "action",
+      "text": "hold right 653ms"
+    },
+    {
+      "t_ms": 52343,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 52827,
+      "kind": "action",
+      "text": "hold right 484ms"
+    },
+    {
+      "t_ms": 54219,
+      "kind": "action",
+      "text": "hold right 1391ms"
+    },
+    {
+      "t_ms": 54997,
+      "kind": "action",
+      "text": "hold right 777ms"
+    },
+    {
+      "t_ms": 55200,
+      "kind": "action",
+      "text": "hold left 200ms"
+    },
+    {
+      "t_ms": 56048,
+      "kind": "action",
+      "text": "hold right 848ms"
+    },
+    {
+      "t_ms": 56049,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 56461,
+      "kind": "action",
+      "text": "hold right 411ms"
+    },
+    {
+      "t_ms": 56461,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 56909,
+      "kind": "action",
+      "text": "hold right 447ms"
+    },
+    {
+      "t_ms": 57627,
+      "kind": "action",
+      "text": "hold right 717ms"
+    },
+    {
+      "t_ms": 57628,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 58015,
+      "kind": "action",
+      "text": "hold right 386ms"
+    },
+    {
+      "t_ms": 58015,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 58579,
+      "kind": "action",
+      "text": "hold right 563ms"
+    },
+    {
+      "t_ms": 58928,
+      "kind": "action",
+      "text": "hold left 348ms"
+    },
+    {
+      "t_ms": 59447,
+      "kind": "action",
+      "text": "hold right 510ms"
+    },
+    {
+      "t_ms": 59448,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 59826,
+      "kind": "action",
+      "text": "hold right 377ms"
+    },
+    {
+      "t_ms": 59826,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 60329,
+      "kind": "action",
+      "text": "hold right 502ms"
+    },
+    {
+      "t_ms": 60955,
+      "kind": "action",
+      "text": "hold left 625ms"
+    },
+    {
+      "t_ms": 60955,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 61518,
+      "kind": "action",
+      "text": "hold right 562ms"
+    },
+    {
+      "t_ms": 61518,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 61982,
+      "kind": "action",
+      "text": "hold right 463ms"
+    },
+    {
+      "t_ms": 63057,
+      "kind": "action",
+      "text": "hold right 1074ms"
+    },
+    {
+      "t_ms": 63734,
+      "kind": "action",
+      "text": "hold right 676ms"
+    }
+  ],
+  "incidents": [],
+  "reports": [],
+  "meter": {
+    "frames_captured": 300,
+    "player_steps": 69,
+    "player_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "director_calls": 0,
+    "director_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "director_bytes_sent": 0,
+    "naive_director_tokens": 73209,
+    "window_size": [
+      960,
+      540
+    ]
+  },
+  "out_dir": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\none-explore",
+  "error": null
+}

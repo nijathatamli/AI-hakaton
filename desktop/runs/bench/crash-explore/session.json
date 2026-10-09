@@ -1,0 +1,351 @@
+{
+  "started": true,
+  "running": false,
+  "window": "Cavern (PlayerOne test) (DEBUG)",
+  "goal": "walk right through the level, collect coins, get past every obstacle and watch the coin counter",
+  "player": "explore",
+  "director": "none",
+  "events": [
+    {
+      "t_ms": 294,
+      "kind": "launch",
+      "text": "godot --path testgame -- --bugs=crash"
+    },
+    {
+      "t_ms": 4145,
+      "kind": "action",
+      "text": "hold right 1251ms"
+    },
+    {
+      "t_ms": 4446,
+      "kind": "action",
+      "text": "hold right 300ms"
+    },
+    {
+      "t_ms": 5636,
+      "kind": "action",
+      "text": "hold right 1189ms"
+    },
+    {
+      "t_ms": 5636,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 5874,
+      "kind": "action",
+      "text": "hold right 237ms"
+    },
+    {
+      "t_ms": 6561,
+      "kind": "action",
+      "text": "hold left 686ms"
+    },
+    {
+      "t_ms": 6562,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 6996,
+      "kind": "action",
+      "text": "hold right 433ms"
+    },
+    {
+      "t_ms": 6997,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 7577,
+      "kind": "action",
+      "text": "hold right 576ms"
+    },
+    {
+      "t_ms": 8583,
+      "kind": "action",
+      "text": "hold right 1005ms"
+    },
+    {
+      "t_ms": 9212,
+      "kind": "action",
+      "text": "hold right 628ms"
+    },
+    {
+      "t_ms": 9212,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 9586,
+      "kind": "action",
+      "text": "hold right 373ms"
+    },
+    {
+      "t_ms": 10094,
+      "kind": "action",
+      "text": "hold right 507ms"
+    },
+    {
+      "t_ms": 10395,
+      "kind": "action",
+      "text": "hold space 300ms"
+    },
+    {
+      "t_ms": 11408,
+      "kind": "action",
+      "text": "hold right 1012ms"
+    },
+    {
+      "t_ms": 11409,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 11746,
+      "kind": "action",
+      "text": "hold right 337ms"
+    },
+    {
+      "t_ms": 12047,
+      "kind": "action",
+      "text": "hold left 300ms"
+    },
+    {
+      "t_ms": 13137,
+      "kind": "action",
+      "text": "hold right 1089ms"
+    },
+    {
+      "t_ms": 13590,
+      "kind": "action",
+      "text": "hold right 452ms"
+    },
+    {
+      "t_ms": 13602,
+      "kind": "console",
+      "text": "ERROR: cavern: player touched spike with invalid state"
+    },
+    {
+      "t_ms": 14892,
+      "kind": "action",
+      "text": "hold right 1301ms"
+    },
+    {
+      "t_ms": 14893,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 15323,
+      "kind": "action",
+      "text": "hold right 429ms"
+    },
+    {
+      "t_ms": 15834,
+      "kind": "incident",
+      "text": "#1 console_error: ERROR: cavern: player touched spike with invalid state"
+    },
+    {
+      "t_ms": 16570,
+      "kind": "action",
+      "text": "hold right 1246ms"
+    },
+    {
+      "t_ms": 16972,
+      "kind": "action",
+      "text": "hold right 401ms"
+    },
+    {
+      "t_ms": 17412,
+      "kind": "action",
+      "text": "hold left 439ms"
+    },
+    {
+      "t_ms": 17413,
+      "kind": "action",
+      "text": "tap space"
+    },
+    {
+      "t_ms": 17854,
+      "kind": "incident",
+      "text": "#2 crash: game process exited (exit code: 0xc000001d)"
+    },
+    {
+      "t_ms": 17997,
+      "kind": "action",
+      "text": "hold right 582ms"
+    }
+  ],
+  "incidents": [
+    {
+      "id": 1,
+      "t_ms": 15834,
+      "kind": "console_error",
+      "detail": "ERROR: cavern: player touched spike with invalid state",
+      "console": [
+        "stderr:    at: crash (core/core_bind.cpp:349)",
+        "stderr:    GDScript backtrace (most recent call first):",
+        "stderr:        [0] _check_triggers (res://main.gd:154)",
+        "stderr:        [1] _physics_process (res://main.gd:131)",
+        "stderr: ================================================================",
+        "stderr: CrashHandlerException: Program crashed with signal 4",
+        "stderr: Engine version: Godot Engine v4.7.2.stable.official (ed1daf0bf001b61586d9930840f2f1394092c079)",
+        "stderr: Dumping the backtrace. Please include this when reporting the bug on: https://github.com/godotengine/godot/issues",
+        "stderr: Load address: 7ff50e2a0000",
+        "stderr: -- END OF C++ BACKTRACE --",
+        "stderr: ================================================================",
+        "stderr: GDScript backtrace (most recent call first):",
+        "stderr:     [0] _check_triggers (res://main.gd:154)",
+        "stderr:     [1] _physics_process (res://main.gd:131)",
+        "stderr: -- END OF GDSCRIPT BACKTRACE --",
+        "stderr: ================================================================"
+      ],
+      "sheet": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\crash-explore\\incident-001.jpg",
+      "clip": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\crash-explore\\incident-001.mp4",
+      "reviewed": true
+    },
+    {
+      "id": 2,
+      "t_ms": 17854,
+      "kind": "crash",
+      "detail": "game process exited (exit code: 0xc000001d)",
+      "console": [
+        "stderr:    GDScript backtrace (most recent call first):",
+        "stderr:        [0] _check_triggers (res://main.gd:153)",
+        "stderr:        [1] _physics_process (res://main.gd:131)",
+        "stderr: ERROR: spike collision corrupted the player state",
+        "stderr:    at: crash (core/core_bind.cpp:349)",
+        "stderr:    GDScript backtrace (most recent call first):",
+        "stderr:        [0] _check_triggers (res://main.gd:154)",
+        "stderr:        [1] _physics_process (res://main.gd:131)",
+        "stderr: ================================================================",
+        "stderr: CrashHandlerException: Program crashed with signal 4",
+        "stderr: Engine version: Godot Engine v4.7.2.stable.official (ed1daf0bf001b61586d9930840f2f1394092c079)",
+        "stderr: Dumping the backtrace. Please include this when reporting the bug on: https://github.com/godotengine/godot/issues",
+        "stderr: Load address: 7ff50e2a0000",
+        "stderr: -- END OF C++ BACKTRACE --",
+        "stderr: ================================================================",
+        "stderr: GDScript backtrace (most recent call first):",
+        "stderr:     [0] _check_triggers (res://main.gd:154)",
+        "stderr:     [1] _physics_process (res://main.gd:131)",
+        "stderr: -- END OF GDSCRIPT BACKTRACE --",
+        "stderr: ================================================================"
+      ],
+      "sheet": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\crash-explore\\incident-002.jpg",
+      "clip": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\crash-explore\\incident-002.mp4",
+      "reviewed": true
+    }
+  ],
+  "reports": [
+    {
+      "id": 1,
+      "incident": 1,
+      "title": "Engine error: ERROR: cavern: player touched spike with invalid state",
+      "severity": "major",
+      "steps": [
+        "Start the game",
+        "Play forward for about 16s (10 input groups, full list in session.json)",
+        "hold space",
+        "hold right",
+        "tap space",
+        "hold right",
+        "hold left",
+        "hold right (x3)",
+        "tap space",
+        "hold right",
+        "The problem shows at about 15.8s"
+      ],
+      "expected": "",
+      "actual": "ERROR: cavern: player touched spike with invalid state",
+      "console": [
+        "stderr:    at: crash (core/core_bind.cpp:349)",
+        "stderr:    GDScript backtrace (most recent call first):",
+        "stderr:        [0] _check_triggers (res://main.gd:154)",
+        "stderr:        [1] _physics_process (res://main.gd:131)",
+        "stderr: ================================================================",
+        "stderr: CrashHandlerException: Program crashed with signal 4",
+        "stderr: Engine version: Godot Engine v4.7.2.stable.official (ed1daf0bf001b61586d9930840f2f1394092c079)",
+        "stderr: Dumping the backtrace. Please include this when reporting the bug on: https://github.com/godotengine/godot/issues",
+        "stderr: Load address: 7ff50e2a0000",
+        "stderr: -- END OF C++ BACKTRACE --",
+        "stderr: ================================================================",
+        "stderr: GDScript backtrace (most recent call first):",
+        "stderr:     [0] _check_triggers (res://main.gd:154)",
+        "stderr:     [1] _physics_process (res://main.gd:131)",
+        "stderr: -- END OF GDSCRIPT BACKTRACE --",
+        "stderr: ================================================================"
+      ],
+      "sheet": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\crash-explore\\incident-001.jpg",
+      "clip": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\crash-explore\\incident-001.mp4",
+      "filed_by": "playerone (no director)"
+    },
+    {
+      "id": 2,
+      "incident": 2,
+      "title": "Game crashes",
+      "severity": "blocker",
+      "steps": [
+        "Start the game",
+        "Play forward for about 18s (12 input groups, full list in session.json)",
+        "tap space",
+        "hold right",
+        "hold left",
+        "hold right (x3)",
+        "tap space",
+        "hold right (x3)",
+        "hold left",
+        "tap space",
+        "The problem shows at about 17.9s"
+      ],
+      "expected": "",
+      "actual": "game process exited (exit code: 0xc000001d)",
+      "console": [
+        "stderr:    GDScript backtrace (most recent call first):",
+        "stderr:        [0] _check_triggers (res://main.gd:153)",
+        "stderr:        [1] _physics_process (res://main.gd:131)",
+        "stderr: ERROR: spike collision corrupted the player state",
+        "stderr:    at: crash (core/core_bind.cpp:349)",
+        "stderr:    GDScript backtrace (most recent call first):",
+        "stderr:        [0] _check_triggers (res://main.gd:154)",
+        "stderr:        [1] _physics_process (res://main.gd:131)",
+        "stderr: ================================================================",
+        "stderr: CrashHandlerException: Program crashed with signal 4",
+        "stderr: Engine version: Godot Engine v4.7.2.stable.official (ed1daf0bf001b61586d9930840f2f1394092c079)",
+        "stderr: Dumping the backtrace. Please include this when reporting the bug on: https://github.com/godotengine/godot/issues",
+        "stderr: Load address: 7ff50e2a0000",
+        "stderr: -- END OF C++ BACKTRACE --",
+        "stderr: ================================================================",
+        "stderr: GDScript backtrace (most recent call first):",
+        "stderr:     [0] _check_triggers (res://main.gd:154)",
+        "stderr:     [1] _physics_process (res://main.gd:131)",
+        "stderr: -- END OF GDSCRIPT BACKTRACE --",
+        "stderr: ================================================================"
+      ],
+      "sheet": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\crash-explore\\incident-002.jpg",
+      "clip": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\crash-explore\\incident-002.mp4",
+      "filed_by": "playerone (no director)"
+    }
+  ],
+  "meter": {
+    "frames_captured": 54,
+    "player_steps": 18,
+    "player_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "director_calls": 0,
+    "director_tokens": {
+      "input": 0,
+      "output": 0
+    },
+    "director_bytes_sent": 0,
+    "naive_director_tokens": 19098,
+    "window_size": [
+      960,
+      540
+    ]
+  },
+  "out_dir": "C:\\Users\\yeni\\Documents\\cpp\\AI-hakaton\\desktop\\runs\\bench\\crash-explore",
+  "error": null
+}
