@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  :root { --ink:#060607; --paper:#f4f4f2; --dim:#8b8b93; --line:rgba(255,255,255,.12); --pink:#ff3d71; --ease:cubic-bezier(.23,1,.32,1); }
+  :root { --ink:#060607; --paper:#f4f4f2; --dim:#8b8b93; --line:#26262b; --card:#111114; --card2:#18181c; --pink:#ff3d71; --ease:cubic-bezier(.23,1,.32,1); }
   * { margin:0; padding:0; box-sizing:border-box; }
   html, body { background:#000; color:var(--paper); font-family:'Space Mono', monospace; }
   .slide { width:1920px; height:1080px; position:relative; overflow:hidden; padding:110px 130px; display:flex; flex-direction:column; background:var(--ink); margin:0 auto 40px; }
@@ -17,7 +17,7 @@
   p.lead { font-size:30px; line-height:1.45; color:#cfcfd4; max-width:1250px; margin-top:34px; }
   .grid { display:grid; gap:28px; margin-top:auto; }
   .g3 { grid-template-columns:repeat(3,1fr); } .g2 { grid-template-columns:repeat(2,1fr); } .g4 { grid-template-columns:repeat(4,1fr); }
-  .box { border:1px solid var(--line); border-radius:22px; padding:34px; background:rgba(255,255,255,.025); }
+  .box { border:1px solid var(--line); border-radius:22px; padding:34px; background:var(--card); }
   .box h3 { font-size:30px; font-weight:700; margin-bottom:14px; }
   .box p, .box li { font-size:22px; line-height:1.5; color:#bdbdc4; }
   .box ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
@@ -25,15 +25,22 @@
   .num small { font-size:60px; }
   .pink { color:var(--pink); }
   .foot { position:absolute; left:130px; right:130px; bottom:50px; display:flex; justify-content:space-between; font-size:18px; color:#5d5d64; }
-  table { width:100%; border-collapse:collapse; font-size:24px; }
+  table { width:100%; border-collapse:separate; border-spacing:0; font-size:24px; background:var(--card); border:1px solid var(--line); border-radius:22px; overflow:hidden; }
   th, td { text-align:left; padding:16px 18px; border-bottom:1px solid var(--line); }
-  th { color:var(--dim); font-weight:400; font-size:20px; }
+  th { color:var(--dim); font-weight:400; font-size:20px; background:var(--card2); }
+  tr:last-child td { border-bottom:0; }
+  .box.hl { background:#1a0f14; border-color:#5a2134; }
+  .step { display:flex; gap:20px; align-items:flex-start; padding:12px 0; border-bottom:1px solid var(--line); }
+  .step:last-child { border-bottom:0; }
+  .step b { font-family:'Anton SC',sans-serif; font-size:36px; color:var(--pink); line-height:1; min-width:56px; }
+  .step h3 { font-size:24px; margin-bottom:2px; }
+  .step p { font-size:19px; line-height:1.5; color:#bdbdc4; }
   td.y { color:#7dffb0; } td.n { color:#6a6a72; } td.bad { color:var(--pink); }
-  img.shot { border-radius:20px; border:1px solid var(--line); box-shadow:0 30px 80px rgba(0,0,0,.6); }
+  img.shot { border-radius:20px; border:1px solid #2c2c32; box-shadow:0 30px 80px rgba(0,0,0,.6); }
   .flow { display:flex; align-items:stretch; gap:22px; margin-top:auto; }
   .flow .box { flex:1; }
   .arrow { align-self:center; font-size:44px; color:var(--dim); }
-  .tag { align-self:flex-start; display:inline-block; font-size:18px; padding:6px 14px; border-radius:999px; border:1px solid var(--line); color:#cfcfd4; margin-bottom:16px; }
+  .tag { align-self:flex-start; display:inline-block; font-size:18px; padding:6px 14px; border-radius:999px; background:var(--card2); border:1px solid #33333a; color:#cfcfd4; margin-bottom:16px; }
 
   /* motion on screen only: each slide's parts rise in as it scrolls into view */
   @media screen and (prefers-reduced-motion: no-preference) {
@@ -165,22 +172,38 @@
   <div class="foot"><span>PlayerOne</span><span>8</span></div>
 </section>
 
-<!-- 9 feasibility + business -->
+
+<!-- business -->
 <section class="slide">
-  <div class="k">Feasibility and business</div>
-  <h2>Free to start. <em>Pay when your AI joins.</em></h2>
-  <div class="grid g4" style="margin-top:56px">
-    <div class="box"><h3>Free</h3><p>Local AI plays and judges. Crash, hang and console capture. Reports on disk.</p></div>
-    <div class="box"><h3>Connect</h3><p>Monthly. Claude, Codex or Gemini as the judge with your own key. Cloud report history.</p></div>
-    <div class="box"><h3>Studio</h3><p>Per seat. Shared reports, a playtest in CI after every build.</p></div>
-    <div class="box"><h3>Credits</h3><p>Our hosted judge, priced from the tokens we measure per playtest hour.</p></div>
+  <div class="k">Business model</div>
+  <h2 style="font-size:64px">Free users cost us <em>almost nothing</em>. The game and the AI run on their PC.</h2>
+  <div class="grid" style="grid-template-columns:1.05fr 1fr;align-items:stretch;margin-top:40px;margin-bottom:30px">
+    <div class="box">
+      <h3>Who pays and for what</h3>
+      <div class="step"><b>1</b><div><h3>Free</h3><p>Hooks every indie dev. Local AI, crash and console capture. Costs us nothing to serve.</p></div></div>
+      <div class="step"><b>2</b><div><h3>Connect, monthly</h3><p>Their own Claude, Codex or Gemini key judges. They pay the model, we keep the subscription. Cloud history and dashboard.</p></div></div>
+      <div class="step"><b>3</b><div><h3>Studio, per seat</h3><p>Shared reports and a playtest in CI after every build. Where team budgets live.</p></div></div>
+      <div class="step"><b>4</b><div><h3>Credits</h3><p>Our hosted judge for people with no key. Priced on the tokens we measure, about 180k per hour of play, plus margin.</p></div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:28px">
+      <div class="box hl"><h3>Getting customers</h3><p>Godot, Unity and itch.io communities, game jams, and Baku studios first. Free is the funnel: every report says "found by PlayerOne".</p></div>
+      <div class="box"><h3>Why we win</h3><p>Testing tools that need an SDK cost weeks to integrate. A big AI playing alone costs 70k tokens a minute. We need neither.</p></div>
+      <div class="box"><h3>Already live</h3><p>Accounts, plans, usage metering on Supabase. Stripe webhook. Website sign-in. Installers for 5 platforms.</p></div>
+    </div>
   </div>
-  <div class="grid g3" style="margin-top:28px">
-    <div class="box"><h3>Data needed</h3><p>None. No training data, no game code. It works from the screen and the console.</p></div>
-    <div class="box"><h3>Running cost</h3><p>Playing is free on the user's PC. The judge reads about 3k tokens per minute, about 180k per hour.</p></div>
-    <div class="box"><h3>Already built</h3><p>Accounts and plans on Supabase, Stripe webhook, website login, installers for every OS.</p></div>
+
+</section>
+
+<!-- 10 feasibility -->
+<section class="slide">
+  <div class="k">Feasibility</div>
+  <h2>Runs today, <em>on hardware people already own</em></h2>
+  <div class="grid g3" style="margin-top:auto">
+    <div class="box"><h3>Data needed</h3><p>None. No training data and no game source code. It works from the screen and the engine console.</p></div>
+    <div class="box"><h3>Running cost</h3><p>Playing is free on the user's PC (a 3B model on a laptop GPU, under 1.5 s a move). The judge reads about 3k tokens per minute.</p></div>
+    <div class="box"><h3>Next step</h3><p>Signed builds, Unity and Unreal log probes on real projects, and a 30-day pilot with three Baku studios.</p></div>
   </div>
-  <div class="foot"><span>PlayerOne</span><span>9</span></div>
+  <div class="foot"><span>PlayerOne</span><span>10</span></div>
 </section>
 
 <!-- 10 originality + next -->
@@ -193,7 +216,7 @@
     <div class="box"><h3>Product</h3><p>Unity and Unreal log probes on real projects, signed builds, a small overlay so you can watch the AI play.</p></div>
     <div class="box"><h3>Try it</h3><p>roaring-alfajores-8a941a.netlify.app · download, pick your game, press Start.</p></div>
   </div>
-  <div class="foot"><span>PlayerOne · Team Cyber Tesla</span><span>10</span></div>
+  <div class="foot"><span>PlayerOne · Team Cyber Tesla</span><span>11</span></div>
 </section>
 
 <script>
