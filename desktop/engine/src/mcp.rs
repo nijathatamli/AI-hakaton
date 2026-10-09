@@ -21,6 +21,7 @@ fn tools() -> Value {
               "minutes": { "type": "number", "default": 5 },
               "goal": { "type": "string" },
               "player": { "type": "string", "description": "ollama:<model> for the free local player, or explore", "default": "explore" },
+              "preset": { "type": "string", "enum": ["platformer", "first_person", "third_person", "top_down", "point_click", "racing"], "description": "control scheme the player may use" },
               "keys": { "type": "array", "items": { "type": "string" } }
           } } },
         { "name": "instruct", "description": "Give the player a new goal in one sentence.", "inputSchema": { "type": "object", "properties": { "goal": { "type": "string" } }, "required": ["goal"] } },
@@ -81,6 +82,9 @@ impl Server {
                 };
                 if let Some(g) = a["goal"].as_str() {
                     cfg.goal = g.into();
+                }
+                if let Some(p) = a["preset"].as_str() {
+                    cfg.controls = crate::controls::preset(p);
                 }
                 if let Some(k) = a["keys"].as_array() {
                     cfg.keys = k.iter().filter_map(|x| x.as_str().map(String::from)).collect();

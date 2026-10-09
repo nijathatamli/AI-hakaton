@@ -28,6 +28,8 @@ pub struct SessionConfig {
     pub director: Option<String>,
     pub out_dir: PathBuf,
     pub keys: Vec<String>,
+    /// approved controls. when set they replace `keys`
+    pub controls: Option<crate::controls::Controls>,
     pub quiet: bool,
 }
 
@@ -44,6 +46,7 @@ impl Default for SessionConfig {
             director: None,
             out_dir: PathBuf::from("runs"),
             keys: DEFAULT_KEYS.iter().map(|s| s.to_string()).collect(),
+            controls: None,
             quiet: false,
         }
     }
@@ -347,7 +350,8 @@ fn run_inner(sess: &Arc<Session>, cfg: SessionConfig) -> Result<()> {
     // 2. player thread
     let player_sess = sess.clone();
     let player_spec = cfg.player.clone();
-    let keys = cfg.keys.clone();
+    let ctrl = cfg.controls.clone().unwrap_or_else(|| crate::controls::Controls::from_keys(&cfg.keys));
+    sess.log("controls", format!("{}: {}", ctrl.preset, ctrl.describe()));
     let player_thread = std::thread::spawn(move || -> Result<()> {
         let player = Player::from_spec(&player_spec)?;
         // a cold local model can take a minute to load. pay that once, before the first real move
@@ -357,11 +361,7 @@ fn run_inner(sess: &Arc<Session>, cfg: SessionConfig) -> Result<()> {
         }
         let mut input = Input::new()?;
         let mut recent: Vec<String> = vec![];
-        let probe_keys: Vec<String> = keys
-            .iter()
-            .filter(|k| ["left", "right", "up", "down", "space", "w", "a", "s", "d"].contains(&k.as_str()))
-            .cloned()
-            .collect();
+        let probe_keys: Vec<String> = ctrl.movement();
         while !player_sess.stop.load(Ordering::Relaxed) {
             if player_sess.probe_req.swap(false, Ordering::Relaxed) {
                 // a human tester would wiggle every control before calling it stuck. so do we
@@ -381,7 +381,7 @@ fn run_inner(sess: &Arc<Session>, cfg: SessionConfig) -> Result<()> {
                 continue;
             };
             let goal = player_sess.state.lock().unwrap().goal.clone();
-            let (mv, usage) = match agent::decide(&player, &goal, &keys, &jpeg, &recent) {
+            let (mv, usage) = match agent::decide(&player, &goal, &ctrl, &jpeg, &recent) {
                 Ok(x) => x,
                 Err(e) => {
                     player_sess.log("error", format!("player: {e}"));

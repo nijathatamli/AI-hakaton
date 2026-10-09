@@ -6,11 +6,13 @@ const mock: Record<string, (a?: any) => any> = {
   platform: () => ({ os: new URLSearchParams(location.search).get('os') || 'windows', desktop: 'kde' }),
   list_windows: () => [
     { id: 1, pid: 10, title: 'Cavern (PlayerOne test)', app: 'Godot', width: 960, height: 540 },
-    { id: 2, pid: 11, title: 'Hollow Knight', app: 'hollow_knight.exe', width: 1920, height: 1080 },
+    { id: 2, pid: 11, title: 'Hello Neighbor', app: 'HelloNeighbor-Win64-Shipping.exe', width: 1920, height: 1080 },
     { id: 3, pid: 12, title: 'Celeste', app: 'Celeste.exe', width: 1280, height: 720 },
   ],
   window_thumb: () => null,
   ollama_models: () => ['qwen2.5vl:3b'],
+  presets: () => [{ id: 'first_person', name: 'First-person 3D', controls: { preset: 'first_person', keys: [{ key: 'w', label: 'forward' }, { key: 'a', label: 'strafe left' }, { key: 's', label: 'back' }, { key: 'd', label: 'strafe right' }, { key: 'space', label: 'jump' }, { key: 'ctrl', label: 'crouch' }, { key: 'e', label: 'interact' }], mouse_look: true, mouse_click: true } }, { id: 'platformer', name: '2D platformer', controls: { preset: 'platformer', keys: [{ key: 'left', label: 'move left' }, { key: 'right', label: 'move right' }, { key: 'space', label: 'jump' }], mouse_look: false, mouse_click: false } }],
+  suggest_controls: () => ({ game: 'Hello Neighbor', preset: 'first_person', reason: 'recognised from the window title', controls: { preset: 'first_person', keys: [{ key: 'w', label: 'forward' }, { key: 'a', label: 'strafe left' }, { key: 's', label: 'back' }, { key: 'd', label: 'strafe right' }, { key: 'space', label: 'jump' }, { key: 'ctrl', label: 'crouch' }, { key: 'e', label: 'interact' }], mouse_look: true, mouse_click: true } }),
   account: () => ({ mode: 'offline' }),
   saved_keys: () => [],
   snapshot: () => null,
@@ -39,8 +41,8 @@ const form = {
   player: 'explore',
   director: '',
   directorModel: '',
-  minutes: 3,
-  keys: 'left,right,up,down,space,enter,escape',
+  minutes: 5,
+  keys: '',
   goal: 'explore the level and try to break things',
 };
 
@@ -134,88 +136,75 @@ function render() {
 }
 
 /* ---------- playtest: setup ---------- */
+let presetsCache: Any[] = [];
+let suggestion: Any = null; // what PlayerOne recognised
+let controls: Any = null; // what the user approved
+
 async function renderSetup() {
   const el = $('#page');
-  const models: string[] = await invoke('ollama_models').catch(() => []) as string[];
-  const acct: Any = await invoke('account').catch(() => ({}));
-  const plan = acct.mode === 'offline' ? 'Developer build' : `${(acct.plan || 'free').replace(/^./, (c: string) => c.toUpperCase())} plan`;
+  const [models, acct] = await Promise.all([
+    invoke<string[]>('ollama_models').catch(() => [] as string[]),
+    invoke<Any>('account').catch(() => ({})),
+  ]);
+  if (!presetsCache.length) presetsCache = await invoke<Any[]>('presets').catch(() => []);
+  if (form.player === 'explore' && models.length) form.player = 'ollama:' + models[0];
+  const signedIn = acct.mode === 'signed in';
+  const plan = acct.mode === 'offline' ? 'Developer build' : signedIn ? `${acct.plan[0].toUpperCase()}${acct.plan.slice(1)} plan` : 'Free, not signed in';
   const last = snap && !snap.running ? `<div class="card section" style="display:flex;align-items:center;gap:12px">
-      <div class="grow" style="flex:1"><b>Last playtest finished.</b> <span class="muted">${snap.incidents?.length ?? 0} incidents, ${snap.reports?.length ?? 0} reports${snap.error ? ' · ' + esc(snap.error) : ''}</span></div>
+      <div style="flex:1"><b>Last playtest finished.</b> <span class="muted">${snap.incidents?.length ?? 0} incidents, ${snap.reports?.length ?? 0} bugs filed</span></div>
       <button class="btn small" id="see-reports">See reports</button></div>` : '';
+
   el.innerHTML = `
     <div class="status">
       ${models.length
-        ? `<span class="pill ok"><span class="dot"></span>Local player <b>${esc(models[0])}</b> ready</span>`
-        : `<span class="pill warn"><span class="dot"></span>No local model. Install Ollama, or use the explorer bot</span>`}
+        ? `<span class="pill ok"><span class="dot"></span>Local AI <b>${esc(models[0])}</b> ready</span>`
+        : `<span class="pill warn"><span class="dot"></span>No local AI found. Install Ollama, or the free bot plays</span>`}
       <span class="pill"><span class="dot"></span>${esc(plan)}</span>
+      ${!signedIn && acct.mode !== 'offline' ? `<button class="btn small" id="signin-quick">Sign in</button>` : ''}
     </div>
     ${last}
     <div class="section">
-      <h2><span>Game</span>
-        <span class="segmented" role="tablist">
-          <button class="${mode === 'window' ? 'on' : ''}" data-mode="window">Running window</button>
-          <button class="${mode === 'launch' ? 'on' : ''}" data-mode="launch">Launch command</button>
-        </span>
-      </h2>
-      ${mode === 'window'
-        ? `<div class="windows" id="windows">${'<div class="skel"><i></i><i></i><i></i></div>'.repeat(6)}</div>
-           <p class="hint">Pick the game. PlayerOne captures only this window and sends keys to it.</p>`
-        : `<div class="grid-2">
-             <label class="field">Command that starts the game<input type="text" id="f-launch" placeholder="godot --path ./my-game" value="${esc(form.launch)}"></label>
-             <label class="field">Window title contains<input type="text" id="f-hint" placeholder="My Game" value="${esc(form.windowHint)}"></label>
-           </div>
-           <p class="hint">Launching lets PlayerOne read the engine console and catch crashes the moment they happen.</p>`}
+      <h2><span>Pick your game</span><button class="btn small" id="refresh">Refresh</button></h2>
+      <div class="windows" id="windows">${'<div class="skel"><i></i><i></i><i></i></div>'.repeat(6)}</div>
     </div>
-    <div class="section">
-      <h2>Who plays and who judges</h2>
-      <div class="grid-3">
-        <label class="field">Player, runs on this machine
+    <div class="section" id="controls-box"></div>
+    <details class="section advanced">
+      <summary>Advanced</summary>
+      <div class="grid-3" style="margin-top:12px">
+        <label class="field">Who plays
           <select id="f-player">
-            ${models.map((m) => `<option value="ollama:${esc(m)}" ${form.player === 'ollama:' + m ? 'selected' : ''}>${esc(m)} (local, free)</option>`).join('')}
-            <option value="explore" ${form.player === 'explore' ? 'selected' : ''}>Explorer bot (no model)</option>
-            <option value="random" ${form.player === 'random' ? 'selected' : ''}>Random keys (baseline)</option>
+            ${models.map((m) => `<option value="ollama:${esc(m)}" ${form.player === 'ollama:' + m ? 'selected' : ''}>${esc(m)} (local AI, free)</option>`).join('')}
+            <option value="explore" ${form.player === 'explore' ? 'selected' : ''}>Free bot, no AI</option>
+            <option value="random" ${form.player === 'random' ? 'selected' : ''}>Random input (baseline)</option>
           </select>
         </label>
-        <label class="field">Director, reads digests and files bugs
+        <label class="field">Who judges the bugs
           <select id="f-director">
-            <option value="" ${form.director === '' ? 'selected' : ''}>None, standalone</option>
+            <option value="" ${form.director === '' ? 'selected' : ''}>PlayerOne (built in)</option>
             <option value="claude" ${form.director === 'claude' ? 'selected' : ''}>Claude</option>
             <option value="openai" ${form.director === 'openai' ? 'selected' : ''}>OpenAI / Codex</option>
-            <option value="gemini" ${form.director === 'gemini' ? 'selected' : ''}>Gemini (gets video)</option>
-            <option value="ollama" ${form.director === 'ollama' ? 'selected' : ''}>Local model</option>
-          </select>
-        </label>
-        <label class="field">Director model (optional)<input type="text" id="f-dmodel" placeholder="provider default" value="${esc(form.directorModel)}"></label>
-      </div>
-      <p class="hint">Engine console errors and crashes are caught even with no model at all. A director turns incidents into written bug reports and steers the player.</p>
-    </div>
-    <div class="section">
-      <h2>Run</h2>
-      <div class="grid-3">
-        <label class="field">Engine
-          <select id="f-engine">
-            ${['generic', 'godot', 'unity', 'unreal', 'source2'].map((x) => `<option value="${x}" ${form.engine === x ? 'selected' : ''}>${({ generic: 'Any', godot: 'Godot', unity: 'Unity', unreal: 'Unreal', source2: 'Source 2 / CS2' } as Any)[x]}</option>`).join('')}
+            <option value="gemini" ${form.director === 'gemini' ? 'selected' : ''}>Gemini</option>
+            <option value="ollama" ${form.director === 'ollama' ? 'selected' : ''}>Local AI</option>
           </select>
         </label>
         <label class="field">Minutes<input type="number" id="f-min" min="0.5" max="120" step="0.5" value="${form.minutes}"></label>
-        <label class="field">Keys the player may press<input type="text" id="f-keys" value="${esc(form.keys)}"></label>
+        <label class="field" style="grid-column:span 2">Or launch the game with a command, to read its console
+          <input type="text" id="f-launch" placeholder="godot --path ./my-game" value="${esc(form.launch)}"></label>
+        <label class="field">Engine
+          <select id="f-engine">
+            ${['generic', 'godot', 'unity', 'unreal', 'source2'].map((x) => `<option value="${x}" ${form.engine === x ? 'selected' : ''}>${({ generic: 'Detect', godot: 'Godot', unity: 'Unity', unreal: 'Unreal', source2: 'Source 2 / CS2' } as Any)[x]}</option>`).join('')}
+          </select>
+        </label>
       </div>
-      <label class="field" style="margin-top:12px">Goal<textarea id="f-goal">${esc(form.goal)}</textarea></label>
-    </div>
-    <div style="display:flex;justify-content:flex-end;gap:8px"><button class="btn primary big" id="start">Start playtest</button></div>`;
+    </details>
+    <div style="display:flex;justify-content:flex-end;gap:8px"><button class="btn primary big" id="start" ${selected ? '' : 'disabled'}>Start playtest</button></div>`;
 
-  const seg = el.querySelector('.segmented') as HTMLElement;
-  requestAnimationFrame(() => placeThumb(seg));
-  el.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => {
-    save();
-    mode = (b as HTMLElement).dataset.mode as Any;
-    seg.querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b));
-    placeThumb(seg);
-    setTimeout(renderSetup, 180); // let the thumb finish sliding before the panel swaps
-  }));
   $('#see-reports')?.addEventListener('click', () => go('reports'));
+  $('#signin-quick')?.addEventListener('click', signInWeb);
+  $('#refresh').addEventListener('click', loadWindows);
   $('#start').addEventListener('click', start);
-  if (mode === 'window') loadWindows();
+  loadWindows();
+  if (selected && controls) renderControls();
 }
 
 async function loadWindows() {
@@ -228,15 +217,7 @@ async function loadWindows() {
   }
   box.innerHTML = wins.map((w, i) => `<button class="win ${selected?.id === w.id ? 'on' : ''}" data-id="${w.id}" style="--i:${i}">
       <div class="thumb" id="th-${w.id}"></div><div class="t">${esc(w.title)}</div><div class="a">${esc(w.app)} · ${w.width}×${w.height}</div></button>`).join('');
-  $('#toolbar-actions').innerHTML = `<button class="btn small" id="refresh">Refresh</button>`;
-  $('#refresh').addEventListener('click', () => {
-    box.innerHTML = '<div class="skel"><i></i><i></i><i></i></div>'.repeat(Math.max(3, wins.length));
-    loadWindows();
-  });
-  box.querySelectorAll('.win').forEach((b) => b.addEventListener('click', () => {
-    selected = wins.find((w) => String(w.id) === (b as HTMLElement).dataset.id);
-    box.querySelectorAll('.win').forEach((x) => x.classList.toggle('on', x === b));
-  }));
+  box.querySelectorAll('.win').forEach((b) => b.addEventListener('click', () => pickGame(wins.find((w) => String(w.id) === (b as HTMLElement).dataset.id), b as HTMLElement)));
   for (const w of wins.slice(0, 16)) {
     invoke<string | null>('window_thumb', { id: w.id }).then((b64) => {
       const t = document.getElementById('th-' + w.id);
@@ -248,37 +229,119 @@ async function loadWindows() {
   }
 }
 
+/** picking a game asks PlayerOne what it is and how it is controlled */
+async function pickGame(w: Any, card: HTMLElement) {
+  selected = w;
+  document.querySelectorAll('.win').forEach((x) => x.classList.toggle('on', x === card));
+  ($('#start') as HTMLButtonElement).disabled = true;
+  $('#controls-box').innerHTML = `<div class="card detecting"><span class="spin"></span>Looking at <b>${esc(w.title)}</b> to work out how it is played…</div>`;
+  suggestion = await invoke<Any>('suggest_controls', { id: w.id, title: w.title, app: w.app }).catch(() => null);
+  controls = suggestion ? JSON.parse(JSON.stringify(suggestion.controls)) : null;
+  if (controls) controls.keys.forEach((k: Any) => (k.on = true));
+  renderControls();
+  ($('#start') as HTMLButtonElement).disabled = false;
+}
+
+function renderControls() {
+  const box = $('#controls-box');
+  if (!controls) {
+    box.innerHTML = '';
+    return;
+  }
+  const presetName = (id: string) => presetsCache.find((p) => p.id === id)?.name || 'Custom';
+  box.innerHTML = `
+    <h2><span>Controls the AI may use</span></h2>
+    <div class="card controls">
+      <div class="detected">
+        <div><div class="game">${esc(suggestion?.game || selected?.title)}</div>
+          <div class="muted" style="font-size:12px">${esc(presetName(controls.preset))} · ${esc(suggestion?.reason || '')}</div></div>
+        <select id="preset">
+          ${presetsCache.map((p) => `<option value="${p.id}" ${p.id === controls.preset ? 'selected' : ''}>${esc(p.name)}</option>`).join('')}
+          <option value="custom" ${controls.preset === 'custom' ? 'selected' : ''}>Custom</option>
+        </select>
+      </div>
+      <div class="keys">
+        ${controls.keys.map((k: Any, i: number) => `<button class="keycap ${k.on ? 'on' : ''}" data-i="${i}" title="Click to ${k.on ? 'block' : 'allow'}"><kbd>${esc(k.key)}</kbd><span>${esc(k.label)}</span></button>`).join('')}
+        <button class="keycap ${controls.mouse_look ? 'on' : ''}" data-mouse="look"><kbd>mouse</kbd><span>look around</span></button>
+        <button class="keycap ${controls.mouse_click ? 'on' : ''}" data-mouse="click"><kbd>click</kbd><span>click in game</span></button>
+        <span class="addkey"><input type="text" id="addkey" placeholder="add a key, e.g. q" maxlength="10"></span>
+      </div>
+      <p class="hint">The AI only ever presses what is switched on here. It never touches Alt+F4, the Windows key or anything outside the game window.</p>
+    </div>
+    <label class="field" style="margin-top:12px">What should it try? (optional)
+      <input type="text" id="f-goal" placeholder="explore and try to break things" value="${esc(form.goal === 'explore the level and try to break things' ? '' : form.goal)}"></label>`;
+  box.querySelectorAll('.keycap[data-i]').forEach((b) => b.addEventListener('click', () => {
+    const k = controls.keys[Number((b as HTMLElement).dataset.i)];
+    k.on = !k.on;
+    b.classList.toggle('on', k.on);
+  }));
+  box.querySelectorAll('.keycap[data-mouse]').forEach((b) => b.addEventListener('click', () => {
+    const f = (b as HTMLElement).dataset.mouse === 'look' ? 'mouse_look' : 'mouse_click';
+    controls[f] = !controls[f];
+    b.classList.toggle('on', controls[f]);
+  }));
+  $('#preset').addEventListener('change', (e) => {
+    const id = (e.target as HTMLSelectElement).value;
+    const p = presetsCache.find((x) => x.id === id);
+    if (p) {
+      controls = JSON.parse(JSON.stringify(p.controls));
+      controls.keys.forEach((k: Any) => (k.on = true));
+    } else controls.preset = 'custom';
+    renderControls();
+  });
+  $('#addkey').addEventListener('keydown', (e) => {
+    const ev = e as KeyboardEvent;
+    const inp = ev.target as HTMLInputElement;
+    if (ev.key !== 'Enter' || !inp.value.trim()) return;
+    controls.keys.push({ key: inp.value.trim().toLowerCase(), label: 'custom', on: true });
+    controls.preset = 'custom';
+    renderControls();
+    ($('#addkey') as HTMLInputElement).focus();
+  });
+}
+
+async function signInWeb() {
+  toast('Finish signing in in your browser');
+  const r: Any = await call('login_web').catch(() => null);
+  if (r) {
+    toast(`Signed in as ${r.email}, ${r.plan} plan`);
+    $('#plan-badge').textContent = `${r.plan[0].toUpperCase()}${r.plan.slice(1)} plan`;
+    render();
+  }
+}
+
 function save() {
   const v = (id: string) => (document.getElementById(id) as HTMLInputElement | null)?.value;
   form.launch = v('f-launch') ?? form.launch;
-  form.windowHint = v('f-hint') ?? form.windowHint;
   form.player = v('f-player') ?? form.player;
   form.director = v('f-director') ?? form.director;
-  form.directorModel = v('f-dmodel') ?? form.directorModel;
   form.engine = v('f-engine') ?? form.engine;
   form.minutes = Number(v('f-min') ?? form.minutes);
-  form.keys = v('f-keys') ?? form.keys;
-  form.goal = v('f-goal') ?? form.goal;
+  const g = v('f-goal');
+  if (g !== undefined) form.goal = g.trim() || 'explore the level and try to break things';
 }
 
 async function start() {
   save();
-  if (mode === 'window' && !selected) return toast('Pick a game window first.');
-  if (mode === 'launch' && !form.launch) return toast('Enter the command that starts the game.');
-  const director = form.director ? form.director + (form.directorModel ? ':' + form.directorModel : '') : null;
+  if (!selected && !form.launch) return toast('Pick your game first.');
+  const approved = controls
+    ? { preset: controls.preset, keys: controls.keys.filter((k: Any) => k.on).map((k: Any) => ({ key: k.key, label: k.label })), mouse_look: controls.mouse_look, mouse_click: controls.mouse_click }
+    : null;
+  if (approved && !approved.keys.length && !approved.mouse_look && !approved.mouse_click) return toast('Allow at least one control.');
   const btn = $('#start') as HTMLButtonElement;
   btn.disabled = true;
   btn.innerHTML = '<span class="spin"></span>Starting';
   await call('start', {
     args: {
-      window: mode === 'window' ? selected.title : form.windowHint,
-      launch: mode === 'launch' ? form.launch : null,
+      window: selected ? selected.title : '',
+      launch: form.launch || null,
       engine: form.engine,
       minutes: form.minutes,
       goal: form.goal,
       player: form.player,
-      director,
-      keys: form.keys.split(',').map((s) => s.trim()).filter(Boolean),
+      director: form.director || null,
+      keys: [],
+      controls: approved,
     },
   }).catch(() => {
     btn.disabled = false;
@@ -505,11 +568,15 @@ async function renderAccount() {
           ? `<div style="display:flex;align-items:center;justify-content:space-between"><div><b>${esc(a.email)}</b><div class="muted" style="font-size:12px">Signed in</div></div><button class="btn" id="logout">Sign out</button></div>`
           : a.mode === 'offline'
             ? `<b>Developer build</b><p class="muted" style="font-size:12px;margin-top:4px">No account server is configured, so every feature is unlocked. Release builds sign in to the PlayerOne account server.</p>`
-            : `<div class="grid-3" style="align-items:end">
+            : `<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px">
+                 <div><b>Sign in with your PlayerOne account</b><div class="muted" style="font-size:12px">Opens the website in your browser, then brings you back here.</div></div>
+                 <button class="btn primary" id="login-web">Sign in</button></div>
+               <details><summary class="muted" style="font-size:12px">Sign in with email and password instead</summary>
+               <div class="grid-3" style="align-items:end;margin-top:10px">
                  <label class="field">Email<input type="email" id="a-email" autocomplete="username"></label>
                  <label class="field">Password<input type="password" id="a-pass" autocomplete="current-password"></label>
                  <div><button class="btn primary" id="login">Sign in</button></div>
-               </div><p class="hint">No account yet? Create one on the PlayerOne website. Free works without one.</p>`}
+               </div></details><p class="hint">No account yet? Create one on the website. The Free plan works without one.</p>`}
       </div>
     </div>
     <div class="section">
@@ -520,6 +587,7 @@ async function renderAccount() {
       <p class="hint">Upgrades and billing happen on the PlayerOne website. Hosted director credits are priced from the tokens we measure per playtest hour.</p>
     </div>`;
   $('#logout')?.addEventListener('click', async () => { await call('logout'); renderAccount(); });
+  $('#login-web')?.addEventListener('click', async () => { await signInWeb(); renderAccount(); });
   $('#login')?.addEventListener('click', async () => {
     const email = ($('#a-email') as HTMLInputElement).value;
     const password = ($('#a-pass') as HTMLInputElement).value;

@@ -23,6 +23,7 @@ struct StartArgs {
     player: String,
     director: Option<String>,
     keys: Vec<String>,
+    controls: Option<playerone::controls::Controls>,
 }
 
 type Res<T> = Result<T, String>;
@@ -82,6 +83,45 @@ async fn login(email: String, password: String) -> Res<Value> {
     .map_err(e)?
 }
 
+/// where "Sign in" sends people. set PLAYERONE_SITE_URL when building a release
+const SITE_URL: &str = match option_env!("PLAYERONE_SITE_URL") {
+    Some(u) => u,
+    None => "http://localhost:5173",
+};
+
+#[tauri::command]
+async fn login_web() -> Res<Value> {
+    tauri::async_runtime::spawn_blocking(|| {
+        let a = playerone::cloud::login_browser(SITE_URL).map_err(e)?;
+        Ok(json!({ "email": a.email, "plan": a.plan }))
+    })
+    .await
+    .map_err(e)?
+}
+
+#[tauri::command]
+fn presets() -> Value {
+    serde_json::to_value(playerone::controls::presets()).unwrap()
+}
+
+/// recognise the game and recommend controls. by name first, then the local vision model if one is installed
+#[tauri::command]
+async fn suggest_controls(id: u32, title: String, app: String) -> Value {
+    tauri::async_runtime::spawn_blocking(move || {
+        let frame = playerone::capture::find_by_id(id)
+            .and_then(|w| playerone::capture::grab(&w, 640).ok())
+            .map(|img| playerone::capture::to_jpeg(&img, 70));
+        let model = reqwest::blocking::get("http://127.0.0.1:11434/api/tags")
+            .ok()
+            .and_then(|r| r.json::<Value>().ok())
+            .and_then(|v| v["models"][0]["name"].as_str().map(String::from))
+            .and_then(|m| playerone::providers::Provider::from_spec(&format!("ollama:{m}")).ok());
+        serde_json::to_value(playerone::controls::suggest(&title, &app, model.as_ref(), frame.as_deref())).unwrap()
+    })
+    .await
+    .unwrap_or(Value::Null)
+}
+
 #[tauri::command]
 fn logout() -> Res<()> {
     playerone::cloud::logout().map_err(e)
@@ -123,6 +163,7 @@ fn start(args: StartArgs, state: State<AppState>) -> Res<String> {
         director: args.director.filter(|s| !s.is_empty()),
         out_dir: out_dir.clone(),
         keys: args.keys,
+        controls: args.controls,
         quiet: true,
     };
     let s = session::new_session(&cfg);
@@ -204,7 +245,7 @@ fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            platform, list_windows, window_thumb, ollama_models, account, login, logout, connect, saved_keys, set_key,
+            platform, list_windows, window_thumb, ollama_models, account, login, login_web, presets, suggest_controls, logout, connect, saved_keys, set_key,
             start, snapshot, instruct, stop, read_image, reveal
         ])
         .run(tauri::generate_context!())

@@ -58,6 +58,9 @@ jobs:
       - name: Build app
         working-directory: desktop/app
         continue-on-error: true
+        env:
+          # set this repository variable to the website address so Sign in opens the right page
+          PLAYERONE_SITE_URL: ${{ vars.PLAYERONE_SITE_URL || 'http://localhost:5173' }}
         run: npx tauri build --target ${{ matrix.target }} --bundles ${{ matrix.bundles }}
 
       # stable file names, so download links never change between versions

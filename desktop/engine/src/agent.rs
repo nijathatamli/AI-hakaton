@@ -1,6 +1,7 @@
 //! The two brains. The player is cheap and fast and looks at every few frames.
 //! The director is smart and expensive and only reads digests.
 
+use crate::controls::Controls;
 use crate::input::Action;
 use crate::providers::{extract_json, Provider, Usage};
 use anyhow::Result;
@@ -46,41 +47,54 @@ pub struct Move {
 
 const PLAYER_SYSTEM: &str = "You are the hands of a video game playtester. You see one screenshot of the game. \
 Make progress toward the goal and poke at anything that might break: walk into walls, jump at edges, \
-collect things, open doors. Coordinates for clicks use a 0..1000 grid over the screenshot. \
-Reply with JSON only: {\"actions\":[{\"type\":\"key\",\"key\":\"right\",\"ms\":600}],\"note\":\"what you see in a few words\",\"suspicious\":null}. \
-Use at most 4 actions. Hold movement keys with ms between 200 and 1500, tap others with ms 0. \
-Set suspicious to a short sentence only if something on screen looks wrong, for example a counter that did not change, \
-a character stuck inside a wall, or a frozen screen.";
+open doors, use objects, go where a player would not expect. If a menu is open, get into the game. \
+You may only use the controls listed. Action types: \
+{\"type\":\"key\",\"key\":\"w\",\"ms\":800} holds a key (ms 0 taps it), \
+{\"type\":\"look\",\"dx\":200,\"dy\":0} turns the camera (only if mouse_look is listed; dx -600..600), \
+{\"type\":\"click\",\"x\":500,\"y\":500} clicks at a point on a 0..1000 grid over the screenshot (only if click is listed). \
+Reply with JSON only: {\"actions\":[...],\"note\":\"what you see in a few words\",\"suspicious\":null}. \
+Use at most 4 actions. Set suspicious to a short sentence only if something on screen looks wrong, for example a counter that \
+did not change, a character stuck inside a wall, missing textures, or a frozen screen.";
 
-pub fn decide(player: &Player, goal: &str, keys: &[String], frame_jpeg: &[u8], recent: &[String]) -> Result<(Move, Usage)> {
+pub fn decide(player: &Player, goal: &str, ctrl: &Controls, frame_jpeg: &[u8], recent: &[String]) -> Result<(Move, Usage)> {
     match player {
-        Player::Explore => Ok((explore(keys), Usage::default())),
-        Player::Random => Ok((random(keys), Usage::default())),
+        Player::Explore => Ok((explore(ctrl), Usage::default())),
+        Player::Random => Ok((random(ctrl), Usage::default())),
         Player::Model(p) => {
             let text = format!(
-                "Goal: {goal}\nAllowed keys: {}\nYour last moves: {}\nWhat do you do next?",
-                keys.join(", "),
+                "Goal: {goal}\nControls you may use: {}\nYour last moves: {}\nWhat do you do next?",
+                ctrl.describe(),
                 if recent.is_empty() { "none".into() } else { recent.join("; ") }
             );
             let (raw, usage) = p.ask(PLAYER_SYSTEM, &text, &[frame_jpeg.to_vec()], None)?;
-            let mv = extract_json(&raw).map(|v| lenient_move(&v, keys)).unwrap_or_default();
+            let mv = extract_json(&raw).map(|v| lenient_move(&v, ctrl)).unwrap_or_default();
             // a confused small model returns nothing. keep the run moving instead of stalling
             if mv.actions.is_empty() {
-                return Ok((Move { note: format!("model gave no actions ({})", raw.chars().take(60).collect::<String>()), ..explore(keys) }, usage));
+                return Ok((Move { note: format!("model gave no usable actions ({})", raw.chars().take(60).collect::<String>()), ..explore(ctrl) }, usage));
             }
             Ok((Move { actions: mv.actions.into_iter().take(4).collect(), ..mv }, usage))
         }
     }
 }
 
-/// small models bend the schema: {"type":"left"} or {"key":"right"} with no type. accept anything that clearly means a move
-fn lenient_move(v: &serde_json::Value, keys: &[String]) -> Move {
+/// small models bend the schema: {"type":"w"} or {"key":"d"} with no type. anything that clearly means an approved move is kept,
+/// anything outside the approved controls is dropped
+fn lenient_move(v: &serde_json::Value, ctrl: &Controls) -> Move {
+    let keys = ctrl.key_names();
     let mut actions = vec![];
     for a in v["actions"].as_array().cloned().unwrap_or_default() {
         let ty = a["type"].as_str().unwrap_or_default().to_lowercase();
         let ms = a["ms"].as_u64().or_else(|| a["duration"].as_u64()).unwrap_or(0);
-        if let (Some(x), Some(y)) = (a["x"].as_f64(), a["y"].as_f64()) {
-            actions.push(Action::Click { x: x as f32, y: y as f32 });
+        if ty == "look" || a.get("dx").is_some() {
+            if ctrl.mouse_look {
+                let dx = a["dx"].as_i64().unwrap_or(0) as i32;
+                let dy = a["dy"].as_i64().unwrap_or(0) as i32;
+                actions.push(Action::Look { dx: dx.clamp(-600, 600), dy: dy.clamp(-300, 300) });
+            }
+        } else if let (Some(x), Some(y)) = (a["x"].as_f64(), a["y"].as_f64()) {
+            if ctrl.mouse_click {
+                actions.push(Action::Click { x: x as f32, y: y as f32, right: a["right"].as_bool().unwrap_or(false) });
+            }
         } else if ty == "wait" {
             actions.push(Action::Wait { ms: ms.max(200) });
         } else {
@@ -94,31 +108,46 @@ fn lenient_move(v: &serde_json::Value, keys: &[String]) -> Move {
     Move { actions: actions.into_iter().take(4).collect(), note: v["note"].as_str().unwrap_or_default().to_string(), suspicious }
 }
 
-fn explore(keys: &[String]) -> Move {
+/// free fallback: mostly push forward, look around, jump and interact now and then
+fn explore(ctrl: &Controls) -> Move {
     let mut rng = rand::rng();
+    let keys = ctrl.key_names();
     let has = |k: &str| keys.iter().any(|x| x == k);
+    let forward = ["w", "right", "up"].into_iter().find(|k| has(k));
     let mut actions = Vec::new();
-    let r: f32 = rng.random();
-    if r < 0.6 && has("right") {
-        actions.push(Action::Key { key: "right".into(), ms: rng.random_range(400..1400) });
-    } else if r < 0.75 && has("left") {
-        actions.push(Action::Key { key: "left".into(), ms: rng.random_range(200..700) });
-    }
-    if rng.random::<f32>() < 0.45 {
-        let jump = if has("space") { "space" } else { "up" };
-        actions.push(Action::Key { key: jump.into(), ms: 0 });
-        if has("right") {
-            actions.push(Action::Key { key: "right".into(), ms: rng.random_range(200..600) });
+    if let Some(f) = forward {
+        if rng.random::<f32>() < 0.7 {
+            actions.push(Action::Key { key: f.into(), ms: rng.random_range(400..1400) });
         }
     }
-    if actions.is_empty() {
+    if ctrl.mouse_look && rng.random::<f32>() < 0.5 {
+        actions.push(Action::Look { dx: rng.random_range(-400..400), dy: rng.random_range(-40..40) });
+    }
+    if rng.random::<f32>() < 0.4 {
+        if let Some(j) = ["space", "up"].into_iter().find(|k| has(k)) {
+            actions.push(Action::Key { key: j.into(), ms: 0 });
+        }
+    }
+    if rng.random::<f32>() < 0.2 {
+        if let Some(i) = ["e", "f", "enter"].into_iter().find(|k| has(k)) {
+            actions.push(Action::Key { key: i.into(), ms: 0 });
+        }
+    }
+    if ctrl.mouse_click && !has("w") && !has("right") {
+        actions.push(Action::Click { x: rng.random_range(100.0..900.0), y: rng.random_range(100.0..900.0), right: false });
+    }
+    if actions.is_empty() && !keys.is_empty() {
         actions.push(Action::Key { key: keys[rng.random_range(0..keys.len())].clone(), ms: 300 });
     }
     Move { actions, note: "explore".into(), suspicious: None }
 }
 
-fn random(keys: &[String]) -> Move {
+fn random(ctrl: &Controls) -> Move {
     let mut rng = rand::rng();
+    let keys = ctrl.key_names();
+    if keys.is_empty() {
+        return Move { actions: vec![Action::Wait { ms: 300 }], note: "random".into(), suspicious: None };
+    }
     let actions = (0..3)
         .map(|_| Action::Key { key: keys[rng.random_range(0..keys.len())].clone(), ms: if rng.random::<bool>() { 0 } else { rng.random_range(100..900) } })
         .collect();

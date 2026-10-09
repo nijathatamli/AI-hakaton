@@ -230,3 +230,117 @@ pub fn push_session(summary: &Value) -> Result<bool> {
     }
     Ok(true)
 }
+
+/// sign in through the website, like Figma or GitHub Desktop: open the browser, wait for the site to hand the session back
+/// to a one-shot listener on 127.0.0.1. the anon key and project url come back with it, so the app needs no config
+pub fn login_browser(site: &str) -> Result<Account> {
+    use std::io::{Read, Write};
+    use std::net::TcpListener;
+    let listener = TcpListener::bind("127.0.0.1:0")?;
+    let port = listener.local_addr()?.port();
+    let state = format!("{:x}", rand_u64());
+    let url = format!("{}/login?app=1&port={port}&state={state}", site.trim_end_matches('/'));
+    open_browser(&url);
+    listener.set_nonblocking(true)?;
+    let deadline = std::time::Instant::now() + std::time::Duration::from_secs(300);
+    while std::time::Instant::now() < deadline {
+        match listener.accept() {
+            Ok((mut stream, _)) => {
+                stream.set_nonblocking(false)?;
+                let mut buf = [0u8; 16384];
+                let n = stream.read(&mut buf).unwrap_or(0);
+                let req = String::from_utf8_lossy(&buf[..n]).to_string();
+                let path = req.split_whitespace().nth(1).unwrap_or("").to_string();
+                if !path.starts_with("/callback") {
+                    let _ = stream.write_all(b"HTTP/1.1 404 Not Found\r\nContent-Length: 0\r\n\r\n");
+                    continue;
+                }
+                let q = query(&path);
+                let ok = q.get("state").map(|s| *s == state).unwrap_or(false) && q.contains_key("access_token");
+                let body = if ok { SIGNED_IN_HTML } else { FAILED_HTML };
+                let head = format!("HTTP/1.1 200 OK\r\nContent-Type: text/html; charset=utf-8\r\nContent-Length: {}\r\nConnection: close\r\n\r\n", body.len());
+                let _ = stream.write_all(head.as_bytes());
+                let _ = stream.write_all(body.as_bytes());
+                if !ok {
+                    return Err(anyhow!("sign-in was cancelled or the response did not match"));
+                }
+                let mut a = load();
+                if let Some(u) = q.get("sb_url") {
+                    a.url = u.clone();
+                }
+                if let Some(k) = q.get("sb_key") {
+                    a.anon_key = k.clone();
+                }
+                a.access_token = q["access_token"].clone();
+                a.refresh_token = q.get("refresh_token").cloned().unwrap_or_default();
+                let claims = jwt_claims(&a.access_token);
+                a.user_id = claims["sub"].as_str().unwrap_or_default().into();
+                a.email = claims["email"].as_str().unwrap_or_default().into();
+                a.plan = fetch_plan(&a).unwrap_or_else(|_| "free".into());
+                save(&a)?;
+                return Ok(a);
+            }
+            Err(_) => std::thread::sleep(std::time::Duration::from_millis(150)),
+        }
+    }
+    Err(anyhow!("sign-in timed out"))
+}
+
+const SIGNED_IN_HTML: &str = r#"<!doctype html><meta charset=utf-8><title>PlayerOne</title><body style="font:16px system-ui;background:#000;color:#fff;display:grid;place-items:center;height:100vh;margin:0"><div style="text-align:center"><h2 style="font-weight:500">You are signed in</h2><p style="opacity:.6">Go back to PlayerOne. You can close this tab.</p></div>"#;
+const FAILED_HTML: &str = r#"<!doctype html><meta charset=utf-8><body style="font:16px system-ui">Sign-in failed. Try again from the app."#;
+
+fn rand_u64() -> u64 {
+    let t = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap_or_default();
+    (t.as_nanos() as u64) ^ ((std::process::id() as u64) << 32) ^ 0x9e37_79b9_7f4a_7c15
+}
+
+pub fn open_browser(url: &str) {
+    #[cfg(windows)]
+    let _ = std::process::Command::new("rundll32").args(["url.dll,FileProtocolHandler", url]).spawn();
+    #[cfg(target_os = "macos")]
+    let _ = std::process::Command::new("open").arg(url).spawn();
+    #[cfg(target_os = "linux")]
+    let _ = std::process::Command::new("xdg-open").arg(url).spawn();
+}
+
+fn query(path: &str) -> std::collections::HashMap<String, String> {
+    let mut m = std::collections::HashMap::new();
+    if let Some((_, q)) = path.split_once('?') {
+        for pair in q.split('&') {
+            let (k, v) = pair.split_once('=').unwrap_or((pair, ""));
+            m.insert(pct(k), pct(v));
+        }
+    }
+    m
+}
+
+fn pct(s: &str) -> String {
+    let b = s.as_bytes();
+    let mut out = Vec::with_capacity(b.len());
+    let mut i = 0;
+    while i < b.len() {
+        match b[i] {
+            b'+' => out.push(b' '),
+            b'%' if i + 2 < b.len() => match u8::from_str_radix(&s[i + 1..i + 3], 16) {
+                Ok(v) => {
+                    out.push(v);
+                    i += 2;
+                }
+                Err(_) => out.push(b'%'),
+            },
+            c => out.push(c),
+        }
+        i += 1;
+    }
+    String::from_utf8_lossy(&out).into_owned()
+}
+
+fn jwt_claims(token: &str) -> Value {
+    use base64::Engine as _;
+    token
+        .split('.')
+        .nth(1)
+        .and_then(|p| base64::engine::general_purpose::URL_SAFE_NO_PAD.decode(p.trim_end_matches('=')).ok())
+        .and_then(|b| serde_json::from_slice(&b).ok())
+        .unwrap_or(Value::Null)
+}

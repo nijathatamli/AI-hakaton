@@ -425,6 +425,27 @@ html[data-os='kde'] .card { box-shadow: none; }
 .connector .out:not(:empty) { animation: rise 260ms var(--ease) both; color: var(--text); }
 .toast { box-shadow: 0 8px 30px rgba(0,0,0,.3); }
 
+/* controls approval */
+.detecting { display: flex; align-items: center; gap: 10px; color: var(--text-2); animation: rise 260ms var(--ease) both; }
+.controls { animation: rise 320ms var(--ease) both; }
+.controls .detected { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 14px; }
+.controls .detected select { width: auto; min-width: 190px; }
+.controls .game { font-size: calc(var(--fs) + 3px); font-weight: 600; }
+.keys { display: flex; flex-wrap: wrap; gap: 8px; }
+.keycap { all: unset; display: inline-flex; align-items: center; gap: 8px; height: 34px; padding: 0 10px 0 5px; border-radius: 9px; border: 1px solid var(--line);
+  background: var(--surface-2); color: var(--text-2); font-size: 12px; cursor: default; opacity: .55;
+  transition: opacity 160ms ease, border-color 160ms ease, transform 140ms var(--ease), background-color 160ms ease; animation: rise 280ms var(--ease) both; }
+.keycap:active { transform: scale(.96); }
+.keycap.on { opacity: 1; color: var(--text); border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); background: color-mix(in srgb, var(--accent) 10%, var(--surface-2)); }
+.keycap kbd { font: 600 11px/1 ui-monospace, 'Cascadia Mono', 'SF Mono', monospace; min-width: 24px; height: 24px; padding: 0 6px; display: grid; place-items: center;
+  border-radius: 6px; background: var(--field); border: 1px solid var(--line); box-shadow: 0 1px 0 var(--line); color: var(--text); text-transform: uppercase; }
+.keycap:not(.on) span { text-decoration: line-through; }
+.addkey input { height: 34px; width: 150px; border-radius: 9px; }
+details.advanced summary, details summary { cursor: default; color: var(--text-2); font-size: 12px; font-weight: 600; list-style: none; }
+details.advanced summary::before { content: '\25B8'; display: inline-block; margin-right: 6px; transition: transform 200ms var(--ease); }
+details.advanced[open] summary::before { transform: rotate(90deg); }
+details.advanced[open] > .grid-3 { animation: rise 240ms var(--ease) both; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

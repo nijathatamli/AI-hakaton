@@ -40,6 +40,9 @@ enum Cmd {
         /// keys the player may press, comma separated
         #[arg(long, default_value = "left,right,up,down,space,enter,escape")]
         keys: String,
+        /// control preset: platformer, first_person, third_person, top_down, point_click, racing. replaces --keys
+        #[arg(long)]
+        preset: Option<String>,
         #[arg(long, default_value = "runs/latest")]
         out: PathBuf,
     },
@@ -55,6 +58,11 @@ enum Cmd {
         password: String,
     },
     Logout,
+    /// sign in through the website in your browser
+    LoginWeb {
+        #[arg(long, env = "PLAYERONE_SITE_URL")]
+        site: String,
+    },
     /// show account and plan
     Account,
     /// save a provider key on this machine: playerone key claude sk-ant-...
@@ -68,7 +76,7 @@ fn main() -> Result<()> {
                 println!("{:>6}  {:>4}x{:<4}  {}  ({})", w.pid, w.width, w.height, w.title, w.app);
             }
         }
-        Cmd::Run { window, launch, engine, logs, minutes, goal, player, director, keys, out } => {
+        Cmd::Run { window, launch, engine, logs, minutes, goal, player, director, keys, preset, out } => {
             let plan = cloud::check_allowed(&player, director.as_deref())?;
             eprintln!("playerone: plan {plan:?}, player {player}, director {}", director.as_deref().unwrap_or("none"));
             let cfg = session::SessionConfig {
@@ -82,6 +90,7 @@ fn main() -> Result<()> {
                 director,
                 out_dir: out,
                 keys: keys.split(',').map(|s| s.trim().to_string()).filter(|s| !s.is_empty()).collect(),
+                controls: preset.as_deref().and_then(playerone::controls::preset),
                 quiet: false,
             };
             let out_dir = cfg.out_dir.clone();
@@ -104,6 +113,10 @@ fn main() -> Result<()> {
         Cmd::Connect { target } => println!("{}", connect::connect(&target)?),
         Cmd::Login { email, password } => {
             let a = cloud::login(&email, &password)?;
+            println!("signed in as {} on the {} plan", a.email, a.plan);
+        }
+        Cmd::LoginWeb { site } => {
+            let a = cloud::login_browser(&site)?;
             println!("signed in as {} on the {} plan", a.email, a.plan);
         }
         Cmd::Logout => {

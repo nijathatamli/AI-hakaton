@@ -5,6 +5,7 @@ pub mod agent;
 pub mod capture;
 pub mod cloud;
 pub mod connect;
+pub mod controls;
 pub mod input;
 pub mod mcp;
 pub mod probes;
