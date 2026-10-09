@@ -8,7 +8,7 @@
 <style>
   :root { --ink:#060607; --paper:#f4f4f2; --dim:#8b8b93; --line:#26262b; --card:#111114; --card2:#18181c; --pink:#ff3d71; --ease:cubic-bezier(.23,1,.32,1); }
   * { margin:0; padding:0; box-sizing:border-box; }
-  html, body { background:#000; color:var(--paper); font-family:'Space Mono', monospace; }
+  html, body { -webkit-print-color-adjust:exact; print-color-adjust:exact; background:#000; color:var(--paper); font-family:'Space Mono', monospace; }
   .slide { width:1920px; height:1080px; position:relative; overflow:hidden; padding:110px 130px; display:flex; flex-direction:column; background:var(--ink); margin:0 auto 40px; }
   .k { font-size:22px; color:var(--dim); letter-spacing:.02em; margin-bottom:28px; }
   h1, h2 { font-weight:400; letter-spacing:-.03em; line-height:1; }
@@ -53,7 +53,7 @@
     .cover.in .bg { transform:scale(1) !important; }
   }
   @page { size:1920px 1080px; margin:0; }
-  @media print { body { background:var(--ink); } .slide { margin:0; page-break-after:always; break-after:page; } }
+  @media print { html, body { background:var(--ink); width:1920px; } * { -webkit-print-color-adjust:exact; print-color-adjust:exact; } .slide { margin:0 !important; page-break-after:always; break-after:page; } }
 
   .cover { justify-content:flex-end; }
   .cover .bg { position:absolute; inset:0; background:url(llama.jpg) center/cover; }
