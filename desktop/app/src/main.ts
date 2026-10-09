@@ -1,4 +1,23 @@
-import { invoke } from '@tauri-apps/api/core';
+import { invoke as tauriInvoke } from '@tauri-apps/api/core';
+
+// outside the desktop shell (a plain browser) the UI runs on sample data, so design work does not need a build
+const inTauri = '__TAURI_INTERNALS__' in window;
+const mock: Record<string, (a?: any) => any> = {
+  platform: () => ({ os: new URLSearchParams(location.search).get('os') || 'windows', desktop: 'kde' }),
+  list_windows: () => [
+    { id: 1, pid: 10, title: 'Cavern (PlayerOne test)', app: 'Godot', width: 960, height: 540 },
+    { id: 2, pid: 11, title: 'Hollow Knight', app: 'hollow_knight.exe', width: 1920, height: 1080 },
+    { id: 3, pid: 12, title: 'Celeste', app: 'Celeste.exe', width: 1280, height: 720 },
+  ],
+  window_thumb: () => null,
+  ollama_models: () => ['qwen2.5vl:3b'],
+  account: () => ({ mode: 'offline' }),
+  saved_keys: () => [],
+  snapshot: () => null,
+};
+const invoke = <T = any>(cmd: string, args?: any): Promise<T> =>
+  inTauri ? tauriInvoke<T>(cmd, args) : Promise.resolve(mock[cmd]?.(args) as T);
+const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 type Any = any;
 const $ = (s: string) => document.querySelector(s) as HTMLElement;
@@ -55,10 +74,55 @@ function go(p: string) {
   page = p;
   openReport = null;
   document.querySelectorAll('.nav button').forEach((b) => b.classList.toggle('active', (b as HTMLElement).dataset.page === p));
+  moveIndicator();
   $('#page-title').textContent = titles[p];
   render();
 }
 document.querySelectorAll('.nav button').forEach((b) => b.addEventListener('click', () => go((b as HTMLElement).dataset.page!)));
+
+/** the sidebar highlight slides to the active item instead of jumping */
+function moveIndicator() {
+  const a = document.querySelector('.nav button.active') as HTMLElement | null;
+  const ind = document.querySelector('.nav-indicator') as HTMLElement | null;
+  if (!a || !ind) return;
+  ind.style.height = a.offsetHeight + 'px';
+  ind.style.transform = `translateY(${a.offsetTop}px)`;
+}
+
+/** segmented control thumb follows the selected option */
+function placeThumb(seg: HTMLElement | null) {
+  if (!seg) return;
+  let t = seg.querySelector('.thumb-s') as HTMLElement | null;
+  if (!t) {
+    t = document.createElement('span');
+    t.className = 'thumb-s';
+    seg.prepend(t);
+  }
+  const on = seg.querySelector('button.on') as HTMLElement | null;
+  if (on) {
+    t.style.width = on.offsetWidth + 'px';
+    t.style.transform = `translateX(${on.offsetLeft}px)`;
+  }
+}
+
+/** numbers count up instead of snapping. skipped for reduced motion */
+function tween(el: HTMLElement, to: number) {
+  const from = Number(el.dataset.v || 0);
+  el.dataset.v = String(to);
+  if (from === to) return;
+  const box = el.closest('.stat');
+  box?.classList.add('bump');
+  setTimeout(() => box?.classList.remove('bump'), 450);
+  if (reduceMotion) { el.textContent = num(to); return; }
+  const t0 = performance.now();
+  const step = (now: number) => {
+    const k = Math.min(1, (now - t0) / 450);
+    const e = 1 - Math.pow(1 - k, 3);
+    el.textContent = num(Math.round(from + (to - from) * e));
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
 
 function render() {
   const actions = $('#toolbar-actions');
@@ -73,10 +137,18 @@ function render() {
 async function renderSetup() {
   const el = $('#page');
   const models: string[] = await invoke('ollama_models').catch(() => []) as string[];
+  const acct: Any = await invoke('account').catch(() => ({}));
+  const plan = acct.mode === 'offline' ? 'Developer build' : `${(acct.plan || 'free').replace(/^./, (c: string) => c.toUpperCase())} plan`;
   const last = snap && !snap.running ? `<div class="card section" style="display:flex;align-items:center;gap:12px">
       <div class="grow" style="flex:1"><b>Last playtest finished.</b> <span class="muted">${snap.incidents?.length ?? 0} incidents, ${snap.reports?.length ?? 0} reports${snap.error ? ' · ' + esc(snap.error) : ''}</span></div>
       <button class="btn small" id="see-reports">See reports</button></div>` : '';
   el.innerHTML = `
+    <div class="status">
+      ${models.length
+        ? `<span class="pill ok"><span class="dot"></span>Local player <b>${esc(models[0])}</b> ready</span>`
+        : `<span class="pill warn"><span class="dot"></span>No local model. Install Ollama, or use the explorer bot</span>`}
+      <span class="pill"><span class="dot"></span>${esc(plan)}</span>
+    </div>
     ${last}
     <div class="section">
       <h2><span>Game</span>
@@ -86,7 +158,7 @@ async function renderSetup() {
         </span>
       </h2>
       ${mode === 'window'
-        ? `<div class="windows" id="windows"><div class="muted">Looking for windows…</div></div>
+        ? `<div class="windows" id="windows">${'<div class="skel"><i></i><i></i><i></i></div>'.repeat(6)}</div>
            <p class="hint">Pick the game. PlayerOne captures only this window and sends keys to it.</p>`
         : `<div class="grid-2">
              <label class="field">Command that starts the game<input type="text" id="f-launch" placeholder="godot --path ./my-game" value="${esc(form.launch)}"></label>
@@ -130,9 +202,17 @@ async function renderSetup() {
       </div>
       <label class="field" style="margin-top:12px">Goal<textarea id="f-goal">${esc(form.goal)}</textarea></label>
     </div>
-    <div style="display:flex;justify-content:flex-end;gap:8px"><button class="btn primary" id="start">Start playtest</button></div>`;
+    <div style="display:flex;justify-content:flex-end;gap:8px"><button class="btn primary big" id="start">Start playtest</button></div>`;
 
-  el.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => { save(); mode = (b as HTMLElement).dataset.mode as Any; renderSetup(); }));
+  const seg = el.querySelector('.segmented') as HTMLElement;
+  requestAnimationFrame(() => placeThumb(seg));
+  el.querySelectorAll('[data-mode]').forEach((b) => b.addEventListener('click', () => {
+    save();
+    mode = (b as HTMLElement).dataset.mode as Any;
+    seg.querySelectorAll('button').forEach((x) => x.classList.toggle('on', x === b));
+    placeThumb(seg);
+    setTimeout(renderSetup, 180); // let the thumb finish sliding before the panel swaps
+  }));
   $('#see-reports')?.addEventListener('click', () => go('reports'));
   $('#start').addEventListener('click', start);
   if (mode === 'window') loadWindows();
@@ -143,11 +223,16 @@ async function loadWindows() {
   if (!box) return;
   const wins: Any[] = await call('list_windows');
   if (!wins.length) {
-    box.innerHTML = `<div class="empty" style="grid-column:1/-1"><b>No windows found</b>Start your game, then come back.</div>`;
+    box.innerHTML = `<div class="empty" style="grid-column:1/-1"><div class="glyph"><i class="ic ic-play"></i></div><b>No game windows yet</b>Start your game, then press Refresh.</div>`;
     return;
   }
-  box.innerHTML = wins.map((w) => `<button class="win ${selected?.id === w.id ? 'on' : ''}" data-id="${w.id}">
+  box.innerHTML = wins.map((w, i) => `<button class="win ${selected?.id === w.id ? 'on' : ''}" data-id="${w.id}" style="--i:${i}">
       <div class="thumb" id="th-${w.id}"></div><div class="t">${esc(w.title)}</div><div class="a">${esc(w.app)} · ${w.width}×${w.height}</div></button>`).join('');
+  $('#toolbar-actions').innerHTML = `<button class="btn small" id="refresh">Refresh</button>`;
+  $('#refresh').addEventListener('click', () => {
+    box.innerHTML = '<div class="skel"><i></i><i></i><i></i></div>'.repeat(Math.max(3, wins.length));
+    loadWindows();
+  });
   box.querySelectorAll('.win').forEach((b) => b.addEventListener('click', () => {
     selected = wins.find((w) => String(w.id) === (b as HTMLElement).dataset.id);
     box.querySelectorAll('.win').forEach((x) => x.classList.toggle('on', x === b));
@@ -155,7 +240,10 @@ async function loadWindows() {
   for (const w of wins.slice(0, 16)) {
     invoke<string | null>('window_thumb', { id: w.id }).then((b64) => {
       const t = document.getElementById('th-' + w.id);
-      if (t && b64) t.style.backgroundImage = `url(data:image/jpeg;base64,${b64})`;
+      if (t && b64) {
+        t.style.setProperty('--img', `url(data:image/jpeg;base64,${b64})`);
+        requestAnimationFrame(() => t.classList.add('loaded'));
+      }
     });
   }
 }
@@ -178,6 +266,9 @@ async function start() {
   if (mode === 'window' && !selected) return toast('Pick a game window first.');
   if (mode === 'launch' && !form.launch) return toast('Enter the command that starts the game.');
   const director = form.director ? form.director + (form.directorModel ? ':' + form.directorModel : '') : null;
+  const btn = $('#start') as HTMLButtonElement;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spin"></span>Starting';
   await call('start', {
     args: {
       window: mode === 'window' ? selected.title : form.windowHint,
@@ -189,7 +280,13 @@ async function start() {
       director,
       keys: form.keys.split(',').map((s) => s.trim()).filter(Boolean),
     },
+  }).catch(() => {
+    btn.disabled = false;
+    btn.textContent = 'Start playtest';
+    throw new Error('start failed');
   });
+  feedTop = -1;
+  lastIncidents = 0;
   snap = { running: true, started: false, events: [], incidents: [], reports: [], meter: {} };
   startPolling();
   renderLive();
@@ -217,14 +314,22 @@ function renderLive() {
   $('#page').innerHTML = `
     <div class="live">
       <div class="stage">
-        <div class="screen"><img id="frame" alt="Live view of the game"><span class="rec" id="rec">Starting</span><div class="chips" id="chips"></div></div>
+        <div class="screen" id="screen"><img id="frame" alt="Live view of the game"><div class="waiting" id="waiting">Waiting for the first frame</div><span class="rec" id="rec">Starting</span><div class="chips" id="chips"></div></div>
+        <div class="progress" title="Time left in this playtest"><i id="prog" style="transform:scaleX(0)"></i></div>
         <div class="instruct"><input type="text" id="goal-in" placeholder="Tell the player what to try next, e.g. jump into every wall"><button class="btn" id="goal-btn">Send</button></div>
       </div>
       <div class="side">
-        <div class="stats" id="stats"></div>
-        <div class="feed" id="feed"></div>
+        <div class="stats" id="stats">
+          <div class="stat"><b id="s-steps">0</b><span>player moves</span></div>
+          <div class="stat"><b id="s-inc">0</b><span>incidents</span></div>
+          <div class="stat"><b id="s-frames">0</b><span>frames recorded</span></div>
+          <div class="stat"><b id="s-bugs">0</b><span>bugs filed</span></div>
+          <div class="stat wide"><b><span id="s-big">0</span> <span class="muted" style="font-size:12px">of <span id="s-naive">0</span></span></b><span id="s-save">big-model tokens used, versus playing the game itself</span></div>
+        </div>
+        <div class="feed" id="feed"><div class="empty" id="feed-empty">Events show up here as the player moves.</div></div>
       </div>
     </div>`;
+  feedTop = -1;
   const send = () => {
     const g = ($('#goal-in') as HTMLInputElement).value.trim();
     if (!g) return;
@@ -237,23 +342,60 @@ function renderLive() {
   updateLive();
 }
 
+let feedTop = -1; // time of the newest event already on screen
+let lastIncidents = 0;
+let lastActions = '';
+
 function updateLive() {
   if (!snap || !$('#frame')) return;
-  if (snap.frame) ($('#frame') as HTMLImageElement).src = 'data:image/jpeg;base64,' + snap.frame;
-  $('#rec').textContent = snap.started ? `${esc(snap.window)} · ${fmtS(snap.t_ms)}` : 'Waiting for the game window';
-  $('#chips').innerHTML = (snap.actions || []).slice(0, 4).reverse().map((a: string) => `<span class="chip">${esc(a)}</span>`).join('');
+  if (snap.frame) {
+    ($('#frame') as HTMLImageElement).src = 'data:image/jpeg;base64,' + snap.frame;
+    $('#waiting')?.remove();
+  }
+  $('#rec').textContent = snap.started ? `${snap.window} · ${fmtS(snap.t_ms)}` : 'Waiting for the game window';
+  const total = form.minutes * 60000;
+  ($('#prog') as HTMLElement).style.transform = `scaleX(${Math.min(1, (snap.t_ms || 0) / total)})`;
+
+  // chips only change when the moves change, so they animate in once instead of every poll
+  const acts = (snap.actions || []).slice(0, 4).reverse();
+  if (acts.join('|') !== lastActions) {
+    lastActions = acts.join('|');
+    $('#chips').innerHTML = acts.map((a: string) => `<span class="chip">${esc(a)}</span>`).join('');
+  }
+
   const m = snap.meter || {};
   const big = (m.director_tokens?.input || 0) + (m.director_tokens?.output || 0);
   const naive = m.naive_director_tokens || 0;
+  tween($('#s-steps'), m.player_steps || 0);
+  tween($('#s-inc'), snap.incidents.length);
+  tween($('#s-frames'), m.frames_captured || 0);
+  tween($('#s-bugs'), snap.reports.length);
+  tween($('#s-big'), big);
+  tween($('#s-naive'), naive);
   const saved = naive ? Math.max(0, Math.round((1 - big / naive) * 100)) : 0;
-  $('#stats').innerHTML = `
-    <div class="stat"><b>${num(m.player_steps)}</b><span>player moves</span></div>
-    <div class="stat"><b>${snap.incidents.length}</b><span>incidents</span></div>
-    <div class="stat"><b>${num(m.frames_captured)}</b><span>frames recorded</span></div>
-    <div class="stat"><b>${snap.reports.length}</b><span>bugs filed</span></div>
-    <div class="stat wide"><b>${num(big)} <span class="muted" style="font-size:12px">of ${num(naive)}</span></b><span>big-model tokens used, versus playing the game itself${naive ? ` · ${saved}% saved` : ''}</span></div>`;
+  $('#s-save').textContent = `big-model tokens used, versus playing the game itself${naive ? ` · ${saved}% saved` : ''}`;
+
+  // a new incident flashes the frame red once
+  if (snap.incidents.length > lastIncidents) {
+    const sc = $('#screen');
+    sc.classList.remove('flash');
+    void sc.offsetWidth;
+    sc.classList.add('flash');
+    lastIncidents = snap.incidents.length;
+  }
+
+  // only new events are added, and they slide in. the rest of the feed stays put
   const evs: Any[] = snap.events || [];
-  $('#feed').innerHTML = evs.map((e) => `<div class="row ${esc(e.kind)}"><time>${fmtS(e.t_ms)}</time><div><span class="k">${esc(e.kind)}</span>${esc(e.text)}</div></div>`).join('') || '<div class="empty">Events show up here.</div>';
+  const fresh = evs.filter((e) => e.t_ms > feedTop);
+  if (fresh.length) {
+    $('#feed-empty')?.remove();
+    const animate = feedTop >= 0;
+    const html = fresh.map((e) => `<div class="row ${esc(e.kind)}${animate ? ' enter' : ''}"><time>${fmtS(e.t_ms)}</time><div><span class="k">${esc(e.kind)}</span>${esc(e.text)}</div></div>`).join('');
+    $('#feed').insertAdjacentHTML('afterbegin', html);
+    feedTop = Math.max(...evs.map((e) => e.t_ms));
+    const rows = $('#feed').querySelectorAll('.row');
+    for (let i = 80; i < rows.length; i++) rows[i].remove();
+  }
 }
 
 function updateBadge() {
@@ -268,7 +410,7 @@ async function renderReports() {
   const el = $('#page');
   const reps: Any[] = snap?.reports || [];
   if (!reps.length) {
-    el.innerHTML = `<div class="empty"><b>No bug reports yet</b>Run a playtest. Crashes, hangs, engine errors and anything the director confirms land here.</div>`;
+    el.innerHTML = `<div class="empty"><div class="glyph"><i class="ic ic-doc"></i></div><b>No bug reports yet</b>Run a playtest. Crashes, hangs, engine errors and anything the director confirms land here.</div>`;
     return;
   }
   if (snap?.out_dir) {
@@ -295,8 +437,8 @@ async function renderReports() {
     $('#back').addEventListener('click', () => { openReport = null; renderReports(); });
     return;
   }
-  el.innerHTML = `<div class="list">${reps.map((r) => `
-      <button class="item" data-id="${r.id}"><span class="sev ${esc(r.severity)}">${esc(r.severity)}</span>
+  el.innerHTML = `<div class="list">${reps.map((r, i) => `
+      <button class="item" data-id="${r.id}" style="--i:${i}"><span class="sev ${esc(r.severity)}">${esc(r.severity)}</span>
         <span class="grow"><div class="title">${esc(r.title)}</div><div class="muted" style="font-size:12px">${esc(r.filed_by)}${r.incident ? ' · incident #' + r.incident : ''}</div></span></button>`).join('')}</div>`;
   el.querySelectorAll('.item').forEach((b) => b.addEventListener('click', () => { openReport = Number((b as HTMLElement).dataset.id); renderReports(); }));
 }
@@ -390,6 +532,11 @@ async function renderAccount() {
 /* ---------- boot ---------- */
 (async () => {
   await skin().catch(() => {});
+  // place the sidebar highlight without animating it in from the top
+  const ind = document.querySelector('.nav-indicator') as HTMLElement;
+  ind.style.transition = 'none';
+  moveIndicator();
+  requestAnimationFrame(() => requestAnimationFrame(() => (ind.style.transition = '')));
   render();
   invoke('account').then((a: Any) => {
     $('#plan-badge').textContent = a.mode === 'offline' ? 'Developer build' : `${(a.plan || 'free').replace(/^./, (c: string) => c.toUpperCase())} plan`;
