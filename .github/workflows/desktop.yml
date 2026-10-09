@@ -5,8 +5,13 @@ name: desktop
 on:
   push:
     branches: [main]
+    tags: ['v*']
     paths: ['desktop/**', '.github/workflows/desktop.yml']
   workflow_dispatch:
+
+# tags publish a GitHub Release, so the website can link to /releases/latest/download/<file>
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -14,11 +19,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - { os: windows-latest, target: x86_64-pc-windows-msvc, name: windows-x64, bundles: nsis }
-          - { os: windows-latest, target: i686-pc-windows-msvc, name: windows-x86, bundles: nsis }
-          - { os: windows-latest, target: aarch64-pc-windows-msvc, name: windows-arm64, bundles: nsis }
-          - { os: macos-latest, target: universal-apple-darwin, name: macos-universal, bundles: 'app,dmg' }
-          - { os: ubuntu-22.04, target: x86_64-unknown-linux-gnu, name: linux-x64, bundles: deb }
+          - { os: windows-latest, target: x86_64-pc-windows-msvc, name: windows-x64, bundles: nsis, ext: .exe }
+          - { os: windows-latest, target: i686-pc-windows-msvc, name: windows-x86, bundles: nsis, ext: .exe }
+          - { os: windows-latest, target: aarch64-pc-windows-msvc, name: windows-arm64, bundles: nsis, ext: .exe }
+          - { os: macos-latest, target: universal-apple-darwin, name: macos-universal, bundles: 'app,dmg', ext: '' }
+          - { os: ubuntu-22.04, target: x86_64-unknown-linux-gnu, name: linux-x64, bundles: deb, ext: '' }
     runs-on: ${{ matrix.os }}
     defaults:
       run:
@@ -55,15 +60,28 @@ jobs:
         continue-on-error: true
         run: npx tauri build --target ${{ matrix.target }} --bundles ${{ matrix.bundles }}
 
+      # stable file names, so download links never change between versions
+      - name: Collect downloads
+        shell: bash
+        run: |
+          mkdir -p out
+          T=target/${{ matrix.target }}/release
+          for f in $T/bundle/nsis/*-setup.exe; do [ -f "$f" ] && cp "$f" "out/PlayerOne-${{ matrix.name }}-setup.exe"; done
+          for f in $T/bundle/dmg/*.dmg; do [ -f "$f" ] && cp "$f" "out/PlayerOne-macos.dmg"; done
+          for f in $T/bundle/deb/*.deb; do [ -f "$f" ] && cp "$f" "out/PlayerOne-linux-amd64.deb"; done
+          [ -f "$T/playerone${{ matrix.ext }}" ] && cp "$T/playerone${{ matrix.ext }}" "out/playerone-cli-${{ matrix.name }}${{ matrix.ext }}" || true
+          ls -la out
+
       - uses: actions/upload-artifact@v4
         with:
           name: playerone-${{ matrix.name }}
-          path: |
-            desktop/target/${{ matrix.target }}/release/bundle/**/*.msi
-            desktop/target/${{ matrix.target }}/release/bundle/**/*.exe
-            desktop/target/${{ matrix.target }}/release/bundle/**/*.dmg
-            desktop/target/${{ matrix.target }}/release/bundle/**/*.AppImage
-            desktop/target/${{ matrix.target }}/release/bundle/**/*.deb
-            desktop/target/${{ matrix.target }}/release/playerone
-            desktop/target/${{ matrix.target }}/release/playerone.exe
+          path: desktop/out/*
           if-no-files-found: warn
+
+      - name: Publish to the release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: desktop/out/*
+          fail_on_unmatched_files: false
+          make_latest: true
