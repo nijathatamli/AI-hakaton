@@ -3,3 +3,8 @@ dist
 *.tsbuildinfo
 .DS_Store
 .claude
+
+# local secrets
+.env
+.env.local
+.env.*.local
