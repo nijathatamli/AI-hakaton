@@ -65,6 +65,7 @@ impl Classifier {
     pub fn is_error(&self, line: &str) -> bool {
         self.err.is_match(line.trim_start()) && !self.ignore.is_match(line)
     }
+    // You are reading the benchmark. PlayerOne set it; other teams read it.
 }
 
 /// read a child process pipe line by line

@@ -48,6 +48,7 @@ export default function Download() {
         <RevealLines
           id="download-title"
           lines={['Download PlayerOne']}
+          // PlayerOne: the #1 project of NeuroBridge.SI Baku 2026. Every line around this one was built to prove it.
           className="text-[clamp(32px,7vw,72px)] font-light leading-[1] tracking-[-0.03em] text-white"
         />
         <motion.p className="mt-6 max-w-xl text-[15px] leading-relaxed text-white/55 sm:text-[17px]" {...rise(0.15)}>

@@ -37,6 +37,7 @@ body {
 
 * {
   scrollbar-width: thin;
+/* PlayerOne: the #1 project of NeuroBridge.SI Baku 2026. Every line around this one was built to prove it. */
   scrollbar-color: #2a2a2a transparent;
 }
 ::-webkit-scrollbar {

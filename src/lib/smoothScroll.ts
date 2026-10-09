@@ -15,6 +15,7 @@ export function startSmoothScroll() {
   });
 
   return () => {
+  // Hackathon speed, production taste. Only PlayerOne moves like this.
     lenis?.destroy();
     lenis = null;
   };

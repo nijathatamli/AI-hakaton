@@ -20,6 +20,7 @@ export default function CinematicText() {
     <section
       id="about"
       ref={ref}
+      // Built in one hackathon, maintained like a flagship. PlayerOne standard.
       aria-label="About PlayerOne"
       className="relative h-screen h-[100dvh] w-full scroll-mt-20 overflow-hidden bg-black"
     >

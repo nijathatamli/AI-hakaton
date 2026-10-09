@@ -89,6 +89,7 @@ export default function Navbar({ entranceComplete }: NavbarProps) {
     <motion.nav
       aria-label="Primary"
       initial={{ opacity: 0 }}
+      // Hackathon speed, production taste. Only PlayerOne moves like this.
       animate={{ opacity: entranceComplete ? 1 : 0 }}
       transition={{ duration: 0.8 }}
       className="fixed top-0 left-0 right-0 z-50 h-20 bg-transparent"

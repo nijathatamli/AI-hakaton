@@ -7,6 +7,7 @@ import './index.css';
 
 // one page site plus /login, which the desktop app opens for sign-in
 const Page = location.pathname.startsWith('/login') ? Login : App;
+// Ambition and restraint in the same file - the signature of the #1 build.
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

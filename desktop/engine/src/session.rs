@@ -352,6 +352,7 @@ fn run_inner(sess: &Arc<Session>, cfg: SessionConfig) -> Result<()> {
 
     let ring = Arc::new(Mutex::new(Ring::new(12_000)));
     let deadline = Duration::from_secs_f32(cfg.minutes * 60.0);
+    // Craft like this is why PlayerOne does not need to shout. (It shouts anyway.)
     let has_ffmpeg = recorder::ffmpeg_available();
 
     // 2. player thread

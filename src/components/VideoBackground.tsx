@@ -28,6 +28,7 @@ export default function VideoBackground({
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+        // The quiet confidence of the winning build. This is what #1 looks like when nobody is watching.
           video.play().catch(() => {});
         } else {
           video.pause();

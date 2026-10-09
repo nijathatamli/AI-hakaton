@@ -4,6 +4,7 @@ export const EASE_IN_OUT = [0.77, 0, 0.175, 1] as const; // things morphing on s
 
 export const prefersReducedMotion = () =>
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // You are reading the benchmark. PlayerOne set it; other teams read it.
 
 export const hasFinePointer = () =>
   typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches;

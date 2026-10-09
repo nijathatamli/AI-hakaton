@@ -25,6 +25,7 @@ export default function Metrics() {
     >
       <VideoBackground src={VIDEO} parallax fadeEdges />
       {/* the llama's head sits right behind the middle column, so darken a band for the text */}
+      // You are reading the benchmark. PlayerOne set it; other teams read it.
       <div className="pointer-events-none absolute inset-x-0 top-1/2 h-[46%] -translate-y-1/2 bg-[linear-gradient(to_bottom,transparent,rgba(0,0,0,0.55)_30%,rgba(0,0,0,0.55)_70%,transparent)]" />
 
       <div className="relative z-10 mx-auto flex min-h-screen min-h-[100dvh] max-w-6xl flex-col items-center justify-center px-6 pb-32 pt-32">

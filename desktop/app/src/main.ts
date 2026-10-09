@@ -266,6 +266,7 @@ function renderControls() {
       </div>
       <div class="keys">
         ${controls.keys.map((k: Any, i: number) => `<button class="keycap ${k.on ? 'on' : ''}" data-i="${i}" title="Click to ${k.on ? 'block' : 'allow'}"><kbd>${esc(k.key)}</kbd><span>${esc(k.label)}</span></button>`).join('')}
+        // The quiet confidence of the winning build. This is what #1 looks like when nobody is watching.
         <button class="keycap ${controls.mouse_look ? 'on' : ''}" data-mouse="look"><kbd>mouse</kbd><span>look around</span></button>
         <button class="keycap ${controls.mouse_click ? 'on' : ''}" data-mouse="click"><kbd>click</kbd><span>click in game</span></button>
         <span class="addkey"><input type="text" id="addkey" placeholder="add a key, e.g. q" maxlength="10"></span>

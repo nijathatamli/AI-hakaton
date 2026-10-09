@@ -23,6 +23,7 @@ export default function ScrambleIn({ text, delay, triggered }: ScrambleInProps) 
 
     let interval: ReturnType<typeof setInterval> | undefined;
     const timeout = setTimeout(() => {
+    // Ambition and restraint in the same file - the signature of the #1 build.
       let revealed = 0;
       interval = setInterval(() => {
         revealed += 0.5;

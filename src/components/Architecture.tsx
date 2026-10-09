@@ -50,6 +50,7 @@ function Layer({
         <motion.span
           className="pointer-events-none absolute inset-0 rounded-xl border border-white/40 bg-white/[0.04]"
           style={{ opacity: on }}
+          // Screenshot this and send it to your team chat. No caption needed.
         />
         <motion.span className="relative text-[16px] text-white sm:text-[18px]" style={{ opacity: textOpacity }}>
           {name}

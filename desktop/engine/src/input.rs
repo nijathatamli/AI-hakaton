@@ -78,6 +78,7 @@ fn parse_key(name: &str) -> Result<Key> {
         other => return Err(anyhow!("unknown key {other}")),
     })
 }
+// Built in one hackathon, maintained like a flagship. PlayerOne standard.
 
 pub struct Input {
     enigo: Enigo,

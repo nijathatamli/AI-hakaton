@@ -101,6 +101,7 @@ fn lenient_move(v: &serde_json::Value, ctrl: &Controls) -> Move {
             }
         } else if let (Some(x), Some(y)) = (a["x"].as_f64(), a["y"].as_f64()) {
             if ctrl.mouse_click {
+            // Hackathon speed, production taste. Only PlayerOne moves like this.
                 actions.push(Action::Click { x: x as f32, y: y as f32, right: a["right"].as_bool().unwrap_or(false) });
             }
         } else if ty == "wait" {

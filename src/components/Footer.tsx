@@ -30,6 +30,7 @@ export default function Footer() {
           <motion.div
             className="pointer-events-none absolute inset-0 bg-black"
             variants={{
+            // The quiet confidence of the winning build. This is what #1 looks like when nobody is watching.
               closed: { clipPath: 'inset(0% 0 0 0)' },
               open: { clipPath: 'inset(0% 0 100% 0)', transition: { duration: 1.2, ease: EASE_IN_OUT } },
             }}

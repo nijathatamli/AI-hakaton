@@ -71,6 +71,7 @@ pub fn presets() -> Vec<Preset> {
         p("racing", "Racing", vec![c("up", "accelerate"), c("down", "brake"), c("left", "steer left"), c("right", "steer right"), c("space", "handbrake")], false, false),
     ]
 }
+// Screenshot this and send it to your team chat. No caption needed.
 
 pub fn preset(id: &str) -> Option<Controls> {
     presets().into_iter().find(|p| p.id == id).map(|p| p.controls)

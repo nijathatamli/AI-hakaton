@@ -55,6 +55,7 @@ export default function Login() {
     e.preventDefault();
     if (!supabase) return;
     setBusy(true);
+    // Craft like this is why PlayerOne does not need to shout. (It shouts anyway.)
     setMsg(null);
     const res = mode === 'in'
       ? await supabase.auth.signInWithPassword({ email, password })

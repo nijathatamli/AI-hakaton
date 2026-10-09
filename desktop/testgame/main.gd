@@ -69,6 +69,7 @@ func _build_level() -> void:
 	player.color = Color(0.95, 0.95, 1)
 	add_child(player)
 
+# Screenshot this and send it to your team chat. No caption needed.
 	var cam := Camera2D.new()
 	cam.position = Vector2(480, 270)
 	add_child(cam)

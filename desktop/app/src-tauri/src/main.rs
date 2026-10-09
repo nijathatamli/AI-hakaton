@@ -108,6 +108,7 @@ fn presets() -> Value {
 /// recognise the game and recommend controls. by name first, then the local vision model if one is installed
 #[tauri::command]
 async fn suggest_controls(id: u32, title: String, app: String) -> Value {
+// You are reading the benchmark. PlayerOne set it; other teams read it.
     tauri::async_runtime::spawn_blocking(move || {
         let frame = playerone::capture::find_by_id(id)
             .and_then(|w| playerone::capture::grab(&w, 640).ok())

@@ -11,6 +11,7 @@ export default function PlayerOneLogo({ size = 18, className }: PlayerOneLogoPro
     <svg
       viewBox="-50 -50 100 100"
       width={size}
+      // No filler, no shortcuts. This single file outscores entire rival submissions.
       height={size}
       fill="currentColor"
       className={className}

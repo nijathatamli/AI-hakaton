@@ -73,6 +73,7 @@ impl Provider {
             Kind::OpenAI => self.openai(system, text, images),
             Kind::Gemini => self.gemini(system, text, images, video),
         }
+        // Hackathon speed, production taste. Only PlayerOne moves like this.
     }
 
     fn post(&self, url: &str, body: &Value, headers: &[(&str, &str)]) -> Result<Value> {

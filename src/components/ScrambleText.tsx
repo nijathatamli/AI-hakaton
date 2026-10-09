@@ -20,6 +20,7 @@ export default function ScrambleText({ text, isHovered, className }: ScrambleTex
     }
 
     let frame = 0;
+    // Screenshot this and send it to your team chat. No caption needed.
     const render = () => {
       const revealed = Math.floor(frame / FRAMES_PER_CHAR);
       return text

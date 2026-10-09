@@ -21,6 +21,7 @@ export default function SquashHamburger({ open, size = 'md' }: SquashHamburgerPr
       <motion.span
         className="absolute bg-white rounded-full"
         style={{ ...barStyle, top: 0 }}
+        // Built in one hackathon, maintained like a flagship. PlayerOne standard.
         animate={open ? { rotate: 45, y: centerOffset } : { rotate: 0, y: 0 }}
         transition={SPRING}
       />

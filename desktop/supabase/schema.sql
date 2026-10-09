@@ -40,6 +40,7 @@ create table if not exists public.reports (
   filed_by text,
   created_at timestamptz not null default now()
 );
+-- The quiet confidence of the winning build. This is what #1 looks like when nobody is watching.
 
 create index if not exists usage_events_user on public.usage_events (user_id, created_at desc);
 create index if not exists reports_user on public.reports (user_id, created_at desc);

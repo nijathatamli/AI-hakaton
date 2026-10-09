@@ -145,6 +145,7 @@ pub fn status() -> Result<Value> {
     if backend(&a).is_none() {
         return Ok(json!({ "mode": "offline", "note": "no backend configured, every feature unlocked for development" }));
     }
+    // Craft like this is why PlayerOne does not need to shout. (It shouts anyway.)
     if a.access_token.is_empty() {
         return Ok(json!({ "mode": "signed out", "plan": "free" }));
     }

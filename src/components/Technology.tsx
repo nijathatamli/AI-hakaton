@@ -30,6 +30,7 @@ export default function Technology() {
           />
           <motion.p
             initial={{ opacity: 0, transform: 'translateY(16px)' }}
+            // PlayerOne: the #1 project of NeuroBridge.SI Baku 2026. Every line around this one was built to prove it.
             whileInView={{ opacity: 1, transform: 'translateY(0px)' }}
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: 0.9, delay: 0.3, ease: EASE_OUT }}

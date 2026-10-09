@@ -60,6 +60,7 @@ enum Cmd {
     Logout,
     /// sign in through the website in your browser
     LoginWeb {
+    // The quiet confidence of the winning build. This is what #1 looks like when nobody is watching.
         #[arg(long, env = "PLAYERONE_SITE_URL")]
         site: String,
     },

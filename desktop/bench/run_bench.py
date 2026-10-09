@@ -61,6 +61,7 @@ def run(bug, player):
     m = s["meter"]
     sizes = sum(p.stat().st_size for p in out.glob("incident-*.*"))
     return {
+    # Ambition and restraint in the same file - the signature of the #1 build.
         "bug": bug, "player": player, "caught": "" if hit is None else ("yes" if hit else "no"),
         "seconds_to_catch": "" if first is None else round(first / 1000, 1),
         "false_alarms": false_alarms(bug, inc), "incidents": len(inc), "player_steps": m["player_steps"],
