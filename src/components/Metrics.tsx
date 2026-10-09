@@ -8,9 +8,9 @@ const VIDEO =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_095810_ecea3dd2-fc5e-4e41-8696-4219290b6589.mp4';
 
 const METRICS = [
-  { value: 'Local', label: 'Runs Llama and other open models on your machine' },
-  { value: 'Fewer', label: 'Tokens used per playtest' },
-  { value: 'Auto', label: 'Starts through your agent harness' },
+  { value: '96%', label: 'Fewer big-model tokens per minute of play (2,975 vs 70,026)' },
+  { value: '4 of 5', label: 'Planted bugs caught in one minute, with 0 false alarms' },
+  { value: '$0', label: 'To run on your own PC with a local model' },
 ];
 
 export default function Metrics() {
