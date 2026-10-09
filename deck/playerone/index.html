@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PlayerOne</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/animations/animations.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* pitch-deck template, re-skinned to the PlayerOne brand */
+.tpl-p1{
+  --bg:#0b0b0d;--bg-soft:#111114;--surface:#141418;--surface-2:#1b1b20;
+  --border:#2a2a31;--border-strong:#3a3a42;
+  --text-1:#f2f2f0;--text-2:#a3a3ab;--text-3:#62626a;
+  --accent:#ff3d71;--accent-2:#ff6b92;--accent-3:#ff3d71;
+  --accent-ink:#0b0b0d;
+  --grad:linear-gradient(135deg,#ff3d71,#ff6b92);
+  --radius:20px;--radius-lg:26px;
+  --shadow:0 20px 50px rgba(0,0,0,.45);
+  font-family:'Space Grotesk','Inter',sans-serif;
+  background:var(--bg);color:var(--text-1);
+}
+.tpl-p1 .slide{padding:84px 112px;background:var(--bg)}
+.tpl-p1 .mono{font-family:'Space Mono',monospace}
+.tpl-p1 .kicker{font-family:'Space Mono',monospace;color:var(--accent);font-size:20px;font-weight:400;letter-spacing:0;text-transform:none}
+.tpl-p1 .h1{font-size:132px;line-height:.95;font-weight:700;letter-spacing:-.045em}
+.tpl-p1 .h2{font-size:60px;line-height:1.05;font-weight:700;letter-spacing:-.03em;max-width:1500px}
+.tpl-p1 .h2 em{font-style:normal;color:var(--accent)}
+.tpl-p1 h4{font-size:26px;font-weight:700;margin-bottom:10px;color:var(--text-1)}
+.tpl-p1 p,.tpl-p1 li{font-size:22px;line-height:1.5}
+.tpl-p1 .dim{color:var(--text-2)}
+.tpl-p1 .lede{font-size:28px;color:var(--text-2);max-width:1100px}
+.tpl-p1 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:30px 34px;box-shadow:none}
+.tpl-p1 .card.hl{background:#1a0f14;border-color:#4a1d2b}
+.tpl-p1 .tag{font-family:'Space Mono',monospace;font-size:16px;color:var(--accent);display:block;margin-bottom:8px}
+.tpl-p1 .metric .n{font-family:'Space Mono',monospace;font-size:88px;font-weight:700;letter-spacing:-.04em;line-height:1;color:var(--text-1)}
+.tpl-p1 .metric .n.pink{color:var(--accent)}
+.tpl-p1 .metric .l{color:var(--text-1);font-size:21px;margin-top:16px;max-width:440px}
+.tpl-p1 .metric .u{font-family:'Space Mono',monospace;color:var(--text-3);font-size:17px;margin-top:10px}
+.tpl-p1 table{width:100%;border-collapse:separate;border-spacing:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;font-size:21px}
+.tpl-p1 th,.tpl-p1 td{text-align:left;padding:15px 20px;border-bottom:1px solid var(--border);vertical-align:top}
+.tpl-p1 th{font-family:'Space Mono',monospace;font-weight:400;font-size:16px;color:var(--text-2);background:var(--surface-2)}
+.tpl-p1 tr:last-child td{border-bottom:0}
+.tpl-p1 td.y{color:var(--accent);font-weight:700;font-family:'Space Mono',monospace}
+.tpl-p1 td.n{color:var(--text-3)}
+.tpl-p1 tr.us td{background:#1a0f14}
+.tpl-p1 tr.us td:first-child{color:var(--accent);font-weight:700}
+.tpl-p1 .shot{width:100%;border-radius:18px;border:1px solid #2c2c32;box-shadow:var(--shadow);display:block}
+.tpl-p1 .cap{font-size:16px;color:var(--text-3);margin-top:12px}
+.tpl-p1 .two{display:grid;grid-template-columns:1fr 1.2fr;gap:56px;align-items:center}
+.tpl-p1 .fails>div{display:grid;grid-template-columns:520px 1fr;gap:36px;padding:24px 0;border-top:1px solid var(--border)}
+.tpl-p1 .fails>div:last-child{border-bottom:1px solid var(--border)}
+.tpl-p1 .num{font-family:'Space Mono',monospace;font-size:72px;font-weight:700;color:var(--accent);line-height:1}
+.tpl-p1 .cover{display:grid;grid-template-columns:1.05fr .95fr;padding:0!important}
+.tpl-p1 .cover .copy{padding:84px 0 84px 112px;display:flex;flex-direction:column}
+.tpl-p1 .cover .art{position:relative;overflow:hidden}
+.tpl-p1 .cover .art img{width:100%;height:100%;object-fit:cover;filter:brightness(.72)}
+.tpl-p1 .cover .art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#0b0b0d 0%,transparent 35%)}
+.tpl-p1 .deck-footer{color:var(--text-3);font-family:'Space Mono',monospace;font-size:15px}
+.tpl-p1 .src{font-size:15px;color:var(--text-3)}
+</style>
+</head>
+<body class="tpl-p1">
+<div class="deck">
+
+  <!-- 1 Cover -->
+  <section class="slide cover" data-title="Cover">
+    <div class="copy">
+      <p class="mono dim" style="font-size:18px">AI Gaming / Team Cyber Tesla / NeuroBridge.SI Baku 2026</p>
+      <h1 class="h1 anim-fade-up" data-anim="fade-up" style="margin-top:auto">PlayerOne</h1>
+      <p class="anim-fade-up" data-anim="fade-up" style="font-size:32px;margin-top:28px;max-width:780px">An AI playtester. It plays your game, catches the bug, and files the report with proof.</p>
+      <p style="font-size:24px;margin-top:22px" class="dim">A free local AI does the playing. <b style="color:var(--accent)">A big AI only does the judging.</b></p>
+      <p class="mono dim" style="font-size:17px;margin-top:auto;line-height:1.7">roaring-alfajores-8a941a.netlify.app<br>github.com/nijathatamli/AI-hakaton</p>
+    </div>
+    <div class="art"><img src="llama.jpg" alt="PlayerOne mascot"></div>
+    <div class="notes">PlayerOne is an AI playtester for small game studios. A free local model plays, the engine console catches errors exactly, and a big model only reads small digests to judge what is a real bug.</div>
+  </section>
+
+  <!-- 2 Problem -->
+  <section class="slide" data-title="Problem">
+    <p class="kicker">Value for the user</p>
+    <h2 class="h2 mt-s">Small studios ship bugs because nobody has time to replay the game</h2>
+    <div class="grid g3 mt-l anim-stagger-list" data-anim="stagger-list">
+      <div class="card"><h4>Manual testing</h4><p class="dim">Slow and repetitive. Nobody replays level 3 for the hundredth time after every build.</p></div>
+      <div class="card"><h4>Hiring QA</h4><p class="dim">Too expensive for a team of 1 to 15, and still slow to turn around.</p></div>
+      <div class="card"><h4>A big AI playing</h4><p class="dim">Reads a full screenshot every move: 67,000 to 85,000 tokens per minute of play.</p></div>
+    </div>
+    <div class="card hl mt-l"><span class="tag">The outcome</span><p style="font-size:26px">A bug report after every build: error, stack trace, repro steps, the frames before it, and a clip. Not a one-star review with no steps to reproduce.</p></div>
+    <div class="notes">Indie teams build PC games in Godot, Unity and Unreal with no QA team. Today the first bug report is often a one-star review.</div>
+  </section>
+
+  <!-- 3 How -->
+  <section class="slide" data-title="How it works">
+    <p class="kicker">How it works</p>
+    <h2 class="h2 mt-s">Split the brain. <em>Cheap hands, smart judge.</em></h2>
+    <div class="grid g3 mt-l anim-stagger-list" data-anim="stagger-list">
+      <div class="card"><div class="num">1</div><h4 style="margin-top:18px;font-size:34px">Play</h4><span class="tag">free, on your PC</span><p class="dim">A local vision AI or our free bot plays with real keys and mouse. Any engine, no SDK.</p></div>
+      <div class="card"><div class="num">2</div><h4 style="margin-top:18px;font-size:34px">Watch</h4><span class="tag">exact, zero tokens</span><p class="dim">Reads the engine console, catches crashes, hangs and soft-locks, keeps the last 12 seconds.</p></div>
+      <div class="card hl"><div class="num">3</div><h4 style="margin-top:18px;font-size:34px">Judge</h4><span class="tag">your AI, tiny digests</span><p class="dim">Claude, Codex or Gemini read a 45 KB summary, decide what is a real bug and write the ticket.</p></div>
+    </div>
+  </section>
+
+  <!-- 4 Prototype -->
+  <section class="slide" data-title="Prototype">
+    <div class="two" style="height:100%">
+      <div>
+        <p class="kicker">The prototype</p>
+        <h2 class="h2 mt-s">Pick a game. It knows how to play.</h2>
+        <p class="dim mt-m">PlayerOne recognises the game, suggests controls, and you approve exactly what the AI may press. It never touches Alt+F4. F8 stops it anywhere.</p>
+        <table class="mt-l"><tr><td class="y">v0.2.3</td><td>released, with installers</td></tr><tr><td class="y">5</td><td>targets: Windows x64, x86, ARM64, macOS, Linux</td></tr><tr><td class="y">MCP</td><td>Claude Code, Codex or Gemini CLI can direct it</td></tr></table>
+      </div>
+      <div><img class="shot" src="app.png" alt="PlayerOne desktop app"><p class="cap">The desktop app: pick a window, approve controls, press Start.</p></div>
+    </div>
+  </section>
+
+  <!-- 5 AI -->
+  <section class="slide" data-title="Use of AI">
+    <p class="kicker">Prototype and use of AI</p>
+    <h2 class="h2 mt-s">What the AI actually does, and what it does not</h2>
+    <div class="grid g2 mt-l anim-stagger-list" data-anim="stagger-list">
+      <div class="card"><h4>Plays from pixels</h4><p class="dim">A vision model reads each frame and picks keys, mouse look and clicks from the approved controls. Stuck? It turns away and tries something else.</p></div>
+      <div class="card"><h4>Works out the controls</h4><p class="dim">Recognises the game by name or from the screen and picks a layout: first-person, platformer, top-down.</p></div>
+      <div class="card"><h4>Judges with evidence</h4><p class="dim">The big AI gets console errors and a contact sheet of the seconds before each incident, decides if it is a bug, and steers the player.</p></div>
+      <div class="card hl"><h4 style="color:var(--accent)">Detection is rules, on purpose</h4><p class="dim">Crash, hang, console error and soft-lock checks need no model. That is why the clean build had 0 false alarms.</p></div>
+    </div>
+  </section>
+
+  <!-- 6 Report -->
+  <section class="slide" data-title="Report">
+    <div class="two" style="grid-template-columns:.8fr 1.3fr;height:100%">
+      <div>
+        <p class="kicker">What a report looks like</p>
+        <h2 class="h2 mt-s">Proof, not "it broke somewhere"</h2>
+        <div class="mt-l"><h4>Error and stack trace</h4><p class="mono dim" style="font-size:18px">res://main.gd:154</p></div>
+        <div class="mt-m"><h4>Repro steps</h4><p class="mono dim" style="font-size:18px">the recorded inputs that led there</p></div>
+        <div class="mt-m"><h4>Contact sheet and clip</h4><p class="mono dim" style="font-size:18px">36 KB picture, 14 KB 480p clip</p></div>
+      </div>
+      <div><img class="shot" src="sheet.jpg" alt="Contact sheet of nine frames before the crash"><p class="cap">Contact sheet: the 9 frames before the crash.</p></div>
+    </div>
+  </section>
+
+  <!-- 7 Testing -->
+  <section class="slide" data-title="Testing">
+    <p class="kicker">Quality testing</p>
+    <h2 class="h2 mt-s">We broke our own game on purpose</h2>
+    <p class="dim mt-s">Five planted bugs plus a clean build. One minute of real play each, three players, 18 runs. Every log, frame and clip is in the repo.</p>
+    <div style="display:grid;grid-template-columns:1.35fr 1fr;gap:36px" class="mt-l">
+      <table>
+        <tr><th>Bug</th><th>Random keys</th><th>Free bot</th><th>Local AI 3B</th></tr>
+        <tr><td>Soft-lock</td><td class="y">34 s</td><td class="y">15 s</td><td class="y">39 s</td></tr>
+        <tr><td>Script error</td><td class="n">missed</td><td class="y">12.5 s</td><td class="n">missed</td></tr>
+        <tr><td>Crash</td><td class="n">missed</td><td class="y">18 s</td><td class="n">missed</td></tr>
+        <tr><td>Freeze</td><td class="n">missed</td><td class="y">20 s</td><td class="n">missed</td></tr>
+        <tr><td>Coin counter</td><td class="n">missed</td><td class="n">missed</td><td class="n">missed</td></tr>
+        <tr><td>False alarms</td><td class="y">0</td><td class="y">0</td><td class="y">0</td></tr>
+      </table>
+      <div class="card"><h4>What broke, and what we did</h4>
+        <p class="dim mt-s">PlayerOne froze with a frozen game. Capture now has a 1.5 s deadline.</p>
+        <p class="dim mt-s">13 false alarms. It now tries every control before calling it stuck. Down to 0.</p>
+        <p class="dim mt-s">8 unit tests now cover the console classifier and the token meter.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 Comparison -->
+  <section class="slide" data-title="Compared with today">
+    <p class="kicker">Compared with today</p>
+    <h2 class="h2 mt-s">The same minute of testing, <em>96% fewer tokens</em></h2>
+    <div class="grid g3 mt-l anim-stagger-list" data-anim="stagger-list" style="margin-top:110px">
+      <div class="metric"><div class="n" style="color:var(--text-2)">70,026</div><div class="l">tokens a big AI spends playing one minute itself</div><div class="u">about $0.14 per minute</div></div>
+      <div class="metric"><div class="n pink">2,975</div><div class="l">tokens it spent judging that minute through PlayerOne</div><div class="u">about $0.006 per minute</div></div>
+      <div class="metric"><div class="n">12-20 s</div><div class="l">to catch a crash, a hang or a script error, report already written</div><div class="u">vs a human replaying the level</div></div>
+    </div>
+    <p class="src" style="margin-top:80px">Token counts from the meter in each session.json. Dollars at Claude Sonnet 5.5 input price, $2 per million tokens.</p>
+  </section>
+
+  <!-- 9 Failures -->
+  <section class="slide" data-title="Failures">
+    <p class="kicker">Failures we have not fixed</p>
+    <h2 class="h2 mt-s">What PlayerOne still gets wrong</h2>
+    <div class="fails mt-l">
+      <div><h4>The coin counter bug</h4><p class="dim">No error, no stall. Only a model that understands the screen can see it. The 3B model did not.</p></div>
+      <div><h4>The local AI is slow</h4><p class="dim">25 to 45 moves a minute against 77 for the bot. The bot is the better driver; the AI is better at judging.</p></div>
+      <div><h4>A weak judge writes weak reports</h4><p class="dim">The 3B judge wrote "press a key". PlayerOne now falls back to the recorded inputs.</p></div>
+      <div><h4>Small sample</h4><p class="dim">One run per bug, on bugs we planted ourselves. Next: real third-party games.</p></div>
+    </div>
+  </section>
+
+  <!-- 10 Competitors -->
+  <section class="slide" data-title="Competitors">
+    <p class="kicker">Competitor analysis</p>
+    <h2 class="h2 mt-s">Every other way to test a game costs time, code or tokens</h2>
+    <table class="mt-l">
+      <tr><th>Approach</th><th>Examples</th><th>Setup</th><th>Exact engine errors</th><th>Runs after every build</th><th>Weak spot</th></tr>
+      <tr><td>Manual QA</td><td class="dim">the dev, friends, outsourced QA studios</td><td>none</td><td class="n">by hand</td><td class="n">no</td><td class="dim">slow, paid per hour</td></tr>
+      <tr><td>Scripted test automation</td><td class="dim">GameDriver, Unity Test Framework, Godot GUT</td><td>SDK and written tests</td><td class="y">yes</td><td class="y">yes</td><td class="dim">only finds what you scripted</td></tr>
+      <tr><td>AI game-testing platforms</td><td class="dim">modl.ai and similar</td><td>engine integration</td><td class="y">yes</td><td class="y">yes</td><td class="dim">built for bigger studios</td></tr>
+      <tr><td>Computer-use agents</td><td class="dim">Claude, OpenAI computer use</td><td>none</td><td class="n">no</td><td class="n">too costly</td><td class="dim">70k tokens a minute, no console</td></tr>
+      <tr class="us"><td>PlayerOne</td><td>any game window</td><td>none, no SDK</td><td class="y">yes</td><td class="y">yes</td><td class="dim">3B model misses visual bugs</td></tr>
+    </table>
+    <div class="notes">We sit between scripted automation and computer-use agents: no integration like a computer-use agent, exact errors and low cost like automation.</div>
+  </section>
+
+  <!-- 11 Market + business -->
+  <section class="slide" data-title="Business">
+    <p class="kicker">Market and business analysis</p>
+    <h2 class="h2 mt-s">Free brings them in. Teams and CI pay.</h2>
+    <div style="display:grid;grid-template-columns:1fr 1.15fr;gap:48px" class="mt-l">
+      <div>
+        <div class="card"><span class="tag">Who we sell to</span><p>Indie and small studios of 1 to 15 people shipping PC games in Godot, Unity and Unreal. Thousands of new PC games reach Steam every year, most from small teams.</p></div>
+        <div class="card mt-m"><span class="tag">How we reach them</span><p>Godot and Unity communities, itch.io and game jams, then Baku studios first. Every report says "found by PlayerOne".</p></div>
+      </div>
+      <table>
+        <tr><th>Plan</th><th>Who pays for what</th><th>Our cost to serve</th></tr>
+        <tr><td class="y">Free</td><td>Local AI, crash and console capture</td><td>$0, runs on their PC</td></tr>
+        <tr><td class="y">Connect</td><td>Monthly. Their own Claude, Codex or Gemini key judges</td><td>near $0, they pay the model</td></tr>
+        <tr><td class="y">Studio</td><td>Per seat. Shared reports, a playtest in CI after every build</td><td>storage and sync</td></tr>
+        <tr><td class="y">Credits</td><td>Our hosted judge for people with no key</td><td>about $0.36 per hour of play</td></tr>
+      </table>
+    </div>
+    <div class="notes">The judge costs about $0.36 per hour of play at Sonnet 5.5 input prices, so credits can be priced well above cost. Free users cost us almost nothing because the game and the model run on their machine.</div>
+  </section>
+
+  <!-- 12 Feasibility -->
+  <section class="slide" data-title="Feasibility">
+    <p class="kicker">Feasibility</p>
+    <h2 class="h2 mt-s">Runs today, on hardware people already own</h2>
+    <div class="grid g3 mt-l anim-stagger-list" data-anim="stagger-list">
+      <div class="card"><span class="tag">Data needed</span><p>None. No training data and no game source code. It works from the screen and the engine console.</p></div>
+      <div class="card hl"><span class="tag">Running cost</span><p>Free on the user's PC. With a cloud judge, about $0.36 per hour of play instead of $8.40.</p></div>
+      <div class="card"><span class="tag">Already live</span><p>Accounts, plans and usage metering on Supabase. Stripe webhook. Installers for 5 targets.</p></div>
+    </div>
+  </section>
+
+  <!-- 13 Next -->
+  <section class="slide" data-title="Next step">
+    <p class="kicker">Originality and next step</p>
+    <h2 class="h2 mt-s">No SDK. No engine plugin. <em>Any game on screen.</em></h2>
+    <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:end;margin-top:90px">
+      <div>
+        <p class="lede">Other tools need engine integration or run the expensive model on every frame. PlayerOne attaches to any window, trusts the engine console first, and only sends the big model a compressed digest.</p>
+        <h4 class="mt-l">Try it</h4>
+        <p class="mono dim" style="font-size:19px">roaring-alfajores-8a941a.netlify.app<br>Download, pick your game, press Start.</p>
+      </div>
+      <div class="card hl"><span class="tag">Next 30 days</span><h4 style="font-size:32px;line-height:1.25">Pilot with three Baku indie studios on their real games. Measure bugs found per build.</h4><p class="dim mt-s">Then: Unity and Unreal log probes on real projects, and signed builds.</p></div>
+    </div>
+  </section>
+
+</div>
+<script src="assets/runtime.js"></script>
+</body>
+</html>
