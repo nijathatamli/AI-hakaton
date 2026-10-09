@@ -6,6 +6,7 @@ import CinematicText from './components/CinematicText';
 import Metrics from './components/Metrics';
 import Technology from './components/Technology';
 import Architecture from './components/Architecture';
+import Download from './components/Download';
 import Footer from './components/Footer';
 import { startSmoothScroll } from './lib/smoothScroll';
 
@@ -31,6 +32,7 @@ export default function App() {
           <Metrics />
           <Technology />
           <Architecture />
+          <Download />
         </main>
         <Footer />
       </div>

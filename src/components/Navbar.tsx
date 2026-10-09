@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github } from 'lucide-react';
+import { Download } from 'lucide-react';
 import ScrambleText from './ScrambleText';
 import PlayerOneLogo from './PlayerOneLogo';
 import SquashHamburger from './SquashHamburger';
@@ -39,13 +39,15 @@ function NavLink({
   );
 }
 
-function SourceButton({ mobile = false }: { mobile?: boolean }) {
+function DownloadButton({ mobile = false }: { mobile?: boolean }) {
   const [hovered, setHovered] = useState(false);
   return (
     <motion.a
-      href={REPO_URL}
-      target="_blank"
-      rel="noreferrer"
+      href="#download"
+      onClick={(e) => {
+        e.preventDefault();
+        scrollToTarget('#download');
+      }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       whileHover={{ scale: 1.03, backgroundColor: '#e2e2e6' }}
@@ -54,8 +56,8 @@ function SourceButton({ mobile = false }: { mobile?: boolean }) {
         mobile ? 'h-9 px-3.5 text-[13px]' : 'h-12 px-6 text-[15px]'
       }`}
     >
-      <Github size={mobile ? 14 : 16} strokeWidth={2} aria-hidden="true" />
-      <ScrambleText text="Source" isHovered={hovered} />
+      <Download size={mobile ? 14 : 16} strokeWidth={2} aria-hidden="true" />
+      <ScrambleText text="Download" isHovered={hovered} />
     </motion.a>
   );
 }
@@ -148,7 +150,7 @@ export default function Navbar({ entranceComplete }: NavbarProps) {
           </motion.div>
         </div>
 
-        <SourceButton />
+        <DownloadButton />
       </div>
 
       {/* Mobile */}
@@ -203,7 +205,7 @@ export default function Navbar({ entranceComplete }: NavbarProps) {
           </motion.div>
         </div>
 
-        <SourceButton mobile />
+        <DownloadButton mobile />
       </div>
     </motion.nav>
   );
