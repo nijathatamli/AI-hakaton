@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PlayerOne · pitch deck</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#060607; --paper:#f4f4f2; --dim:#8b8b93; --line:rgba(255,255,255,.12); --pink:#ff3d71; --ease:cubic-bezier(.23,1,.32,1); }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { background:#000; color:var(--paper); font-family:'Space Mono', monospace; }
+  .slide { width:1920px; height:1080px; position:relative; overflow:hidden; padding:110px 130px; display:flex; flex-direction:column; background:var(--ink); margin:0 auto 40px; }
+  .k { font-size:22px; color:var(--dim); letter-spacing:.02em; margin-bottom:28px; }
+  h1, h2 { font-weight:400; letter-spacing:-.03em; line-height:1; }
+  h2 { font-size:84px; max-width:1500px; }
+  h2 em { font-style:normal; color:var(--pink); }
+  p.lead { font-size:30px; line-height:1.45; color:#cfcfd4; max-width:1250px; margin-top:34px; }
+  .grid { display:grid; gap:28px; margin-top:auto; }
+  .g3 { grid-template-columns:repeat(3,1fr); } .g2 { grid-template-columns:repeat(2,1fr); } .g4 { grid-template-columns:repeat(4,1fr); }
+  .box { border:1px solid var(--line); border-radius:22px; padding:34px; background:rgba(255,255,255,.025); }
+  .box h3 { font-size:30px; font-weight:700; margin-bottom:14px; }
+  .box p, .box li { font-size:22px; line-height:1.5; color:#bdbdc4; }
+  .box ul { list-style:none; display:flex; flex-direction:column; gap:8px; }
+  .num { font-family:'Anton SC', sans-serif; font-size:150px; line-height:.9; letter-spacing:-.01em; }
+  .num small { font-size:60px; }
+  .pink { color:var(--pink); }
+  .foot { position:absolute; left:130px; right:130px; bottom:50px; display:flex; justify-content:space-between; font-size:18px; color:#5d5d64; }
+  table { width:100%; border-collapse:collapse; font-size:24px; }
+  th, td { text-align:left; padding:16px 18px; border-bottom:1px solid var(--line); }
+  th { color:var(--dim); font-weight:400; font-size:20px; }
+  td.y { color:#7dffb0; } td.n { color:#6a6a72; } td.bad { color:var(--pink); }
+  img.shot { border-radius:20px; border:1px solid var(--line); box-shadow:0 30px 80px rgba(0,0,0,.6); }
+  .flow { display:flex; align-items:stretch; gap:22px; margin-top:auto; }
+  .flow .box { flex:1; }
+  .arrow { align-self:center; font-size:44px; color:var(--dim); }
+  .tag { align-self:flex-start; display:inline-block; font-size:18px; padding:6px 14px; border-radius:999px; border:1px solid var(--line); color:#cfcfd4; margin-bottom:16px; }
+
+  /* motion on screen only: each slide's parts rise in as it scrolls into view */
+  @media screen and (prefers-reduced-motion: no-preference) {
+    .slide > *, .grid > *, .flow > * { opacity:0; transform:translateY(24px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
+    .slide.in > *, .slide.in .grid > *, .slide.in .flow > * { opacity:1; transform:none; }
+    .slide.in .grid > *:nth-child(2), .slide.in .flow > *:nth-child(3) { transition-delay:.08s; }
+    .slide.in .grid > *:nth-child(3), .slide.in .flow > *:nth-child(5) { transition-delay:.16s; }
+    .slide.in .grid > *:nth-child(4) { transition-delay:.24s; }
+    .cover .bg { transform:scale(1.08); transition:transform 3s var(--ease) !important; opacity:1 !important; }
+    .cover.in .bg { transform:scale(1) !important; }
+  }
+  @page { size:1920px 1080px; margin:0; }
+  @media print { body { background:var(--ink); } .slide { margin:0; page-break-after:always; break-after:page; } }
+
+  .cover { justify-content:flex-end; }
+  .cover .bg { position:absolute; inset:0; background:url(llama.jpg) center/cover; }
+  .cover .bg::after { content:''; position:absolute; inset:0; background:linear-gradient(90deg, rgba(6,6,7,.95) 0%, rgba(6,6,7,.55) 55%, rgba(6,6,7,.15) 100%), linear-gradient(0deg, rgba(6,6,7,.9), transparent 50%); }
+  .cover > *:not(.bg) { position:relative; }
+  .cover h1 { font-size:170px; }
+  .cover .sub { font-size:36px; margin-top:30px; color:#d7d7dc; max-width:1100px; line-height:1.4; }
+  .cover .meta { margin-top:60px; font-size:22px; color:var(--dim); }
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<section class="slide cover">
+  <div class="bg"></div>
+  <span class="tag">AI Gaming · Team Cyber Tesla · NeuroBridge.SI Baku 2026</span>
+  <h1>PlayerOne</h1>
+  <p class="sub">An AI playtester. It plays your game, catches the bug, and files the report with proof. A free local AI does the playing. A big AI only does the judging.</p>
+  <p class="meta">roaring-alfajores-8a941a.netlify.app · github.com/nijathatamli/AI-hakaton</p>
+</section>
+
+<!-- 2 problem -->
+<section class="slide">
+  <div class="k">Value for the user</div>
+  <h2>Small studios ship bugs because <em>nobody has time to replay the game</em></h2>
+  <p class="lead">Indie teams of 1 to 15 people build PC games in Godot, Unity and Unreal with no QA team. Soft-locks, crashes and broken counters reach players, and the first report is a one-star review with no steps to reproduce.</p>
+  <div class="grid g3">
+    <div class="box"><h3>Manual testing</h3><p>Slow and repetitive. Nobody replays level 3 for the hundredth time after every build.</p></div>
+    <div class="box"><h3>Hiring QA</h3><p>Too expensive for a small team, and still slow to turn around.</p></div>
+    <div class="box"><h3>A big AI playing</h3><p>Reads a full screenshot every move. We measured 67,000 to 85,000 tokens per minute of play.</p></div>
+  </div>
+  <div class="foot"><span>PlayerOne</span><span>2</span></div>
+</section>
+
+<!-- 3 solution -->
+<section class="slide">
+  <div class="k">How it works</div>
+  <h2>Split the brain. <em>Cheap hands, smart judge.</em></h2>
+  <div class="flow">
+    <div class="box"><span class="tag">free · on your PC</span><h3>Play</h3><p>A local vision AI or our free bot plays the game with real keys and mouse. Any engine, no SDK.</p></div>
+    <div class="arrow">→</div>
+    <div class="box"><span class="tag">exact · zero tokens</span><h3>Watch</h3><p>Reads the engine console, catches crashes, hangs and soft-locks, records the last 12 seconds.</p></div>
+    <div class="arrow">→</div>
+    <div class="box"><span class="tag">your AI · tiny digests</span><h3>Judge</h3><p>Claude, Codex or Gemini read a 45 KB summary, decide what is a real bug and write the ticket.</p></div>
+  </div>
+  <div class="foot"><span>PlayerOne</span><span>3</span></div>
+</section>
+
+<!-- 4 product -->
+<section class="slide" style="flex-direction:row;gap:80px;align-items:center">
+  <div style="flex:0 0 640px">
+    <div class="k">The prototype</div>
+    <h2 style="font-size:72px">Pick a game. <em>It knows how to play.</em></h2>
+    <p class="lead" style="font-size:26px">PlayerOne recognises the game, suggests the controls, and you approve exactly what the AI may press. It never touches Alt+F4 or anything outside the game. F8 stops it anywhere.</p>
+    <p class="lead" style="font-size:22px;color:var(--dim)">Desktop app for Windows, macOS and Linux. Released as v0.2.3 with installers for 5 targets.</p>
+  </div>
+  <img class="shot" src="app.png" style="width:1000px">
+</section>
+
+<!-- 5 use of AI -->
+<section class="slide">
+  <div class="k">Prototype and use of AI</div>
+  <h2>What the AI <em>actually does</em></h2>
+  <div class="grid g2" style="margin-top:60px">
+    <div class="box"><h3>Plays from pixels</h3><p>A vision model reads each frame and chooses keys, mouse look and clicks from the approved controls. When it gets stuck it turns away and tries something else.</p></div>
+    <div class="box"><h3>Works out the controls</h3><p>Recognises the game by name or by looking at the screen, and picks a control layout: first-person, platformer, top-down and more.</p></div>
+    <div class="box"><h3>Judges with evidence</h3><p>The big AI gets the console errors and a contact sheet of the seconds before each incident, decides if it is a bug, and steers the player.</p></div>
+    <div class="box"><h3>Plugs into your agent</h3><p>One click connects Claude Code, Codex or Gemini CLI through MCP. Your agent directs, our local model plays.</p></div>
+  </div>
+  <div class="foot"><span>PlayerOne</span><span>5</span></div>
+</section>
+
+<!-- 6 evidence -->
+<section class="slide" style="flex-direction:row;gap:80px;align-items:center">
+  <div style="flex:0 0 700px">
+    <div class="k">What a report looks like</div>
+    <h2 style="font-size:72px">Proof, not <em>"it broke somewhere"</em></h2>
+    <p class="lead" style="font-size:26px">Every bug comes with the engine error and stack trace (main.gd line 148), the inputs that led there, this 36 KB picture of the seconds before it, and a 14 KB clip.</p>
+  </div>
+  <img class="shot" src="sheet.jpg" style="width:960px">
+</section>
+
+<!-- 7 testing -->
+<section class="slide">
+  <div class="k">Quality testing</div>
+  <h2>We broke our own game <em>on purpose</em></h2>
+  <p class="lead" style="font-size:24px;margin-top:20px">Five planted bugs plus a clean build, one minute of real play each, three players. 18 runs, all logs in the repo.</p>
+  <div class="grid g2" style="grid-template-columns:1.25fr 1fr;align-items:start">
+    <table>
+      <tr><th>Bug</th><th>Random keys</th><th>Free bot</th><th>Local AI</th></tr>
+      <tr><td>Soft-lock</td><td class="y">34s</td><td class="y">15s</td><td class="y">39s</td></tr>
+      <tr><td>Script error</td><td class="n">missed</td><td class="y">12.5s</td><td class="n">missed</td></tr>
+      <tr><td>Crash</td><td class="n">missed</td><td class="y">18s</td><td class="n">missed</td></tr>
+      <tr><td>Freeze</td><td class="n">missed</td><td class="y">20s</td><td class="n">missed</td></tr>
+      <tr><td>Coin counter</td><td class="bad">missed</td><td class="bad">missed</td><td class="bad">missed</td></tr>
+      <tr><td>False alarms</td><td>0</td><td>0</td><td>0</td></tr>
+    </table>
+    <div class="box"><h3>What broke, and what we did</h3><ul>
+      <li>PlayerOne froze with a frozen game. Capture now has a 1.5s deadline.</li>
+      <li>13 false alarms. Now it tries every control before calling it stuck. Down to 0.</li>
+      <li>Still open: the coin counter bug needs a smarter AI to see it. The 3B model is too slow to explore.</li>
+    </ul></div>
+  </div>
+  <div class="foot"><span>PlayerOne</span><span>7</span></div>
+</section>
+
+<!-- 8 comparison -->
+<section class="slide">
+  <div class="k">Compared with today</div>
+  <h2>The same minute of testing, <em>96% fewer tokens</em></h2>
+  <div class="grid g3">
+    <div class="box"><div class="num">70k</div><p>tokens a big AI spends playing one minute itself</p></div>
+    <div class="box"><div class="num pink">2,975</div><p>tokens it spent judging that minute through PlayerOne</p></div>
+    <div class="box"><div class="num">12<small>–20s</small></div><p>to catch a crash, a hang or a script error, with the report already written</p></div>
+  </div>
+  <div class="foot"><span>PlayerOne</span><span>8</span></div>
+</section>
+
+<!-- 9 feasibility + business -->
+<section class="slide">
+  <div class="k">Feasibility and business</div>
+  <h2>Free to start. <em>Pay when your AI joins.</em></h2>
+  <div class="grid g4" style="margin-top:56px">
+    <div class="box"><h3>Free</h3><p>Local AI plays and judges. Crash, hang and console capture. Reports on disk.</p></div>
+    <div class="box"><h3>Connect</h3><p>Monthly. Claude, Codex or Gemini as the judge with your own key. Cloud report history.</p></div>
+    <div class="box"><h3>Studio</h3><p>Per seat. Shared reports, a playtest in CI after every build.</p></div>
+    <div class="box"><h3>Credits</h3><p>Our hosted judge, priced from the tokens we measure per playtest hour.</p></div>
+  </div>
+  <div class="grid g3" style="margin-top:28px">
+    <div class="box"><h3>Data needed</h3><p>None. No training data, no game code. It works from the screen and the console.</p></div>
+    <div class="box"><h3>Running cost</h3><p>Playing is free on the user's PC. The judge reads about 3k tokens per minute, about 180k per hour.</p></div>
+    <div class="box"><h3>Already built</h3><p>Accounts and plans on Supabase, Stripe webhook, website login, installers for every OS.</p></div>
+  </div>
+  <div class="foot"><span>PlayerOne</span><span>9</span></div>
+</section>
+
+<!-- 10 originality + next -->
+<section class="slide">
+  <div class="k">Originality and next step</div>
+  <h2>No SDK. No engine plugin. <em>Any game on screen.</em></h2>
+  <p class="lead">Other AI testing tools need engine integration and run the expensive model on every frame. PlayerOne attaches to any window, trusts the engine console first, and only sends the big model a compressed digest.</p>
+  <div class="grid g3">
+    <div class="box"><h3>Next 30 days</h3><p>Pilot with three Baku indie studios on their real games and measure bugs found per build.</p></div>
+    <div class="box"><h3>Product</h3><p>Unity and Unreal log probes on real projects, signed builds, a small overlay so you can watch the AI play.</p></div>
+    <div class="box"><h3>Try it</h3><p>roaring-alfajores-8a941a.netlify.app · download, pick your game, press Start.</p></div>
+  </div>
+  <div class="foot"><span>PlayerOne · Team Cyber Tesla</span><span>10</span></div>
+</section>
+
+<script>
+  const io = new IntersectionObserver((es) => es.forEach((e) => e.isIntersecting && e.target.classList.add('in')), { threshold: 0.25 });
+  document.querySelectorAll('.slide').forEach((s) => io.observe(s));
+  // printing to PDF shows every slide in its final state
+  matchMedia('print').addEventListener('change', () => document.querySelectorAll('.slide').forEach((s) => s.classList.add('in')));
+</script>
+</body>
+</html>
