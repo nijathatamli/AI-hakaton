@@ -1,27 +1,6 @@
-<<<<<<< HEAD
-import Logo from './Logo'
-import { REPO_URL } from './Navbar'
-
-export default function Footer() {
-  return (
-    <footer className="hairline py-10">
-      <div className="wrap flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-        <div>
-          <Logo />
-          <p className="mt-3 max-w-[40ch] text-sm text-mute">An AI playtester that watches, plays and files the bug.</p>
-        </div>
-        <div className="flex flex-col gap-2 text-sm text-mute sm:items-end">
-          <a href={REPO_URL} target="_blank" rel="noreferrer" className="hover:text-paper hover:underline">
-            Source
-          </a>
-          <span>Team Cyber Tesla. 2026.</span>
-        </div>
-      </div>
-    </footer>
-  )
-=======
 import PlayerOneLogo from './PlayerOneLogo';
 import VideoBackground from './VideoBackground';
+import { REPO_URL } from './Navbar';
 
 const VIDEO =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_080203_fd7f4f85-3a86-4837-8192-85e7bfe68e75.mp4';
@@ -39,17 +18,24 @@ export default function Footer() {
               <PlayerOneLogo size={18} className="text-white/70" />
               <span className="text-[15px] font-medium tracking-tight text-white/70">PlayerOne</span>
             </div>
-            <p className="max-w-sm text-[14px] leading-relaxed text-white/40 sm:text-[15px]">
+            <p className="max-w-sm text-[14px] leading-relaxed text-white/50 sm:text-[15px]">
               PlayerOne is an AI playtester for game developers. It runs more playtests on fewer
               tokens.
             </p>
+            <a
+              href={REPO_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 inline-block text-[14px] text-white/70 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-white"
+            >
+              Source on GitHub
+            </a>
           </div>
-          <p className="mt-12 text-[12px] text-white/25">
-            © 2026 PlayerOne. All rights reserved.
+          <p className="mt-12 text-[12px] text-white/35">
+            © 2026 PlayerOne. Built in Baku by Cyber Tesla.
           </p>
         </div>
       </div>
     </footer>
   );
->>>>>>> febadb6 (landing page)
 }

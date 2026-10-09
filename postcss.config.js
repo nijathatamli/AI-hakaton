@@ -3,8 +3,4 @@ export default {
     tailwindcss: {},
     autoprefixer: {},
   },
-<<<<<<< HEAD
-}
-=======
 };
->>>>>>> febadb6 (landing page)

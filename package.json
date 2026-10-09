@@ -1,37 +1,11 @@
 {
-<<<<<<< HEAD
-  "name": "po",
-=======
   "name": "playerone",
->>>>>>> febadb6 (landing page)
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-<<<<<<< HEAD
-    "lint": "oxlint",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@phosphor-icons/react": "^2.1.10",
-    "framer-motion": "^14.0.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8"
-  },
-  "devDependencies": {
-    "@types/node": "^24.13.3",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.7",
-    "@vitejs/plugin-react": "^6.1.1",
-    "autoprefixer": "^10.6.1",
-    "oxlint": "^1.81.0",
-    "postcss": "^8.5.29",
-    "tailwindcss": "^3.4.19",
-    "typescript": "~6.0.2",
-    "vite": "^8.3.0"
-=======
     "preview": "vite preview"
   },
   "dependencies": {
@@ -49,6 +23,5 @@
     "tailwindcss": "^3.4.13",
     "typescript": "^5.5.3",
     "vite": "^5.4.8"
->>>>>>> febadb6 (landing page)
   }
 }
