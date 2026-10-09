@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PlayerOne</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="drag" data-tauri-drag-region></div>
+        <div class="brand">
+          <svg viewBox="-50 -50 100 100" width="18" height="18" aria-hidden="true">
+            <g fill="currentColor">
+              <path id="petal" d="M 1.5,23 L 1.5,33 C 1.5,38.5 6,43 11.5,43 L 16.5,43 C 22,43 26.5,38.5 26.5,33 Q 28,28 33,26.5 C 38.5,26.5 43,22 43,16.5 L 43,11.5 C 43,6 38.5,1.5 33,1.5 L 23,1.5 Q 12,12 1.5,23 Z" />
+              <use href="#petal" transform="rotate(90)" /><use href="#petal" transform="rotate(180)" /><use href="#petal" transform="rotate(270)" />
+            </g>
+          </svg>
+          <span>PlayerOne</span>
+        </div>
+        <nav class="nav" aria-label="Sections">
+          <button data-page="playtest" class="active"><i class="ic ic-play"></i>Playtest</button>
+          <button data-page="reports"><i class="ic ic-doc"></i>Reports<span class="count" id="report-count" hidden></span></button>
+          <button data-page="connect"><i class="ic ic-plug"></i>Connect</button>
+          <button data-page="account"><i class="ic ic-user"></i>Account</button>
+        </nav>
+        <div class="sidebar-foot">
+          <span class="plan-badge" id="plan-badge">Offline</span>
+        </div>
+      </aside>
+      <main class="content">
+        <header class="toolbar" data-tauri-drag-region>
+          <h1 id="page-title">Playtest</h1>
+          <div class="toolbar-actions" id="toolbar-actions"></div>
+        </header>
+        <section class="page" id="page"></section>
+      </main>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

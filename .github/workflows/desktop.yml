@@ -1,0 +1,67 @@
+# Builds the PlayerOne desktop app and CLI for every OS on each push to main that touches desktop/.
+# Windows x64, x86 and ARM64, macOS universal (Intel + Apple Silicon), Linux x64 (AppImage + deb).
+name: desktop
+
+on:
+  push:
+    branches: [main]
+    paths: ['desktop/**', '.github/workflows/desktop.yml']
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { os: windows-latest, target: x86_64-pc-windows-msvc, name: windows-x64 }
+          - { os: windows-latest, target: i686-pc-windows-msvc, name: windows-x86 }
+          - { os: windows-latest, target: aarch64-pc-windows-msvc, name: windows-arm64 }
+          - { os: macos-latest, target: universal-apple-darwin, name: macos-universal }
+          - { os: ubuntu-22.04, target: x86_64-unknown-linux-gnu, name: linux-x64 }
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Linux packages
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf \
+            libxdo-dev libxcb1-dev libxrandr-dev libdbus-1-dev libpipewire-0.3-dev libwayland-dev libegl-dev libgbm-dev libssl-dev
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target == 'universal-apple-darwin' && 'aarch64-apple-darwin,x86_64-apple-darwin' || matrix.target }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: App dependencies
+        working-directory: desktop/app
+        run: npm ci || npm install
+
+      - name: Build app
+        working-directory: desktop/app
+        run: npx tauri build --target ${{ matrix.target }}
+
+      - name: Build CLI
+        if: matrix.target != 'universal-apple-darwin'
+        run: cargo build --release -p playerone --target ${{ matrix.target }}
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: playerone-${{ matrix.name }}
+          path: |
+            desktop/target/${{ matrix.target }}/release/bundle/**/*.msi
+            desktop/target/${{ matrix.target }}/release/bundle/**/*.exe
+            desktop/target/${{ matrix.target }}/release/bundle/**/*.dmg
+            desktop/target/${{ matrix.target }}/release/bundle/**/*.AppImage
+            desktop/target/${{ matrix.target }}/release/bundle/**/*.deb
+            desktop/target/${{ matrix.target }}/release/playerone
+            desktop/target/${{ matrix.target }}/release/playerone.exe
+          if-no-files-found: warn

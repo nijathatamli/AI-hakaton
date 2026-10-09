@@ -1,0 +1,6 @@
+target
+runs/*
+!runs/bench
+app/node_modules
+app/dist
+app/src-tauri/gen
