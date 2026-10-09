@@ -124,6 +124,8 @@ pub struct Session {
     pub paused: AtomicBool,
     start: Instant,
     last_input_ms: AtomicU64,
+    /// when the screen last changed. the player uses it to notice its own moves did nothing
+    last_change_ms: AtomicU64,
     /// capture loop asks the player to try every key once, to tell a dead end from a soft-lock
     probe_req: AtomicBool,
     probe_done: AtomicBool,
@@ -270,6 +272,7 @@ pub fn new_session(cfg: &SessionConfig) -> Arc<Session> {
         paused: AtomicBool::new(false),
         start: Instant::now(),
         last_input_ms: AtomicU64::new(0),
+        last_change_ms: AtomicU64::new(0),
         probe_req: AtomicBool::new(false),
         probe_done: AtomicBool::new(false),
         rect: Mutex::new((0, 0, 1, 1)),
@@ -389,7 +392,15 @@ fn run_inner(sess: &Arc<Session>, cfg: SessionConfig) -> Result<()> {
                 continue;
             };
             let goal = player_sess.state.lock().unwrap().goal.clone();
-            let (mv, usage) = match agent::decide(&player, &goal, &ctrl, &jpeg, &recent) {
+            let (mv, usage) = match agent::decide(
+                &player,
+                &goal,
+                &ctrl,
+                &jpeg,
+                &recent,
+                // nothing on screen moved for 1.5s while we were pressing things: we are stuck against something
+                player_sess.t().saturating_sub(player_sess.last_change_ms.load(Ordering::Relaxed)) > 1500,
+            ) {
                 Ok(x) => x,
                 Err(e) => {
                     player_sess.log("error", format!("player: {e}"));
@@ -600,6 +611,7 @@ fn run_inner(sess: &Arc<Session>, cfg: SessionConfig) -> Result<()> {
                 if changed > 0.003 {
                     last_change = t;
                     stall_reported = false;
+                    sess.last_change_ms.store(t, Ordering::Relaxed);
                 }
                 if let Some(base) = &probe_base {
                     if capture::diff(base, &img) > 0.003 {
@@ -702,7 +714,7 @@ fn run_inner(sess: &Arc<Session>, cfg: SessionConfig) -> Result<()> {
                     expected: String::new(),
                     actual: i.detail.clone(),
                 },
-                "playerone (no director)",
+                "PlayerOne (built-in checks)",
             );
         }
     }

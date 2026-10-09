@@ -48,6 +48,8 @@ pub struct Move {
 const PLAYER_SYSTEM: &str = "You are the hands of a video game playtester. You see one screenshot of the game. \
 Make progress toward the goal and poke at anything that might break: walk into walls, jump at edges, \
 open doors, use objects, go where a player would not expect. If a menu is open, get into the game. \
+In a 3D game: walk forward with long holds (800 to 1500 ms), turn the camera with look when a wall or corner fills the screen, \
+head for doors, stairs, items and anything you can interact with, and press the interact key near objects. \
 You may only use the controls listed. Action types: \
 {\"type\":\"key\",\"key\":\"w\",\"ms\":800} holds a key (ms 0 taps it), \
 {\"type\":\"look\",\"dx\":200,\"dy\":0} turns the camera (only if mouse_look is listed; dx -600..600), \
@@ -56,15 +58,20 @@ Reply with JSON only: {\"actions\":[...],\"note\":\"what you see in a few words\
 Use at most 4 actions. Set suspicious to a short sentence only if something on screen looks wrong, for example a counter that \
 did not change, a character stuck inside a wall, missing textures, or a frozen screen.";
 
-pub fn decide(player: &Player, goal: &str, ctrl: &Controls, frame_jpeg: &[u8], recent: &[String]) -> Result<(Move, Usage)> {
+pub fn decide(player: &Player, goal: &str, ctrl: &Controls, frame_jpeg: &[u8], recent: &[String], blocked: bool) -> Result<(Move, Usage)> {
+    // stuck against a wall: get unstuck first, whoever is playing. this is what makes the free bot usable in 3D
+    if blocked && !matches!(player, Player::Random) && rand::random::<f32>() < 0.7 {
+        return Ok((unstick(ctrl), Usage::default()));
+    }
     match player {
         Player::Explore => Ok((explore(ctrl), Usage::default())),
         Player::Random => Ok((random(ctrl), Usage::default())),
         Player::Model(p) => {
             let text = format!(
-                "Goal: {goal}\nControls you may use: {}\nYour last moves: {}\nWhat do you do next?",
+                "Goal: {goal}\nControls you may use: {}\nYour last moves: {}\n{}What do you do next?",
                 ctrl.describe(),
-                if recent.is_empty() { "none".into() } else { recent.join("; ") }
+                if recent.is_empty() { "none".into() } else { recent.join("; ") },
+                if blocked { "Your last moves changed nothing on screen. You are stuck: turn, back off, jump or interact. Do not repeat them.\n" } else { "" }
             );
             let (raw, usage) = p.ask(PLAYER_SYSTEM, &text, &[frame_jpeg.to_vec()], None)?;
             let mv = extract_json(&raw).map(|v| lenient_move(&v, ctrl)).unwrap_or_default();
@@ -108,6 +115,43 @@ fn lenient_move(v: &serde_json::Value, ctrl: &Controls) -> Move {
     Move { actions: actions.into_iter().take(4).collect(), note: v["note"].as_str().unwrap_or_default().to_string(), suspicious }
 }
 
+/// turn away, back off or jump, depending on what the game allows
+fn unstick(ctrl: &Controls) -> Move {
+    let mut rng = rand::rng();
+    let keys = ctrl.key_names();
+    let has = |k: &str| keys.iter().any(|x| x == k);
+    let mut actions = vec![];
+    if ctrl.mouse_look {
+        let dx = if rng.random::<bool>() { rng.random_range(450..900) } else { -rng.random_range(450..900) };
+        actions.push(Action::Look { dx, dy: 0 });
+        if has("w") {
+            actions.push(Action::Key { key: "w".into(), ms: rng.random_range(700..1400) });
+        }
+    } else {
+        for k in ["space", "up"] {
+            if has(k) {
+                actions.push(Action::Key { key: k.into(), ms: 0 });
+                break;
+            }
+        }
+        let back = ["left", "a", "down", "s"].into_iter().find(|k| has(k));
+        let fwd = ["right", "d", "w", "up"].into_iter().find(|k| has(k));
+        if let (Some(b), Some(f)) = (back, fwd) {
+            actions.push(Action::Key { key: b.into(), ms: 400 });
+            actions.push(Action::Key { key: "space".into(), ms: 0 });
+            actions.push(Action::Key { key: f.into(), ms: 900 });
+        }
+    }
+    if let Some(i) = ["e", "f"].into_iter().find(|k| has(k)) {
+        actions.push(Action::Key { key: i.into(), ms: 0 });
+    }
+    actions.retain(|a| !matches!(a, Action::Key { key, .. } if !has(key)));
+    if actions.is_empty() {
+        return explore(ctrl);
+    }
+    Move { actions, note: "stuck, turning away".into(), suspicious: None }
+}
+
 /// free fallback: mostly push forward, look around, jump and interact now and then
 fn explore(ctrl: &Controls) -> Move {
     let mut rng = rand::rng();
@@ -117,7 +161,7 @@ fn explore(ctrl: &Controls) -> Move {
     let mut actions = Vec::new();
     if let Some(f) = forward {
         if rng.random::<f32>() < 0.7 {
-            actions.push(Action::Key { key: f.into(), ms: rng.random_range(400..1400) });
+            actions.push(Action::Key { key: f.into(), ms: rng.random_range(800..1800) });
         }
     }
     if ctrl.mouse_look && rng.random::<f32>() < 0.5 {

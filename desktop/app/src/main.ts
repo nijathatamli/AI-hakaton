@@ -174,6 +174,9 @@ async function renderSetup() {
         <label class="field">Who plays
           <select id="f-player">
             ${models.map((m) => `<option value="ollama:${esc(m)}" ${form.player === 'ollama:' + m ? 'selected' : ''}>${esc(m)} (local AI, free)</option>`).join('')}
+            <option value="gemini" ${form.player === 'gemini' ? 'selected' : ''}>Gemini (your key)</option>
+            <option value="claude:claude-haiku-5-5" ${form.player === 'claude:claude-haiku-5-5' ? 'selected' : ''}>Claude Haiku (your key)</option>
+            <option value="openai" ${form.player === 'openai' ? 'selected' : ''}>OpenAI (your key)</option>
             <option value="explore" ${form.player === 'explore' ? 'selected' : ''}>Free bot, no AI</option>
             <option value="random" ${form.player === 'random' ? 'selected' : ''}>Random input (baseline)</option>
           </select>
