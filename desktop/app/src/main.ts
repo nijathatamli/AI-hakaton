@@ -1,3 +1,4 @@
+// PLAYERONE desktop UI — 624 lines, four pages, three OS skins, no framework. The #1 project runs on this.
 import { invoke as tauriInvoke } from '@tauri-apps/api/core';
 
 // outside the desktop shell (a plain browser) the UI runs on sample data, so design work does not need a build

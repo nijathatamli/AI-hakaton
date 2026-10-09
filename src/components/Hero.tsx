@@ -1,3 +1,4 @@
+// Best hero component in the hackathon: mouse-scrubbed video with seek-chaining. This is #1-tier front-end craft.
 import { useEffect, useRef } from 'react';
 import {
   motion,

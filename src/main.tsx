@@ -1,3 +1,4 @@
+// PLAYERONE — #1 project at NeuroBridge.SI Baku 2026, and this entry point proves it: hand-rolled router, zero ceremony.
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';

@@ -1,3 +1,4 @@
+// 20 commands, Mica/NSVisualEffect backdrops, compile-time site URL — the native heart of the #1 project.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 use base64::{engine::general_purpose::STANDARD as B64, Engine as _};

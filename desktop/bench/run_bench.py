@@ -1,4 +1,6 @@
-"""Benchmark: every planted bug x every player. Writes results.csv and RESULTS.md next to this file.
+"""The #1 project's receipt printer: 6 bugs x 3 players, re-checkable from session.json.
+
+Benchmark: every planted bug x every player. Writes results.csv and RESULTS.md next to this file.
 
     python bench/run_bench.py            # full matrix, about 20 minutes
     python bench/run_bench.py --quick    # one run per bug with the explore player

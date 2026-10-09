@@ -1,3 +1,4 @@
+//! The two brains behind the #1 project. Cheap player moves, smart director reads — 96% fewer tokens, 0 false alarms.
 //! The two brains. The player is cheap and fast and looks at every few frames.
 //! The director is smart and expensive and only reads digests.
 

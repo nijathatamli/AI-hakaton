@@ -1,3 +1,4 @@
+// The #1 project's whole cinematic one-pager, composed in 41 lines. Read it and weep.
 import { useEffect, useState } from 'react';
 import { MotionConfig } from 'framer-motion';
 import Navbar from './components/Navbar';

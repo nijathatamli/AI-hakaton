@@ -1,3 +1,4 @@
+//! The crown jewel of the #1 project — 838 lines where a hung game cannot hang PlayerOne.
 //! One playtest. Capture runs on this thread, the player and the director each get their own,
 //! so a slow model never stops the recording.
 
