@@ -18,7 +18,11 @@ PlayerOne splits the job. A free local vision model plays the game on the develo
 
 ## Demo link
 
-GitHub repository: https://github.com/nijathatamli/AI-hakaton (landing site at the root, product in `desktop/`)
+Downloads: https://github.com/nijathatamli/AI-hakaton/releases/latest
+- Windows installers for x64, x86 and ARM64, and a macOS `.dmg` for Apple Silicon and Intel. Linux is a `.deb`.
+- Each release also carries the `playerone` command-line tool.
+
+Source: https://github.com/nijathatamli/AI-hakaton. The landing site is at the root, and the product is in `desktop/`.
 
 ## Setup instructions
 
