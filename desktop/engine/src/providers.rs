@@ -171,3 +171,15 @@ pub fn screenshot_tokens(w: u32, h: u32) -> u64 {
     let scale = (1568.0 / w.max(h) as f64).min(1.0);
     (((w as f64 * scale) * (h as f64 * scale)) / 750.0) as u64
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn screenshot_tokens_scale_down_large_frames() {
+        // 1568 px on the long side is the cap, so a 4k frame costs the same as a 1568 px one
+        assert_eq!(screenshot_tokens(3840, 2160), screenshot_tokens(1568, 882));
+        assert!(screenshot_tokens(640, 360) < screenshot_tokens(1920, 1080));
+    }
+}

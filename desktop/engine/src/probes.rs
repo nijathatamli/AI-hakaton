@@ -156,3 +156,45 @@ pub fn default_log_paths(engine: Engine, company: &str, product: &str, project_d
     }
     v
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn godot_script_error_is_caught() {
+        let c = Classifier::new(Engine::Godot);
+        assert!(c.is_error("SCRIPT ERROR: Invalid call. Nonexistent function 'open' in base 'Nil'."));
+        assert!(c.is_error("ERROR: cavern: player touched spike with invalid state"));
+        assert!(c.is_error("   USER ERROR: something went wrong"));
+    }
+
+    #[test]
+    fn godot_normal_output_is_not_an_error() {
+        let c = Classifier::new(Engine::Godot);
+        assert!(!c.is_error("Godot Engine v4.7.stable - https://godotengine.org"));
+        assert!(!c.is_error("coins: 3"));
+    }
+
+    #[test]
+    fn harmless_error_counters_are_ignored() {
+        let c = Classifier::new(Engine::Generic);
+        assert!(!c.is_error("build finished, error_count=0"));
+        assert!(!c.is_error("validation: no errors"));
+        assert!(c.is_error("panic: index out of range"));
+    }
+
+    #[test]
+    fn unity_and_unreal_patterns() {
+        assert!(Classifier::new(Engine::Unity).is_error("NullReferenceException: Object reference not set"));
+        assert!(Classifier::new(Engine::Unreal).is_error("LogTemp: Error: missing asset"));
+        assert!(!Classifier::new(Engine::Unreal).is_error("LogTemp: Display: level loaded"));
+    }
+
+    #[test]
+    fn engine_names_parse() {
+        assert_eq!("cs2".parse::<Engine>().unwrap(), Engine::Source2);
+        assert_eq!("UE5".parse::<Engine>().unwrap(), Engine::Unreal);
+        assert!("cryengine".parse::<Engine>().is_err());
+    }
+}

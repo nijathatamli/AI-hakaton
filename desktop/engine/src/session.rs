@@ -838,3 +838,24 @@ fn repro_steps_locked(st: &State, until_ms: u64) -> Vec<String> {
     out.push(format!("The problem shows at about {:.1}s", until_ms as f32 / 1000.0));
     out
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn split_cmd_keeps_quoted_args_together() {
+        assert_eq!(
+            split_cmd(r#"godot --path "my game" -- --bugs=crash"#),
+            vec!["godot", "--path", "my game", "--", "--bugs=crash"]
+        );
+        assert!(split_cmd("   ").is_empty());
+    }
+
+    #[test]
+    fn symbol_less_frames_are_noise() {
+        assert!(noise("  [0] <no debug info in PE/COFF>"));
+        assert!(noise("   "));
+        assert!(!noise("[0] _check_triggers (res://main.gd:154)"));
+    }
+}
