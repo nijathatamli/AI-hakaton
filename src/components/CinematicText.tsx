@@ -17,17 +17,24 @@ export default function CinematicText() {
   const transform = useMotionTemplate`rotateX(24deg) translateY(${yScaleValue}px) translateZ(15px)`;
 
   return (
-    <section ref={ref} className="relative h-screen h-[100dvh] w-full overflow-hidden bg-black">
+    <section
+      id="about"
+      ref={ref}
+      aria-label="About PlayerOne"
+      className="relative h-screen h-[100dvh] w-full scroll-mt-20 overflow-hidden bg-black"
+    >
       <VideoBackground src={VIDEO} />
       <div
         className="pointer-events-none absolute left-0 right-0 top-0 z-10 h-[180px]"
         style={{ background: 'linear-gradient(to bottom, #010103, transparent)' }}
       />
+      {/* the sky gets bright pink in the middle of this clip, text was hard to read there */}
+      <div className="pointer-events-none absolute inset-0 z-10 bg-[radial-gradient(60%_50%_at_50%_50%,rgba(0,0,0,0.55),transparent)]" />
       <div className="relative z-20 flex h-full items-center justify-center">
         <div className="w-full max-w-5xl" style={{ perspective: 400 }}>
           <motion.p
             style={{ transform, opacity }}
-            className="select-none px-6 text-center font-sans text-[22px] font-normal leading-[1.35] tracking-[-0.02em] text-white sm:px-12 sm:text-[30px] md:text-[36px] lg:text-[42px]"
+            className="on-video select-none px-6 text-center font-sans text-[22px] font-normal leading-[1.35] tracking-[-0.02em] text-white sm:px-12 sm:text-[30px] md:text-[36px] lg:text-[42px]"
           >
             PlayerOne is an AI playtester. Through computer use, it watches your game and controls
             it the way a player would. A large cloud model or a local open model such as Llama does

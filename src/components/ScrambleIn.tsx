@@ -15,6 +15,12 @@ export default function ScrambleIn({ text, delay, triggered }: ScrambleInProps) 
   useEffect(() => {
     if (!triggered) return;
 
+    // no scramble for people who asked for less motion
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setDisplay(text);
+      return;
+    }
+
     let interval: ReturnType<typeof setInterval> | undefined;
     const timeout = setTimeout(() => {
       let revealed = 0;
