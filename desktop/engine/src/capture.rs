@@ -142,3 +142,31 @@ pub fn is_hung(win: &Window) -> bool {
     let _ = win;
     false
 }
+
+/// process id of the window the user is looking at right now
+pub fn foreground_pid() -> Option<u32> {
+    #[cfg(windows)]
+    unsafe {
+        use windows_sys::Win32::UI::WindowsAndMessaging::{GetForegroundWindow, GetWindowThreadProcessId};
+        let h = GetForegroundWindow();
+        if h.is_null() {
+            return None;
+        }
+        let mut pid = 0u32;
+        GetWindowThreadProcessId(h, &mut pid);
+        return Some(pid);
+    }
+    #[allow(unreachable_code)]
+    None
+}
+
+/// F8 stops a playtest from anywhere, even while the game has focus
+pub fn stop_key_down() -> bool {
+    #[cfg(windows)]
+    unsafe {
+        use windows_sys::Win32::UI::Input::KeyboardAndMouse::{GetAsyncKeyState, VK_F8};
+        return (GetAsyncKeyState(VK_F8 as i32) as u16 & 0x8000) != 0;
+    }
+    #[allow(unreachable_code)]
+    false
+}

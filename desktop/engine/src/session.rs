@@ -120,6 +120,8 @@ pub struct State {
 pub struct Session {
     pub state: Mutex<State>,
     pub stop: AtomicBool,
+    /// true while the user has PlayerOne in front: no input goes to the game, so the Stop button is reachable
+    pub paused: AtomicBool,
     start: Instant,
     last_input_ms: AtomicU64,
     /// capture loop asks the player to try every key once, to tell a dead end from a soft-lock
@@ -265,6 +267,7 @@ pub fn new_session(cfg: &SessionConfig) -> Arc<Session> {
             latest: None,
         }),
         stop: AtomicBool::new(false),
+        paused: AtomicBool::new(false),
         start: Instant::now(),
         last_input_ms: AtomicU64::new(0),
         probe_req: AtomicBool::new(false),
@@ -363,6 +366,11 @@ fn run_inner(sess: &Arc<Session>, cfg: SessionConfig) -> Result<()> {
         let mut recent: Vec<String> = vec![];
         let probe_keys: Vec<String> = ctrl.movement();
         while !player_sess.stop.load(Ordering::Relaxed) {
+            if player_sess.paused.load(Ordering::Relaxed) {
+                input.release_all();
+                std::thread::sleep(Duration::from_millis(200));
+                continue;
+            }
             if player_sess.probe_req.swap(false, Ordering::Relaxed) {
                 // a human tester would wiggle every control before calling it stuck. so do we
                 let rect = *player_sess.rect.lock().unwrap();
@@ -493,6 +501,11 @@ fn run_inner(sess: &Arc<Session>, cfg: SessionConfig) -> Result<()> {
 
     while started.elapsed() < deadline && !sess.stop.load(Ordering::Relaxed) {
         let tick = Instant::now();
+        if capture::stop_key_down() {
+            sess.log("stop", "stopped with F8");
+            say(q, "playerone: stopped with F8");
+            break;
+        }
 
         // console lines
         while let Ok(line) = rx.try_recv() {
@@ -539,10 +552,12 @@ fn run_inner(sess: &Arc<Session>, cfg: SessionConfig) -> Result<()> {
 
         // capture on a worker with a deadline. a hung game never finishes drawing for us, and we must not hang with it
         if !busy.swap(true, Ordering::Relaxed) {
-            let (gtx, busy) = (gtx.clone(), busy.clone());
+            let (gtx, busy, ws) = (gtx.clone(), busy.clone(), sess.clone());
             std::thread::spawn(move || {
+                let me = capture::foreground_pid() == Some(std::process::id());
+                ws.paused.store(me, Ordering::Relaxed);
                 let r = capture::find_by_id(win_id).and_then(|w| {
-                    if !w.is_focused().unwrap_or(true) {
+                    if !me && !w.is_focused().unwrap_or(true) {
                         capture::focus(&w);
                     }
                     let rect = (w.x().unwrap_or(0), w.y().unwrap_or(0), w.width().unwrap_or(1), w.height().unwrap_or(1));

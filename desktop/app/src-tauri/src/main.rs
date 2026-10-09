@@ -186,7 +186,7 @@ fn snapshot(state: State<AppState>) -> Value {
     let events: Vec<_> = st.events.iter().rev().filter(|e| e.kind != "action").take(60).collect();
     let actions: Vec<_> = st.events.iter().rev().filter(|e| e.kind == "action").take(6).map(|e| e.text.clone()).collect();
     json!({
-        "running": st.running, "started": st.started, "window": st.window, "goal": st.goal,
+        "running": st.running, "started": st.started, "paused": s.paused.load(std::sync::atomic::Ordering::Relaxed), "window": st.window, "goal": st.goal,
         "player": st.player, "director": st.director, "error": st.error,
         "t_ms": s.t(), "meter": st.meter, "events": events, "actions": actions,
         "incidents": st.incidents, "reports": st.reports, "out_dir": st.out_dir,

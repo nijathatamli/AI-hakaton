@@ -47,7 +47,7 @@ impl Action {
 pub const DEFAULT_KEYS: &[&str] = &["left", "right", "up", "down", "space", "enter", "escape"];
 
 /// never pressed, whatever a model asks for: they close the game or reach the OS
-const BLOCKED: &[&str] = &["win", "super", "meta", "cmd", "command", "lwin", "rwin", "f4", "delete", "del"];
+const BLOCKED: &[&str] = &["win", "super", "meta", "cmd", "command", "lwin", "rwin", "f4", "f8", "delete", "del"];
 
 fn parse_key(name: &str) -> Result<Key> {
     let k = name.trim().to_lowercase();
@@ -72,7 +72,6 @@ fn parse_key(name: &str) -> Result<Key> {
         "f5" => Key::F5,
         "f6" => Key::F6,
         "f7" => Key::F7,
-        "f8" => Key::F8,
         "f9" => Key::F9,
         "f10" => Key::F10,
         s if s.chars().count() == 1 => Key::Unicode(s.chars().next().unwrap()),

@@ -373,12 +373,19 @@ function startPolling() {
 
 function renderLive() {
   $('#toolbar-actions').innerHTML = `<button class="btn danger" id="stop">Stop</button>`;
-  $('#stop').addEventListener('click', () => invoke('stop'));
+  const doStop = () => {
+    invoke('stop');
+    const b = $('#stop-big') as HTMLButtonElement | null;
+    if (b) { b.disabled = true; b.innerHTML = '<span class="spin"></span>Stopping'; }
+  };
+  $('#stop').addEventListener('click', doStop);
+  setTimeout(() => $('#stop-big')?.addEventListener('click', doStop));
   $('#page').innerHTML = `
     <div class="live">
       <div class="stage">
         <div class="screen" id="screen"><img id="frame" alt="Live view of the game"><div class="waiting" id="waiting">Waiting for the first frame</div><span class="rec" id="rec">Starting</span><div class="chips" id="chips"></div></div>
         <div class="progress" title="Time left in this playtest"><i id="prog" style="transform:scaleX(0)"></i></div>
+        <div class="stopbar"><button class="btn stop-big" id="stop-big"><span class="sq"></span>Stop playtest</button><span class="muted" id="pause-note">or press <kbd>F8</kbd> anywhere</span></div>
         <div class="instruct"><input type="text" id="goal-in" placeholder="Tell the player what to try next, e.g. jump into every wall"><button class="btn" id="goal-btn">Send</button></div>
       </div>
       <div class="side">
@@ -416,6 +423,8 @@ function updateLive() {
     $('#waiting')?.remove();
   }
   $('#rec').textContent = snap.started ? `${snap.window} · ${fmtS(snap.t_ms)}` : 'Waiting for the game window';
+  const pn = $('#pause-note');
+  if (pn) pn.innerHTML = snap.paused ? '<b>Paused</b> while PlayerOne is in front. Click the game to continue.' : 'or press <kbd>F8</kbd> anywhere';
   const total = form.minutes * 60000;
   ($('#prog') as HTMLElement).style.transform = `scaleX(${Math.min(1, (snap.t_ms || 0) / total)})`;
 
