@@ -3,6 +3,7 @@ export default {
   content: ['./index.html', './src/**/*.{ts,tsx}'],
   theme: {
     extend: {
+<<<<<<< HEAD
       colors: {
         ink: '#0a0a0a',
         ink2: '#121212',
@@ -32,3 +33,14 @@ export default {
   },
   plugins: [],
 }
+=======
+      fontFamily: {
+        sans: ['"Space Mono"', 'monospace'],
+        serif: ['"Space Mono"', 'monospace'],
+        mono: ['"Space Mono"', 'monospace'],
+      },
+    },
+  },
+  plugins: [],
+};
+>>>>>>> febadb6 (landing page)
